@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.m": "matlab",
+        "uart.h": "c",
+        "stdio.h": "c",
+        "util.h": "c",
+        "hml.h": "c",
+        "t18b20.h": "c",
+        "types.h": "c",
+        "stdbool.h": "c",
+        "lcd1602.h": "c",
+        "version.h": "c"
+    }
+}

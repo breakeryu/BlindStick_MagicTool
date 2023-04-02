@@ -1,0 +1,610 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.0 #11528 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module isp
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _PX3
+                                     12 	.globl _EX3
+                                     13 	.globl _IE3
+                                     14 	.globl _IT3
+                                     15 	.globl _PX2
+                                     16 	.globl _EX2
+                                     17 	.globl _IE2
+                                     18 	.globl _IT2
+                                     19 	.globl _TF2
+                                     20 	.globl _EXF2
+                                     21 	.globl _RCLK
+                                     22 	.globl _TCLK
+                                     23 	.globl _EXEN2
+                                     24 	.globl _TR2
+                                     25 	.globl _T2_CT
+                                     26 	.globl _CPRL2
+                                     27 	.globl _INT2
+                                     28 	.globl _INT3
+                                     29 	.globl _P4_3
+                                     30 	.globl _P4_2
+                                     31 	.globl _P4_1
+                                     32 	.globl _P4_0
+                                     33 	.globl _T2EX
+                                     34 	.globl _T2
+                                     35 	.globl _PT2
+                                     36 	.globl _ET2
+                                     37 	.globl _CY
+                                     38 	.globl _AC
+                                     39 	.globl _F0
+                                     40 	.globl _RS1
+                                     41 	.globl _RS0
+                                     42 	.globl _OV
+                                     43 	.globl _F1
+                                     44 	.globl _P
+                                     45 	.globl _PS
+                                     46 	.globl _PT1
+                                     47 	.globl _PX1
+                                     48 	.globl _PT0
+                                     49 	.globl _PX0
+                                     50 	.globl _RD
+                                     51 	.globl _WR
+                                     52 	.globl _T1
+                                     53 	.globl _T0
+                                     54 	.globl _INT1
+                                     55 	.globl _INT0
+                                     56 	.globl _TXD
+                                     57 	.globl _RXD
+                                     58 	.globl _P3_7
+                                     59 	.globl _P3_6
+                                     60 	.globl _P3_5
+                                     61 	.globl _P3_4
+                                     62 	.globl _P3_3
+                                     63 	.globl _P3_2
+                                     64 	.globl _P3_1
+                                     65 	.globl _P3_0
+                                     66 	.globl _EA
+                                     67 	.globl _ES
+                                     68 	.globl _ET1
+                                     69 	.globl _EX1
+                                     70 	.globl _ET0
+                                     71 	.globl _EX0
+                                     72 	.globl _P2_7
+                                     73 	.globl _P2_6
+                                     74 	.globl _P2_5
+                                     75 	.globl _P2_4
+                                     76 	.globl _P2_3
+                                     77 	.globl _P2_2
+                                     78 	.globl _P2_1
+                                     79 	.globl _P2_0
+                                     80 	.globl _SM0
+                                     81 	.globl _SM1
+                                     82 	.globl _SM2
+                                     83 	.globl _REN
+                                     84 	.globl _TB8
+                                     85 	.globl _RB8
+                                     86 	.globl _TI
+                                     87 	.globl _RI
+                                     88 	.globl _P1_7
+                                     89 	.globl _P1_6
+                                     90 	.globl _P1_5
+                                     91 	.globl _P1_4
+                                     92 	.globl _P1_3
+                                     93 	.globl _P1_2
+                                     94 	.globl _P1_1
+                                     95 	.globl _P1_0
+                                     96 	.globl _TF1
+                                     97 	.globl _TR1
+                                     98 	.globl _TF0
+                                     99 	.globl _TR0
+                                    100 	.globl _IE1
+                                    101 	.globl _IT1
+                                    102 	.globl _IE0
+                                    103 	.globl _IT0
+                                    104 	.globl _P0_7
+                                    105 	.globl _P0_6
+                                    106 	.globl _P0_5
+                                    107 	.globl _P0_4
+                                    108 	.globl _P0_3
+                                    109 	.globl _P0_2
+                                    110 	.globl _P0_1
+                                    111 	.globl _P0_0
+                                    112 	.globl _P4
+                                    113 	.globl _ISP_CONTR
+                                    114 	.globl _ISP_TRIG
+                                    115 	.globl _ISP_CMD
+                                    116 	.globl _ISP_ADDRL
+                                    117 	.globl _ISP_ADDRH
+                                    118 	.globl _ISP_DATA
+                                    119 	.globl _WDT_CONTR
+                                    120 	.globl _TH2
+                                    121 	.globl _TL2
+                                    122 	.globl _RCAP2H
+                                    123 	.globl _RCAP2L
+                                    124 	.globl _T2MOD
+                                    125 	.globl _T2CON
+                                    126 	.globl _XICON
+                                    127 	.globl _IPH
+                                    128 	.globl _SADDR1
+                                    129 	.globl _AUXR1
+                                    130 	.globl _AUXR
+                                    131 	.globl _B
+                                    132 	.globl _ACC
+                                    133 	.globl _PSW
+                                    134 	.globl _IP
+                                    135 	.globl _P3
+                                    136 	.globl _IE
+                                    137 	.globl _P2
+                                    138 	.globl _SBUF
+                                    139 	.globl _SCON
+                                    140 	.globl _P1
+                                    141 	.globl _TH1
+                                    142 	.globl _TH0
+                                    143 	.globl _TL1
+                                    144 	.globl _TL0
+                                    145 	.globl _TMOD
+                                    146 	.globl _TCON
+                                    147 	.globl _PCON
+                                    148 	.globl _DPH
+                                    149 	.globl _DPL
+                                    150 	.globl _SP
+                                    151 	.globl _P0
+                                    152 	.globl _ISP_writeByte_PARM_2
+                                    153 	.globl _ISP_cmd
+                                    154 	.globl _ISP_config
+                                    155 	.globl _ISP_eraseSector
+                                    156 	.globl _ISP_idle
+                                    157 	.globl _ISP_readByte
+                                    158 	.globl _ISP_setAddress
+                                    159 	.globl _ISP_setCommand
+                                    160 	.globl _ISP_trig
+                                    161 	.globl _ISP_writeByte
+                                    162 ;--------------------------------------------------------
+                                    163 ; special function registers
+                                    164 ;--------------------------------------------------------
+                                    165 	.area RSEG    (ABS,DATA)
+      000000                        166 	.org 0x0000
+                           000080   167 _P0	=	0x0080
+                           000081   168 _SP	=	0x0081
+                           000082   169 _DPL	=	0x0082
+                           000083   170 _DPH	=	0x0083
+                           000087   171 _PCON	=	0x0087
+                           000088   172 _TCON	=	0x0088
+                           000089   173 _TMOD	=	0x0089
+                           00008A   174 _TL0	=	0x008a
+                           00008B   175 _TL1	=	0x008b
+                           00008C   176 _TH0	=	0x008c
+                           00008D   177 _TH1	=	0x008d
+                           000090   178 _P1	=	0x0090
+                           000098   179 _SCON	=	0x0098
+                           000099   180 _SBUF	=	0x0099
+                           0000A0   181 _P2	=	0x00a0
+                           0000A8   182 _IE	=	0x00a8
+                           0000B0   183 _P3	=	0x00b0
+                           0000B8   184 _IP	=	0x00b8
+                           0000D0   185 _PSW	=	0x00d0
+                           0000E0   186 _ACC	=	0x00e0
+                           0000F0   187 _B	=	0x00f0
+                           00008E   188 _AUXR	=	0x008e
+                           0000A2   189 _AUXR1	=	0x00a2
+                           0000A9   190 _SADDR1	=	0x00a9
+                           0000B7   191 _IPH	=	0x00b7
+                           0000C0   192 _XICON	=	0x00c0
+                           0000C8   193 _T2CON	=	0x00c8
+                           0000C9   194 _T2MOD	=	0x00c9
+                           0000CA   195 _RCAP2L	=	0x00ca
+                           0000CB   196 _RCAP2H	=	0x00cb
+                           0000CC   197 _TL2	=	0x00cc
+                           0000CD   198 _TH2	=	0x00cd
+                           0000E1   199 _WDT_CONTR	=	0x00e1
+                           0000E2   200 _ISP_DATA	=	0x00e2
+                           0000E3   201 _ISP_ADDRH	=	0x00e3
+                           0000E4   202 _ISP_ADDRL	=	0x00e4
+                           0000E5   203 _ISP_CMD	=	0x00e5
+                           0000E6   204 _ISP_TRIG	=	0x00e6
+                           0000E7   205 _ISP_CONTR	=	0x00e7
+                           0000E8   206 _P4	=	0x00e8
+                                    207 ;--------------------------------------------------------
+                                    208 ; special function bits
+                                    209 ;--------------------------------------------------------
+                                    210 	.area RSEG    (ABS,DATA)
+      000000                        211 	.org 0x0000
+                           000080   212 _P0_0	=	0x0080
+                           000081   213 _P0_1	=	0x0081
+                           000082   214 _P0_2	=	0x0082
+                           000083   215 _P0_3	=	0x0083
+                           000084   216 _P0_4	=	0x0084
+                           000085   217 _P0_5	=	0x0085
+                           000086   218 _P0_6	=	0x0086
+                           000087   219 _P0_7	=	0x0087
+                           000088   220 _IT0	=	0x0088
+                           000089   221 _IE0	=	0x0089
+                           00008A   222 _IT1	=	0x008a
+                           00008B   223 _IE1	=	0x008b
+                           00008C   224 _TR0	=	0x008c
+                           00008D   225 _TF0	=	0x008d
+                           00008E   226 _TR1	=	0x008e
+                           00008F   227 _TF1	=	0x008f
+                           000090   228 _P1_0	=	0x0090
+                           000091   229 _P1_1	=	0x0091
+                           000092   230 _P1_2	=	0x0092
+                           000093   231 _P1_3	=	0x0093
+                           000094   232 _P1_4	=	0x0094
+                           000095   233 _P1_5	=	0x0095
+                           000096   234 _P1_6	=	0x0096
+                           000097   235 _P1_7	=	0x0097
+                           000098   236 _RI	=	0x0098
+                           000099   237 _TI	=	0x0099
+                           00009A   238 _RB8	=	0x009a
+                           00009B   239 _TB8	=	0x009b
+                           00009C   240 _REN	=	0x009c
+                           00009D   241 _SM2	=	0x009d
+                           00009E   242 _SM1	=	0x009e
+                           00009F   243 _SM0	=	0x009f
+                           0000A0   244 _P2_0	=	0x00a0
+                           0000A1   245 _P2_1	=	0x00a1
+                           0000A2   246 _P2_2	=	0x00a2
+                           0000A3   247 _P2_3	=	0x00a3
+                           0000A4   248 _P2_4	=	0x00a4
+                           0000A5   249 _P2_5	=	0x00a5
+                           0000A6   250 _P2_6	=	0x00a6
+                           0000A7   251 _P2_7	=	0x00a7
+                           0000A8   252 _EX0	=	0x00a8
+                           0000A9   253 _ET0	=	0x00a9
+                           0000AA   254 _EX1	=	0x00aa
+                           0000AB   255 _ET1	=	0x00ab
+                           0000AC   256 _ES	=	0x00ac
+                           0000AF   257 _EA	=	0x00af
+                           0000B0   258 _P3_0	=	0x00b0
+                           0000B1   259 _P3_1	=	0x00b1
+                           0000B2   260 _P3_2	=	0x00b2
+                           0000B3   261 _P3_3	=	0x00b3
+                           0000B4   262 _P3_4	=	0x00b4
+                           0000B5   263 _P3_5	=	0x00b5
+                           0000B6   264 _P3_6	=	0x00b6
+                           0000B7   265 _P3_7	=	0x00b7
+                           0000B0   266 _RXD	=	0x00b0
+                           0000B1   267 _TXD	=	0x00b1
+                           0000B2   268 _INT0	=	0x00b2
+                           0000B3   269 _INT1	=	0x00b3
+                           0000B4   270 _T0	=	0x00b4
+                           0000B5   271 _T1	=	0x00b5
+                           0000B6   272 _WR	=	0x00b6
+                           0000B7   273 _RD	=	0x00b7
+                           0000B8   274 _PX0	=	0x00b8
+                           0000B9   275 _PT0	=	0x00b9
+                           0000BA   276 _PX1	=	0x00ba
+                           0000BB   277 _PT1	=	0x00bb
+                           0000BC   278 _PS	=	0x00bc
+                           0000D0   279 _P	=	0x00d0
+                           0000D1   280 _F1	=	0x00d1
+                           0000D2   281 _OV	=	0x00d2
+                           0000D3   282 _RS0	=	0x00d3
+                           0000D4   283 _RS1	=	0x00d4
+                           0000D5   284 _F0	=	0x00d5
+                           0000D6   285 _AC	=	0x00d6
+                           0000D7   286 _CY	=	0x00d7
+                           0000AD   287 _ET2	=	0x00ad
+                           0000BD   288 _PT2	=	0x00bd
+                           000090   289 _T2	=	0x0090
+                           000091   290 _T2EX	=	0x0091
+                           0000E8   291 _P4_0	=	0x00e8
+                           0000E9   292 _P4_1	=	0x00e9
+                           0000EA   293 _P4_2	=	0x00ea
+                           0000EB   294 _P4_3	=	0x00eb
+                           0000EA   295 _INT3	=	0x00ea
+                           0000EB   296 _INT2	=	0x00eb
+                           0000C8   297 _CPRL2	=	0x00c8
+                           0000C9   298 _T2_CT	=	0x00c9
+                           0000CA   299 _TR2	=	0x00ca
+                           0000CB   300 _EXEN2	=	0x00cb
+                           0000CC   301 _TCLK	=	0x00cc
+                           0000CD   302 _RCLK	=	0x00cd
+                           0000CE   303 _EXF2	=	0x00ce
+                           0000CF   304 _TF2	=	0x00cf
+                           0000C0   305 _IT2	=	0x00c0
+                           0000C1   306 _IE2	=	0x00c1
+                           0000C2   307 _EX2	=	0x00c2
+                           0000C3   308 _PX2	=	0x00c3
+                           0000C4   309 _IT3	=	0x00c4
+                           0000C5   310 _IE3	=	0x00c5
+                           0000C6   311 _EX3	=	0x00c6
+                           0000C7   312 _PX3	=	0x00c7
+                                    313 ;--------------------------------------------------------
+                                    314 ; overlayable register banks
+                                    315 ;--------------------------------------------------------
+                                    316 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        317 	.ds 8
+                                    318 ;--------------------------------------------------------
+                                    319 ; internal ram data
+                                    320 ;--------------------------------------------------------
+                                    321 	.area DSEG    (DATA)
+      000000                        322 _ISP_writeByte_PARM_2:
+      000000                        323 	.ds 1
+                                    324 ;--------------------------------------------------------
+                                    325 ; overlayable items in internal ram 
+                                    326 ;--------------------------------------------------------
+                                    327 	.area	OSEG    (OVR,DATA)
+                                    328 	.area	OSEG    (OVR,DATA)
+                                    329 	.area	OSEG    (OVR,DATA)
+                                    330 ;--------------------------------------------------------
+                                    331 ; indirectly addressable internal ram data
+                                    332 ;--------------------------------------------------------
+                                    333 	.area ISEG    (DATA)
+                                    334 ;--------------------------------------------------------
+                                    335 ; absolute internal ram data
+                                    336 ;--------------------------------------------------------
+                                    337 	.area IABS    (ABS,DATA)
+                                    338 	.area IABS    (ABS,DATA)
+                                    339 ;--------------------------------------------------------
+                                    340 ; bit data
+                                    341 ;--------------------------------------------------------
+                                    342 	.area BSEG    (BIT)
+                                    343 ;--------------------------------------------------------
+                                    344 ; paged external ram data
+                                    345 ;--------------------------------------------------------
+                                    346 	.area PSEG    (PAG,XDATA)
+                                    347 ;--------------------------------------------------------
+                                    348 ; external ram data
+                                    349 ;--------------------------------------------------------
+                                    350 	.area XSEG    (XDATA)
+                                    351 ;--------------------------------------------------------
+                                    352 ; absolute external ram data
+                                    353 ;--------------------------------------------------------
+                                    354 	.area XABS    (ABS,XDATA)
+                                    355 ;--------------------------------------------------------
+                                    356 ; external initialized ram data
+                                    357 ;--------------------------------------------------------
+                                    358 	.area XISEG   (XDATA)
+                                    359 	.area HOME    (CODE)
+                                    360 	.area GSINIT0 (CODE)
+                                    361 	.area GSINIT1 (CODE)
+                                    362 	.area GSINIT2 (CODE)
+                                    363 	.area GSINIT3 (CODE)
+                                    364 	.area GSINIT4 (CODE)
+                                    365 	.area GSINIT5 (CODE)
+                                    366 	.area GSINIT  (CODE)
+                                    367 	.area GSFINAL (CODE)
+                                    368 	.area CSEG    (CODE)
+                                    369 ;--------------------------------------------------------
+                                    370 ; global & static initialisations
+                                    371 ;--------------------------------------------------------
+                                    372 	.area HOME    (CODE)
+                                    373 	.area GSINIT  (CODE)
+                                    374 	.area GSFINAL (CODE)
+                                    375 	.area GSINIT  (CODE)
+                                    376 ;--------------------------------------------------------
+                                    377 ; Home
+                                    378 ;--------------------------------------------------------
+                                    379 	.area HOME    (CODE)
+                                    380 	.area HOME    (CODE)
+                                    381 ;--------------------------------------------------------
+                                    382 ; code
+                                    383 ;--------------------------------------------------------
+                                    384 	.area CSEG    (CODE)
+                                    385 ;------------------------------------------------------------
+                                    386 ;Allocation info for local variables in function 'ISP_cmd'
+                                    387 ;------------------------------------------------------------
+                                    388 ;a                         Allocated to registers r7 
+                                    389 ;------------------------------------------------------------
+                                    390 ;	../src/isp.c:27: void ISP_cmd(Action a)
+                                    391 ;	-----------------------------------------
+                                    392 ;	 function ISP_cmd
+                                    393 ;	-----------------------------------------
+      000000                        394 _ISP_cmd:
+                           000007   395 	ar7 = 0x07
+                           000006   396 	ar6 = 0x06
+                           000005   397 	ar5 = 0x05
+                           000004   398 	ar4 = 0x04
+                           000003   399 	ar3 = 0x03
+                           000002   400 	ar2 = 0x02
+                           000001   401 	ar1 = 0x01
+                           000000   402 	ar0 = 0x00
+      000000 AF 82            [24]  403 	mov	r7,dpl
+                                    404 ;	../src/isp.c:29: CONFB(ISP_CONTR, BIT_NUM_ISPEN, a);
+      000002 74 7F            [12]  405 	mov	a,#0x7f
+      000004 55 E7            [12]  406 	anl	a,_ISP_CONTR
+      000006 FE               [12]  407 	mov	r6,a
+      000007 EF               [12]  408 	mov	a,r7
+      000008 03               [12]  409 	rr	a
+      000009 54 80            [12]  410 	anl	a,#0x80
+      00000B 4E               [12]  411 	orl	a,r6
+      00000C F5 E7            [12]  412 	mov	_ISP_CONTR,a
+                                    413 ;	../src/isp.c:30: }
+      00000E 22               [24]  414 	ret
+                                    415 ;------------------------------------------------------------
+                                    416 ;Allocation info for local variables in function 'ISP_config'
+                                    417 ;------------------------------------------------------------
+                                    418 ;	../src/isp.c:42: void ISP_config(void)
+                                    419 ;	-----------------------------------------
+                                    420 ;	 function ISP_config
+                                    421 ;	-----------------------------------------
+      00000F                        422 _ISP_config:
+                                    423 ;	../src/isp.c:44: ISP_CONTR = (ISP_CONTR & 0xF8) | ISP_WAITTIME;
+      00000F E5 E7            [12]  424 	mov	a,_ISP_CONTR
+      000011 54 F8            [12]  425 	anl	a,#0xf8
+      000013 44 01            [12]  426 	orl	a,#0x01
+      000015 F5 E7            [12]  427 	mov	_ISP_CONTR,a
+                                    428 ;	../src/isp.c:45: }
+      000017 22               [24]  429 	ret
+                                    430 ;------------------------------------------------------------
+                                    431 ;Allocation info for local variables in function 'ISP_eraseSector'
+                                    432 ;------------------------------------------------------------
+                                    433 ;addr                      Allocated to registers r6 r7 
+                                    434 ;------------------------------------------------------------
+                                    435 ;	../src/isp.c:58: bool ISP_eraseSector(uint16_t addr)
+                                    436 ;	-----------------------------------------
+                                    437 ;	 function ISP_eraseSector
+                                    438 ;	-----------------------------------------
+      000018                        439 _ISP_eraseSector:
+      000018 AE 82            [24]  440 	mov	r6,dpl
+      00001A AF 83            [24]  441 	mov	r7,dph
+                                    442 ;	../src/isp.c:61: if ((addr < ISP_ADDR_START) || (addr > ISP_ADDR_END))
+      00001C 8E 04            [24]  443 	mov	ar4,r6
+      00001E 8F 05            [24]  444 	mov	ar5,r7
+      000020 74 E0            [12]  445 	mov	a,#0x100 - 0x20
+      000022 2D               [12]  446 	add	a,r5
+      000023 50 09            [24]  447 	jnc	00101$
+      000025 C3               [12]  448 	clr	c
+      000026 74 FF            [12]  449 	mov	a,#0xff
+      000028 9C               [12]  450 	subb	a,r4
+      000029 74 2F            [12]  451 	mov	a,#0x2f
+      00002B 9D               [12]  452 	subb	a,r5
+      00002C 50 04            [24]  453 	jnc	00102$
+      00002E                        454 00101$:
+                                    455 ;	../src/isp.c:63: return false;
+      00002E 75 82 00         [24]  456 	mov	dpl,#0x00
+      000031 22               [24]  457 	ret
+      000032                        458 00102$:
+                                    459 ;	../src/isp.c:66: ISP_setAddress(addr);
+      000032 8E 82            [24]  460 	mov	dpl,r6
+      000034 8F 83            [24]  461 	mov	dph,r7
+      000036 12r00r6C         [24]  462 	lcall	_ISP_setAddress
+                                    463 ;	../src/isp.c:67: ISP_setCommand(ISP_command_erase);
+      000039 75 82 03         [24]  464 	mov	dpl,#0x03
+      00003C 12r00r75         [24]  465 	lcall	_ISP_setCommand
+                                    466 ;	../src/isp.c:68: ISP_trig();
+      00003F 12r00r79         [24]  467 	lcall	_ISP_trig
+                                    468 ;	../src/isp.c:70: return true;
+      000042 75 82 01         [24]  469 	mov	dpl,#0x01
+                                    470 ;	../src/isp.c:71: }
+      000045 22               [24]  471 	ret
+                                    472 ;------------------------------------------------------------
+                                    473 ;Allocation info for local variables in function 'ISP_idle'
+                                    474 ;------------------------------------------------------------
+                                    475 ;	../src/isp.c:83: void ISP_idle(void)
+                                    476 ;	-----------------------------------------
+                                    477 ;	 function ISP_idle
+                                    478 ;	-----------------------------------------
+      000046                        479 _ISP_idle:
+                                    480 ;	../src/isp.c:85: ISP_cmd(DISABLE);
+      000046 75 82 00         [24]  481 	mov	dpl,#0x00
+      000049 12r00r00         [24]  482 	lcall	_ISP_cmd
+                                    483 ;	../src/isp.c:86: ISP_setAddress(0x0000);
+      00004C 90 00 00         [24]  484 	mov	dptr,#0x0000
+      00004F 12r00r6C         [24]  485 	lcall	_ISP_setAddress
+                                    486 ;	../src/isp.c:87: ISP_setCommand(ISP_command_idle);
+      000052 75 82 00         [24]  487 	mov	dpl,#0x00
+      000055 12r00r75         [24]  488 	lcall	_ISP_setCommand
+                                    489 ;	../src/isp.c:88: ISP_DATA = 0xFF;
+      000058 75 E2 FF         [24]  490 	mov	_ISP_DATA,#0xff
+                                    491 ;	../src/isp.c:89: }
+      00005B 22               [24]  492 	ret
+                                    493 ;------------------------------------------------------------
+                                    494 ;Allocation info for local variables in function 'ISP_readByte'
+                                    495 ;------------------------------------------------------------
+                                    496 ;addr                      Allocated to registers 
+                                    497 ;dat                       Allocated to registers 
+                                    498 ;------------------------------------------------------------
+                                    499 ;	../src/isp.c:101: byte ISP_readByte(uint16_t addr)
+                                    500 ;	-----------------------------------------
+                                    501 ;	 function ISP_readByte
+                                    502 ;	-----------------------------------------
+      00005C                        503 _ISP_readByte:
+                                    504 ;	../src/isp.c:105: ISP_setAddress(addr);
+      00005C 12r00r6C         [24]  505 	lcall	_ISP_setAddress
+                                    506 ;	../src/isp.c:106: ISP_setCommand(ISP_command_read);
+      00005F 75 82 01         [24]  507 	mov	dpl,#0x01
+      000062 12r00r75         [24]  508 	lcall	_ISP_setCommand
+                                    509 ;	../src/isp.c:107: ISP_trig();
+      000065 12r00r79         [24]  510 	lcall	_ISP_trig
+                                    511 ;	../src/isp.c:108: dat = ISP_DATA;
+      000068 85 E2 82         [24]  512 	mov	dpl,_ISP_DATA
+                                    513 ;	../src/isp.c:110: return dat;
+                                    514 ;	../src/isp.c:111: }
+      00006B 22               [24]  515 	ret
+                                    516 ;------------------------------------------------------------
+                                    517 ;Allocation info for local variables in function 'ISP_setAddress'
+                                    518 ;------------------------------------------------------------
+                                    519 ;addr                      Allocated to registers r6 r7 
+                                    520 ;------------------------------------------------------------
+                                    521 ;	../src/isp.c:123: void ISP_setAddress(uint16_t addr)
+                                    522 ;	-----------------------------------------
+                                    523 ;	 function ISP_setAddress
+                                    524 ;	-----------------------------------------
+      00006C                        525 _ISP_setAddress:
+      00006C AE 82            [24]  526 	mov	r6,dpl
+      00006E AF 83            [24]  527 	mov	r7,dph
+                                    528 ;	../src/isp.c:125: ISP_ADDRL = addr;
+      000070 8E E4            [24]  529 	mov	_ISP_ADDRL,r6
+                                    530 ;	../src/isp.c:126: ISP_ADDRH = addr >> 0x8;
+      000072 8F E3            [24]  531 	mov	_ISP_ADDRH,r7
+                                    532 ;	../src/isp.c:127: }
+      000074 22               [24]  533 	ret
+                                    534 ;------------------------------------------------------------
+                                    535 ;Allocation info for local variables in function 'ISP_setCommand'
+                                    536 ;------------------------------------------------------------
+                                    537 ;cmd                       Allocated to registers 
+                                    538 ;------------------------------------------------------------
+                                    539 ;	../src/isp.c:139: void ISP_setCommand(ISP_command cmd)
+                                    540 ;	-----------------------------------------
+                                    541 ;	 function ISP_setCommand
+                                    542 ;	-----------------------------------------
+      000075                        543 _ISP_setCommand:
+      000075 85 82 E5         [24]  544 	mov	_ISP_CMD,dpl
+                                    545 ;	../src/isp.c:141: ISP_CMD = cmd;
+                                    546 ;	../src/isp.c:142: }
+      000078 22               [24]  547 	ret
+                                    548 ;------------------------------------------------------------
+                                    549 ;Allocation info for local variables in function 'ISP_trig'
+                                    550 ;------------------------------------------------------------
+                                    551 ;	../src/isp.c:154: void ISP_trig(void)
+                                    552 ;	-----------------------------------------
+                                    553 ;	 function ISP_trig
+                                    554 ;	-----------------------------------------
+      000079                        555 _ISP_trig:
+                                    556 ;	../src/isp.c:156: ISP_TRIG = 0x46;
+      000079 75 E6 46         [24]  557 	mov	_ISP_TRIG,#0x46
+                                    558 ;	../src/isp.c:157: ISP_TRIG = 0xB9;
+      00007C 75 E6 B9         [24]  559 	mov	_ISP_TRIG,#0xb9
+                                    560 ;	../src/isp.c:158: }
+      00007F 22               [24]  561 	ret
+                                    562 ;------------------------------------------------------------
+                                    563 ;Allocation info for local variables in function 'ISP_writeByte'
+                                    564 ;------------------------------------------------------------
+                                    565 ;dat                       Allocated with name '_ISP_writeByte_PARM_2'
+                                    566 ;addr                      Allocated to registers r6 r7 
+                                    567 ;------------------------------------------------------------
+                                    568 ;	../src/isp.c:171: bool ISP_writeByte(uint16_t addr, byte dat)
+                                    569 ;	-----------------------------------------
+                                    570 ;	 function ISP_writeByte
+                                    571 ;	-----------------------------------------
+      000080                        572 _ISP_writeByte:
+      000080 AE 82            [24]  573 	mov	r6,dpl
+      000082 AF 83            [24]  574 	mov	r7,dph
+                                    575 ;	../src/isp.c:173: if ((addr < ISP_ADDR_START) || (addr > ISP_ADDR_END))
+      000084 8E 04            [24]  576 	mov	ar4,r6
+      000086 8F 05            [24]  577 	mov	ar5,r7
+      000088 74 E0            [12]  578 	mov	a,#0x100 - 0x20
+      00008A 2D               [12]  579 	add	a,r5
+      00008B 50 09            [24]  580 	jnc	00101$
+      00008D C3               [12]  581 	clr	c
+      00008E 74 FF            [12]  582 	mov	a,#0xff
+      000090 9C               [12]  583 	subb	a,r4
+      000091 74 2F            [12]  584 	mov	a,#0x2f
+      000093 9D               [12]  585 	subb	a,r5
+      000094 50 04            [24]  586 	jnc	00102$
+      000096                        587 00101$:
+                                    588 ;	../src/isp.c:175: return false;
+      000096 75 82 00         [24]  589 	mov	dpl,#0x00
+      000099 22               [24]  590 	ret
+      00009A                        591 00102$:
+                                    592 ;	../src/isp.c:179: ISP_setAddress(addr);
+      00009A 8E 82            [24]  593 	mov	dpl,r6
+      00009C 8F 83            [24]  594 	mov	dph,r7
+      00009E 12r00r6C         [24]  595 	lcall	_ISP_setAddress
+                                    596 ;	../src/isp.c:180: ISP_setCommand(ISP_command_write);
+      0000A1 75 82 02         [24]  597 	mov	dpl,#0x02
+      0000A4 12r00r75         [24]  598 	lcall	_ISP_setCommand
+                                    599 ;	../src/isp.c:181: ISP_DATA = dat;
+      0000A7 85*00 E2         [24]  600 	mov	_ISP_DATA,_ISP_writeByte_PARM_2
+                                    601 ;	../src/isp.c:182: ISP_trig();
+      0000AA 12r00r79         [24]  602 	lcall	_ISP_trig
+                                    603 ;	../src/isp.c:184: return true;
+      0000AD 75 82 01         [24]  604 	mov	dpl,#0x01
+                                    605 ;	../src/isp.c:186: }
+      0000B0 22               [24]  606 	ret
+                                    607 	.area CSEG    (CODE)
+                                    608 	.area CONST   (CODE)
+                                    609 	.area XINIT   (CODE)
+                                    610 	.area CABS    (ABS,CODE)

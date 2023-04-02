@@ -1,0 +1,1020 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.0 #11528 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module tim
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _TIM_INT_setPriority_PARM_2
+                                     12 	.globl _TIM_INT_cmd_PARM_2
+                                     13 	.globl _TIM_setValue_PARM_2
+                                     14 	.globl _TIM_setMode_PARM_2
+                                     15 	.globl _TIM_setFunction_PARM_2
+                                     16 	.globl _TIM_cmd_PARM_2
+                                     17 	.globl _PX3
+                                     18 	.globl _EX3
+                                     19 	.globl _IE3
+                                     20 	.globl _IT3
+                                     21 	.globl _PX2
+                                     22 	.globl _EX2
+                                     23 	.globl _IE2
+                                     24 	.globl _IT2
+                                     25 	.globl _TF2
+                                     26 	.globl _EXF2
+                                     27 	.globl _RCLK
+                                     28 	.globl _TCLK
+                                     29 	.globl _EXEN2
+                                     30 	.globl _TR2
+                                     31 	.globl _T2_CT
+                                     32 	.globl _CPRL2
+                                     33 	.globl _INT2
+                                     34 	.globl _INT3
+                                     35 	.globl _P4_3
+                                     36 	.globl _P4_2
+                                     37 	.globl _P4_1
+                                     38 	.globl _P4_0
+                                     39 	.globl _T2EX
+                                     40 	.globl _T2
+                                     41 	.globl _PT2
+                                     42 	.globl _ET2
+                                     43 	.globl _CY
+                                     44 	.globl _AC
+                                     45 	.globl _F0
+                                     46 	.globl _RS1
+                                     47 	.globl _RS0
+                                     48 	.globl _OV
+                                     49 	.globl _F1
+                                     50 	.globl _P
+                                     51 	.globl _PS
+                                     52 	.globl _PT1
+                                     53 	.globl _PX1
+                                     54 	.globl _PT0
+                                     55 	.globl _PX0
+                                     56 	.globl _RD
+                                     57 	.globl _WR
+                                     58 	.globl _T1
+                                     59 	.globl _T0
+                                     60 	.globl _INT1
+                                     61 	.globl _INT0
+                                     62 	.globl _TXD
+                                     63 	.globl _RXD
+                                     64 	.globl _P3_7
+                                     65 	.globl _P3_6
+                                     66 	.globl _P3_5
+                                     67 	.globl _P3_4
+                                     68 	.globl _P3_3
+                                     69 	.globl _P3_2
+                                     70 	.globl _P3_1
+                                     71 	.globl _P3_0
+                                     72 	.globl _EA
+                                     73 	.globl _ES
+                                     74 	.globl _ET1
+                                     75 	.globl _EX1
+                                     76 	.globl _ET0
+                                     77 	.globl _EX0
+                                     78 	.globl _P2_7
+                                     79 	.globl _P2_6
+                                     80 	.globl _P2_5
+                                     81 	.globl _P2_4
+                                     82 	.globl _P2_3
+                                     83 	.globl _P2_2
+                                     84 	.globl _P2_1
+                                     85 	.globl _P2_0
+                                     86 	.globl _SM0
+                                     87 	.globl _SM1
+                                     88 	.globl _SM2
+                                     89 	.globl _REN
+                                     90 	.globl _TB8
+                                     91 	.globl _RB8
+                                     92 	.globl _TI
+                                     93 	.globl _RI
+                                     94 	.globl _P1_7
+                                     95 	.globl _P1_6
+                                     96 	.globl _P1_5
+                                     97 	.globl _P1_4
+                                     98 	.globl _P1_3
+                                     99 	.globl _P1_2
+                                    100 	.globl _P1_1
+                                    101 	.globl _P1_0
+                                    102 	.globl _TF1
+                                    103 	.globl _TR1
+                                    104 	.globl _TF0
+                                    105 	.globl _TR0
+                                    106 	.globl _IE1
+                                    107 	.globl _IT1
+                                    108 	.globl _IE0
+                                    109 	.globl _IT0
+                                    110 	.globl _P0_7
+                                    111 	.globl _P0_6
+                                    112 	.globl _P0_5
+                                    113 	.globl _P0_4
+                                    114 	.globl _P0_3
+                                    115 	.globl _P0_2
+                                    116 	.globl _P0_1
+                                    117 	.globl _P0_0
+                                    118 	.globl _P4
+                                    119 	.globl _ISP_CONTR
+                                    120 	.globl _ISP_TRIG
+                                    121 	.globl _ISP_CMD
+                                    122 	.globl _ISP_ADDRL
+                                    123 	.globl _ISP_ADDRH
+                                    124 	.globl _ISP_DATA
+                                    125 	.globl _WDT_CONTR
+                                    126 	.globl _TH2
+                                    127 	.globl _TL2
+                                    128 	.globl _RCAP2H
+                                    129 	.globl _RCAP2L
+                                    130 	.globl _T2MOD
+                                    131 	.globl _T2CON
+                                    132 	.globl _XICON
+                                    133 	.globl _IPH
+                                    134 	.globl _SADDR1
+                                    135 	.globl _AUXR1
+                                    136 	.globl _AUXR
+                                    137 	.globl _B
+                                    138 	.globl _ACC
+                                    139 	.globl _PSW
+                                    140 	.globl _IP
+                                    141 	.globl _P3
+                                    142 	.globl _IE
+                                    143 	.globl _P2
+                                    144 	.globl _SBUF
+                                    145 	.globl _SCON
+                                    146 	.globl _P1
+                                    147 	.globl _TH1
+                                    148 	.globl _TH0
+                                    149 	.globl _TL1
+                                    150 	.globl _TL0
+                                    151 	.globl _TMOD
+                                    152 	.globl _TCON
+                                    153 	.globl _PCON
+                                    154 	.globl _DPH
+                                    155 	.globl _DPL
+                                    156 	.globl _SP
+                                    157 	.globl _P0
+                                    158 	.globl _TIM_config_PARM_2
+                                    159 	.globl _TIM_calculateValue_PARM_2
+                                    160 	.globl _TIM_calculateValue
+                                    161 	.globl _TIM_cmd
+                                    162 	.globl _TIM_config
+                                    163 	.globl _TIM_getValue
+                                    164 	.globl _TIM_isOverflow
+                                    165 	.globl _TIM_setFunction
+                                    166 	.globl _TIM_setMode
+                                    167 	.globl _TIM_setValue
+                                    168 	.globl _TIM_INT_cmd
+                                    169 	.globl _TIM_INT_setPriority
+                                    170 ;--------------------------------------------------------
+                                    171 ; special function registers
+                                    172 ;--------------------------------------------------------
+                                    173 	.area RSEG    (ABS,DATA)
+      000000                        174 	.org 0x0000
+                           000080   175 _P0	=	0x0080
+                           000081   176 _SP	=	0x0081
+                           000082   177 _DPL	=	0x0082
+                           000083   178 _DPH	=	0x0083
+                           000087   179 _PCON	=	0x0087
+                           000088   180 _TCON	=	0x0088
+                           000089   181 _TMOD	=	0x0089
+                           00008A   182 _TL0	=	0x008a
+                           00008B   183 _TL1	=	0x008b
+                           00008C   184 _TH0	=	0x008c
+                           00008D   185 _TH1	=	0x008d
+                           000090   186 _P1	=	0x0090
+                           000098   187 _SCON	=	0x0098
+                           000099   188 _SBUF	=	0x0099
+                           0000A0   189 _P2	=	0x00a0
+                           0000A8   190 _IE	=	0x00a8
+                           0000B0   191 _P3	=	0x00b0
+                           0000B8   192 _IP	=	0x00b8
+                           0000D0   193 _PSW	=	0x00d0
+                           0000E0   194 _ACC	=	0x00e0
+                           0000F0   195 _B	=	0x00f0
+                           00008E   196 _AUXR	=	0x008e
+                           0000A2   197 _AUXR1	=	0x00a2
+                           0000A9   198 _SADDR1	=	0x00a9
+                           0000B7   199 _IPH	=	0x00b7
+                           0000C0   200 _XICON	=	0x00c0
+                           0000C8   201 _T2CON	=	0x00c8
+                           0000C9   202 _T2MOD	=	0x00c9
+                           0000CA   203 _RCAP2L	=	0x00ca
+                           0000CB   204 _RCAP2H	=	0x00cb
+                           0000CC   205 _TL2	=	0x00cc
+                           0000CD   206 _TH2	=	0x00cd
+                           0000E1   207 _WDT_CONTR	=	0x00e1
+                           0000E2   208 _ISP_DATA	=	0x00e2
+                           0000E3   209 _ISP_ADDRH	=	0x00e3
+                           0000E4   210 _ISP_ADDRL	=	0x00e4
+                           0000E5   211 _ISP_CMD	=	0x00e5
+                           0000E6   212 _ISP_TRIG	=	0x00e6
+                           0000E7   213 _ISP_CONTR	=	0x00e7
+                           0000E8   214 _P4	=	0x00e8
+                                    215 ;--------------------------------------------------------
+                                    216 ; special function bits
+                                    217 ;--------------------------------------------------------
+                                    218 	.area RSEG    (ABS,DATA)
+      000000                        219 	.org 0x0000
+                           000080   220 _P0_0	=	0x0080
+                           000081   221 _P0_1	=	0x0081
+                           000082   222 _P0_2	=	0x0082
+                           000083   223 _P0_3	=	0x0083
+                           000084   224 _P0_4	=	0x0084
+                           000085   225 _P0_5	=	0x0085
+                           000086   226 _P0_6	=	0x0086
+                           000087   227 _P0_7	=	0x0087
+                           000088   228 _IT0	=	0x0088
+                           000089   229 _IE0	=	0x0089
+                           00008A   230 _IT1	=	0x008a
+                           00008B   231 _IE1	=	0x008b
+                           00008C   232 _TR0	=	0x008c
+                           00008D   233 _TF0	=	0x008d
+                           00008E   234 _TR1	=	0x008e
+                           00008F   235 _TF1	=	0x008f
+                           000090   236 _P1_0	=	0x0090
+                           000091   237 _P1_1	=	0x0091
+                           000092   238 _P1_2	=	0x0092
+                           000093   239 _P1_3	=	0x0093
+                           000094   240 _P1_4	=	0x0094
+                           000095   241 _P1_5	=	0x0095
+                           000096   242 _P1_6	=	0x0096
+                           000097   243 _P1_7	=	0x0097
+                           000098   244 _RI	=	0x0098
+                           000099   245 _TI	=	0x0099
+                           00009A   246 _RB8	=	0x009a
+                           00009B   247 _TB8	=	0x009b
+                           00009C   248 _REN	=	0x009c
+                           00009D   249 _SM2	=	0x009d
+                           00009E   250 _SM1	=	0x009e
+                           00009F   251 _SM0	=	0x009f
+                           0000A0   252 _P2_0	=	0x00a0
+                           0000A1   253 _P2_1	=	0x00a1
+                           0000A2   254 _P2_2	=	0x00a2
+                           0000A3   255 _P2_3	=	0x00a3
+                           0000A4   256 _P2_4	=	0x00a4
+                           0000A5   257 _P2_5	=	0x00a5
+                           0000A6   258 _P2_6	=	0x00a6
+                           0000A7   259 _P2_7	=	0x00a7
+                           0000A8   260 _EX0	=	0x00a8
+                           0000A9   261 _ET0	=	0x00a9
+                           0000AA   262 _EX1	=	0x00aa
+                           0000AB   263 _ET1	=	0x00ab
+                           0000AC   264 _ES	=	0x00ac
+                           0000AF   265 _EA	=	0x00af
+                           0000B0   266 _P3_0	=	0x00b0
+                           0000B1   267 _P3_1	=	0x00b1
+                           0000B2   268 _P3_2	=	0x00b2
+                           0000B3   269 _P3_3	=	0x00b3
+                           0000B4   270 _P3_4	=	0x00b4
+                           0000B5   271 _P3_5	=	0x00b5
+                           0000B6   272 _P3_6	=	0x00b6
+                           0000B7   273 _P3_7	=	0x00b7
+                           0000B0   274 _RXD	=	0x00b0
+                           0000B1   275 _TXD	=	0x00b1
+                           0000B2   276 _INT0	=	0x00b2
+                           0000B3   277 _INT1	=	0x00b3
+                           0000B4   278 _T0	=	0x00b4
+                           0000B5   279 _T1	=	0x00b5
+                           0000B6   280 _WR	=	0x00b6
+                           0000B7   281 _RD	=	0x00b7
+                           0000B8   282 _PX0	=	0x00b8
+                           0000B9   283 _PT0	=	0x00b9
+                           0000BA   284 _PX1	=	0x00ba
+                           0000BB   285 _PT1	=	0x00bb
+                           0000BC   286 _PS	=	0x00bc
+                           0000D0   287 _P	=	0x00d0
+                           0000D1   288 _F1	=	0x00d1
+                           0000D2   289 _OV	=	0x00d2
+                           0000D3   290 _RS0	=	0x00d3
+                           0000D4   291 _RS1	=	0x00d4
+                           0000D5   292 _F0	=	0x00d5
+                           0000D6   293 _AC	=	0x00d6
+                           0000D7   294 _CY	=	0x00d7
+                           0000AD   295 _ET2	=	0x00ad
+                           0000BD   296 _PT2	=	0x00bd
+                           000090   297 _T2	=	0x0090
+                           000091   298 _T2EX	=	0x0091
+                           0000E8   299 _P4_0	=	0x00e8
+                           0000E9   300 _P4_1	=	0x00e9
+                           0000EA   301 _P4_2	=	0x00ea
+                           0000EB   302 _P4_3	=	0x00eb
+                           0000EA   303 _INT3	=	0x00ea
+                           0000EB   304 _INT2	=	0x00eb
+                           0000C8   305 _CPRL2	=	0x00c8
+                           0000C9   306 _T2_CT	=	0x00c9
+                           0000CA   307 _TR2	=	0x00ca
+                           0000CB   308 _EXEN2	=	0x00cb
+                           0000CC   309 _TCLK	=	0x00cc
+                           0000CD   310 _RCLK	=	0x00cd
+                           0000CE   311 _EXF2	=	0x00ce
+                           0000CF   312 _TF2	=	0x00cf
+                           0000C0   313 _IT2	=	0x00c0
+                           0000C1   314 _IE2	=	0x00c1
+                           0000C2   315 _EX2	=	0x00c2
+                           0000C3   316 _PX2	=	0x00c3
+                           0000C4   317 _IT3	=	0x00c4
+                           0000C5   318 _IE3	=	0x00c5
+                           0000C6   319 _EX3	=	0x00c6
+                           0000C7   320 _PX3	=	0x00c7
+                                    321 ;--------------------------------------------------------
+                                    322 ; overlayable register banks
+                                    323 ;--------------------------------------------------------
+                                    324 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        325 	.ds 8
+                                    326 ;--------------------------------------------------------
+                                    327 ; internal ram data
+                                    328 ;--------------------------------------------------------
+                                    329 	.area DSEG    (DATA)
+      000000                        330 _TIM_calculateValue_PARM_2:
+      000000                        331 	.ds 1
+      000001                        332 _TIM_calculateValue_maxTick_65536_30:
+      000001                        333 	.ds 2
+      000003                        334 _TIM_config_PARM_2:
+      000003                        335 	.ds 3
+                                    336 ;--------------------------------------------------------
+                                    337 ; overlayable items in internal ram 
+                                    338 ;--------------------------------------------------------
+                                    339 	.area	OSEG    (OVR,DATA)
+      000000                        340 _TIM_cmd_PARM_2:
+      000000                        341 	.ds 1
+                                    342 	.area	OSEG    (OVR,DATA)
+                                    343 	.area	OSEG    (OVR,DATA)
+                                    344 	.area	OSEG    (OVR,DATA)
+      000000                        345 _TIM_setFunction_PARM_2:
+      000000                        346 	.ds 1
+                                    347 	.area	OSEG    (OVR,DATA)
+      000000                        348 _TIM_setMode_PARM_2:
+      000000                        349 	.ds 1
+                                    350 	.area	OSEG    (OVR,DATA)
+      000000                        351 _TIM_setValue_PARM_2:
+      000000                        352 	.ds 2
+                                    353 	.area	OSEG    (OVR,DATA)
+      000000                        354 _TIM_INT_cmd_PARM_2:
+      000000                        355 	.ds 1
+                                    356 	.area	OSEG    (OVR,DATA)
+      000000                        357 _TIM_INT_setPriority_PARM_2:
+      000000                        358 	.ds 1
+                                    359 ;--------------------------------------------------------
+                                    360 ; indirectly addressable internal ram data
+                                    361 ;--------------------------------------------------------
+                                    362 	.area ISEG    (DATA)
+                                    363 ;--------------------------------------------------------
+                                    364 ; absolute internal ram data
+                                    365 ;--------------------------------------------------------
+                                    366 	.area IABS    (ABS,DATA)
+                                    367 	.area IABS    (ABS,DATA)
+                                    368 ;--------------------------------------------------------
+                                    369 ; bit data
+                                    370 ;--------------------------------------------------------
+                                    371 	.area BSEG    (BIT)
+                                    372 ;--------------------------------------------------------
+                                    373 ; paged external ram data
+                                    374 ;--------------------------------------------------------
+                                    375 	.area PSEG    (PAG,XDATA)
+                                    376 ;--------------------------------------------------------
+                                    377 ; external ram data
+                                    378 ;--------------------------------------------------------
+                                    379 	.area XSEG    (XDATA)
+                                    380 ;--------------------------------------------------------
+                                    381 ; absolute external ram data
+                                    382 ;--------------------------------------------------------
+                                    383 	.area XABS    (ABS,XDATA)
+                                    384 ;--------------------------------------------------------
+                                    385 ; external initialized ram data
+                                    386 ;--------------------------------------------------------
+                                    387 	.area XISEG   (XDATA)
+                                    388 	.area HOME    (CODE)
+                                    389 	.area GSINIT0 (CODE)
+                                    390 	.area GSINIT1 (CODE)
+                                    391 	.area GSINIT2 (CODE)
+                                    392 	.area GSINIT3 (CODE)
+                                    393 	.area GSINIT4 (CODE)
+                                    394 	.area GSINIT5 (CODE)
+                                    395 	.area GSINIT  (CODE)
+                                    396 	.area GSFINAL (CODE)
+                                    397 	.area CSEG    (CODE)
+                                    398 ;--------------------------------------------------------
+                                    399 ; global & static initialisations
+                                    400 ;--------------------------------------------------------
+                                    401 	.area HOME    (CODE)
+                                    402 	.area GSINIT  (CODE)
+                                    403 	.area GSFINAL (CODE)
+                                    404 	.area GSINIT  (CODE)
+                                    405 ;--------------------------------------------------------
+                                    406 ; Home
+                                    407 ;--------------------------------------------------------
+                                    408 	.area HOME    (CODE)
+                                    409 	.area HOME    (CODE)
+                                    410 ;--------------------------------------------------------
+                                    411 ; code
+                                    412 ;--------------------------------------------------------
+                                    413 	.area CSEG    (CODE)
+                                    414 ;------------------------------------------------------------
+                                    415 ;Allocation info for local variables in function 'TIM_calculateValue'
+                                    416 ;------------------------------------------------------------
+                                    417 ;mode                      Allocated with name '_TIM_calculateValue_PARM_2'
+                                    418 ;time                      Allocated to registers r6 r7 
+                                    419 ;maxTick                   Allocated with name '_TIM_calculateValue_maxTick_65536_30'
+                                    420 ;------------------------------------------------------------
+                                    421 ;	../src/tim.c:28: uint16_t TIM_calculateValue(uint16_t time, TIM_mode mode)
+                                    422 ;	-----------------------------------------
+                                    423 ;	 function TIM_calculateValue
+                                    424 ;	-----------------------------------------
+      000000                        425 _TIM_calculateValue:
+                           000007   426 	ar7 = 0x07
+                           000006   427 	ar6 = 0x06
+                           000005   428 	ar5 = 0x05
+                           000004   429 	ar4 = 0x04
+                           000003   430 	ar3 = 0x03
+                           000002   431 	ar2 = 0x02
+                           000001   432 	ar1 = 0x01
+                           000000   433 	ar0 = 0x00
+      000000 AE 82            [24]  434 	mov	r6,dpl
+      000002 AF 83            [24]  435 	mov	r7,dph
+                                    436 ;	../src/tim.c:31: uint16_t maxTick = 0x0000;
+      000004 E4               [12]  437 	clr	a
+      000005 F5*01            [12]  438 	mov	_TIM_calculateValue_maxTick_65536_30,a
+      000007 F5*02            [12]  439 	mov	(_TIM_calculateValue_maxTick_65536_30 + 1),a
+                                    440 ;	../src/tim.c:33: switch (mode)
+      000009 E5*00            [12]  441 	mov	a,_TIM_calculateValue_PARM_2
+      00000B 24 FC            [12]  442 	add	a,#0xff - 0x03
+      00000D 40 34            [24]  443 	jc	00106$
+      00000F E5*00            [12]  444 	mov	a,_TIM_calculateValue_PARM_2
+      000011 75 F0 03         [24]  445 	mov	b,#0x03
+      000014 A4               [48]  446 	mul	ab
+      000015 90r00r19         [24]  447 	mov	dptr,#00121$
+      000018 73               [24]  448 	jmp	@a+dptr
+      000019                        449 00121$:
+      000019 02r00r25         [24]  450 	ljmp	00101$
+      00001C 02r00r2D         [24]  451 	ljmp	00102$
+      00001F 02r00r35         [24]  452 	ljmp	00103$
+      000022 02r00r3D         [24]  453 	ljmp	00104$
+                                    454 ;	../src/tim.c:35: case TIM_mode_0: maxTick = 0x1FFF; break;
+      000025                        455 00101$:
+      000025 75*01 FF         [24]  456 	mov	_TIM_calculateValue_maxTick_65536_30,#0xff
+      000028 75*02 1F         [24]  457 	mov	(_TIM_calculateValue_maxTick_65536_30 + 1),#0x1f
+                                    458 ;	../src/tim.c:36: case TIM_mode_1: maxTick = 0xFFFF; break;
+      00002B 80 16            [24]  459 	sjmp	00106$
+      00002D                        460 00102$:
+      00002D 75*01 FF         [24]  461 	mov	_TIM_calculateValue_maxTick_65536_30,#0xff
+      000030 75*02 FF         [24]  462 	mov	(_TIM_calculateValue_maxTick_65536_30 + 1),#0xff
+                                    463 ;	../src/tim.c:37: case TIM_mode_2: maxTick = 0x00FF; break;
+      000033 80 0E            [24]  464 	sjmp	00106$
+      000035                        465 00103$:
+      000035 75*01 FF         [24]  466 	mov	_TIM_calculateValue_maxTick_65536_30,#0xff
+      000038 75*02 00         [24]  467 	mov	(_TIM_calculateValue_maxTick_65536_30 + 1),#0x00
+                                    468 ;	../src/tim.c:38: case TIM_mode_3: maxTick = 0x00FF; break;
+      00003B 80 06            [24]  469 	sjmp	00106$
+      00003D                        470 00104$:
+      00003D 75*01 FF         [24]  471 	mov	_TIM_calculateValue_maxTick_65536_30,#0xff
+      000040 75*02 00         [24]  472 	mov	(_TIM_calculateValue_maxTick_65536_30 + 1),#0x00
+                                    473 ;	../src/tim.c:40: }
+      000043                        474 00106$:
+                                    475 ;	../src/tim.c:43: if ((time*(MCU_FRE_CLK/1000000)/MCU_PRESCALER) >= maxTick)
+      000043 8E*00            [24]  476 	mov	__mullong_PARM_2,r6
+      000045 8F*01            [24]  477 	mov	(__mullong_PARM_2 + 1),r7
+      000047 75*02 00         [24]  478 	mov	(__mullong_PARM_2 + 2),#0x00
+      00004A 75*03 00         [24]  479 	mov	(__mullong_PARM_2 + 3),#0x00
+      00004D 90 00 0C         [24]  480 	mov	dptr,#(0x0c&0x00ff)
+      000050 E4               [12]  481 	clr	a
+      000051 F5 F0            [12]  482 	mov	b,a
+      000053 12r00r00         [24]  483 	lcall	__mullong
+      000056 AA 82            [24]  484 	mov	r2,dpl
+      000058 AB 83            [24]  485 	mov	r3,dph
+      00005A AE F0            [24]  486 	mov	r6,b
+      00005C FF               [12]  487 	mov	r7,a
+      00005D 75*00 0C         [24]  488 	mov	__divulong_PARM_2,#0x0c
+      000060 E4               [12]  489 	clr	a
+      000061 F5*01            [12]  490 	mov	(__divulong_PARM_2 + 1),a
+      000063 F5*02            [12]  491 	mov	(__divulong_PARM_2 + 2),a
+      000065 F5*03            [12]  492 	mov	(__divulong_PARM_2 + 3),a
+      000067 8A 82            [24]  493 	mov	dpl,r2
+      000069 8B 83            [24]  494 	mov	dph,r3
+      00006B 8E F0            [24]  495 	mov	b,r6
+      00006D EF               [12]  496 	mov	a,r7
+      00006E 12r00r00         [24]  497 	lcall	__divulong
+      000071 AA 82            [24]  498 	mov	r2,dpl
+      000073 AB 83            [24]  499 	mov	r3,dph
+      000075 AE F0            [24]  500 	mov	r6,b
+      000077 FF               [12]  501 	mov	r7,a
+      000078 A8*01            [24]  502 	mov	r0,_TIM_calculateValue_maxTick_65536_30
+      00007A A9*02            [24]  503 	mov	r1,(_TIM_calculateValue_maxTick_65536_30 + 1)
+      00007C 7C 00            [12]  504 	mov	r4,#0x00
+      00007E 7D 00            [12]  505 	mov	r5,#0x00
+      000080 C3               [12]  506 	clr	c
+      000081 EA               [12]  507 	mov	a,r2
+      000082 98               [12]  508 	subb	a,r0
+      000083 EB               [12]  509 	mov	a,r3
+      000084 99               [12]  510 	subb	a,r1
+      000085 EE               [12]  511 	mov	a,r6
+      000086 9C               [12]  512 	subb	a,r4
+      000087 EF               [12]  513 	mov	a,r7
+      000088 9D               [12]  514 	subb	a,r5
+      000089 40 04            [24]  515 	jc	00108$
+                                    516 ;	../src/tim.c:45: return 0;
+      00008B 90 00 00         [24]  517 	mov	dptr,#0x0000
+      00008E 22               [24]  518 	ret
+      00008F                        519 00108$:
+                                    520 ;	../src/tim.c:49: return (maxTick + 1 - (time*(MCU_FRE_CLK/1000000)/MCU_PRESCALER));
+      00008F AC*01            [24]  521 	mov	r4,_TIM_calculateValue_maxTick_65536_30
+      000091 AD*02            [24]  522 	mov	r5,(_TIM_calculateValue_maxTick_65536_30 + 1)
+      000093 0C               [12]  523 	inc	r4
+      000094 BC 00 01         [24]  524 	cjne	r4,#0x00,00123$
+      000097 0D               [12]  525 	inc	r5
+      000098                        526 00123$:
+      000098 EC               [12]  527 	mov	a,r4
+      000099 C3               [12]  528 	clr	c
+      00009A 9A               [12]  529 	subb	a,r2
+      00009B F5 82            [12]  530 	mov	dpl,a
+      00009D ED               [12]  531 	mov	a,r5
+      00009E 9B               [12]  532 	subb	a,r3
+      00009F F5 83            [12]  533 	mov	dph,a
+                                    534 ;	../src/tim.c:52: }
+      0000A1 22               [24]  535 	ret
+                                    536 ;------------------------------------------------------------
+                                    537 ;Allocation info for local variables in function 'TIM_cmd'
+                                    538 ;------------------------------------------------------------
+                                    539 ;a                         Allocated with name '_TIM_cmd_PARM_2'
+                                    540 ;tim                       Allocated to registers r7 
+                                    541 ;------------------------------------------------------------
+                                    542 ;	../src/tim.c:65: void TIM_cmd(PERIPH_TIM tim, Action a)
+                                    543 ;	-----------------------------------------
+                                    544 ;	 function TIM_cmd
+                                    545 ;	-----------------------------------------
+      0000A2                        546 _TIM_cmd:
+      0000A2 AF 82            [24]  547 	mov	r7,dpl
+                                    548 ;	../src/tim.c:67: switch (tim)
+      0000A4 BF 00 02         [24]  549 	cjne	r7,#0x00,00115$
+      0000A7 80 05            [24]  550 	sjmp	00101$
+      0000A9                        551 00115$:
+                                    552 ;	../src/tim.c:69: case PERIPH_TIM_0: TR0 = a; break;
+      0000A9 BF 01 0F         [24]  553 	cjne	r7,#0x01,00105$
+      0000AC 80 07            [24]  554 	sjmp	00102$
+      0000AE                        555 00101$:
+                                    556 ;	assignBit
+      0000AE E5*00            [12]  557 	mov	a,_TIM_cmd_PARM_2
+      0000B0 24 FF            [12]  558 	add	a,#0xff
+      0000B2 92 8C            [24]  559 	mov	_TR0,c
+                                    560 ;	../src/tim.c:70: case PERIPH_TIM_1: TR1 = a; break;
+      0000B4 22               [24]  561 	ret
+      0000B5                        562 00102$:
+                                    563 ;	assignBit
+      0000B5 E5*00            [12]  564 	mov	a,_TIM_cmd_PARM_2
+      0000B7 24 FF            [12]  565 	add	a,#0xff
+      0000B9 92 8E            [24]  566 	mov	_TR1,c
+                                    567 ;	../src/tim.c:72: }
+      0000BB                        568 00105$:
+                                    569 ;	../src/tim.c:73: }
+      0000BB 22               [24]  570 	ret
+                                    571 ;------------------------------------------------------------
+                                    572 ;Allocation info for local variables in function 'TIM_config'
+                                    573 ;------------------------------------------------------------
+                                    574 ;tc                        Allocated with name '_TIM_config_PARM_2'
+                                    575 ;tim                       Allocated to registers r7 
+                                    576 ;------------------------------------------------------------
+                                    577 ;	../src/tim.c:86: void TIM_config(PERIPH_TIM tim, TIM_configTypeDef *tc)
+                                    578 ;	-----------------------------------------
+                                    579 ;	 function TIM_config
+                                    580 ;	-----------------------------------------
+      0000BC                        581 _TIM_config:
+      0000BC AF 82            [24]  582 	mov	r7,dpl
+                                    583 ;	../src/tim.c:88: TIM_setFunction(tim, tc->function);
+      0000BE AC*03            [24]  584 	mov	r4,_TIM_config_PARM_2
+      0000C0 AD*04            [24]  585 	mov	r5,(_TIM_config_PARM_2 + 1)
+      0000C2 AE*05            [24]  586 	mov	r6,(_TIM_config_PARM_2 + 2)
+      0000C4 8C 82            [24]  587 	mov	dpl,r4
+      0000C6 8D 83            [24]  588 	mov	dph,r5
+      0000C8 8E F0            [24]  589 	mov	b,r6
+      0000CA 12r00r00         [24]  590 	lcall	__gptrget
+      0000CD F5*00            [12]  591 	mov	_TIM_setFunction_PARM_2,a
+      0000CF 8F 82            [24]  592 	mov	dpl,r7
+      0000D1 C0 07            [24]  593 	push	ar7
+      0000D3 C0 06            [24]  594 	push	ar6
+      0000D5 C0 05            [24]  595 	push	ar5
+      0000D7 C0 04            [24]  596 	push	ar4
+      0000D9 12r01rD0         [24]  597 	lcall	_TIM_setFunction
+      0000DC D0 04            [24]  598 	pop	ar4
+      0000DE D0 05            [24]  599 	pop	ar5
+      0000E0 D0 06            [24]  600 	pop	ar6
+      0000E2 D0 07            [24]  601 	pop	ar7
+                                    602 ;	../src/tim.c:89: TIM_setMode(tim, tc->mode);
+      0000E4 74 03            [12]  603 	mov	a,#0x03
+      0000E6 2C               [12]  604 	add	a,r4
+      0000E7 F9               [12]  605 	mov	r1,a
+      0000E8 E4               [12]  606 	clr	a
+      0000E9 3D               [12]  607 	addc	a,r5
+      0000EA FA               [12]  608 	mov	r2,a
+      0000EB 8E 03            [24]  609 	mov	ar3,r6
+      0000ED 89 82            [24]  610 	mov	dpl,r1
+      0000EF 8A 83            [24]  611 	mov	dph,r2
+      0000F1 8B F0            [24]  612 	mov	b,r3
+      0000F3 12r00r00         [24]  613 	lcall	__gptrget
+      0000F6 F5*00            [12]  614 	mov	_TIM_setMode_PARM_2,a
+      0000F8 8F 82            [24]  615 	mov	dpl,r7
+      0000FA C0 07            [24]  616 	push	ar7
+      0000FC C0 06            [24]  617 	push	ar6
+      0000FE C0 05            [24]  618 	push	ar5
+      000100 C0 04            [24]  619 	push	ar4
+      000102 12r01rFB         [24]  620 	lcall	_TIM_setMode
+      000105 D0 04            [24]  621 	pop	ar4
+      000107 D0 05            [24]  622 	pop	ar5
+      000109 D0 06            [24]  623 	pop	ar6
+      00010B D0 07            [24]  624 	pop	ar7
+                                    625 ;	../src/tim.c:90: TIM_setValue(tim, tc->value);
+      00010D 74 04            [12]  626 	mov	a,#0x04
+      00010F 2C               [12]  627 	add	a,r4
+      000110 F9               [12]  628 	mov	r1,a
+      000111 E4               [12]  629 	clr	a
+      000112 3D               [12]  630 	addc	a,r5
+      000113 FA               [12]  631 	mov	r2,a
+      000114 8E 03            [24]  632 	mov	ar3,r6
+      000116 89 82            [24]  633 	mov	dpl,r1
+      000118 8A 83            [24]  634 	mov	dph,r2
+      00011A 8B F0            [24]  635 	mov	b,r3
+      00011C 12r00r00         [24]  636 	lcall	__gptrget
+      00011F F5*00            [12]  637 	mov	_TIM_setValue_PARM_2,a
+      000121 A3               [24]  638 	inc	dptr
+      000122 12r00r00         [24]  639 	lcall	__gptrget
+      000125 F5*01            [12]  640 	mov	(_TIM_setValue_PARM_2 + 1),a
+      000127 8F 82            [24]  641 	mov	dpl,r7
+      000129 C0 07            [24]  642 	push	ar7
+      00012B C0 06            [24]  643 	push	ar6
+      00012D C0 05            [24]  644 	push	ar5
+      00012F C0 04            [24]  645 	push	ar4
+      000131 12r02r21         [24]  646 	lcall	_TIM_setValue
+      000134 D0 04            [24]  647 	pop	ar4
+      000136 D0 05            [24]  648 	pop	ar5
+      000138 D0 06            [24]  649 	pop	ar6
+      00013A D0 07            [24]  650 	pop	ar7
+                                    651 ;	../src/tim.c:91: TIM_INT_cmd(tim, tc->interruptState);
+      00013C 74 01            [12]  652 	mov	a,#0x01
+      00013E 2C               [12]  653 	add	a,r4
+      00013F F9               [12]  654 	mov	r1,a
+      000140 E4               [12]  655 	clr	a
+      000141 3D               [12]  656 	addc	a,r5
+      000142 FA               [12]  657 	mov	r2,a
+      000143 8E 03            [24]  658 	mov	ar3,r6
+      000145 89 82            [24]  659 	mov	dpl,r1
+      000147 8A 83            [24]  660 	mov	dph,r2
+      000149 8B F0            [24]  661 	mov	b,r3
+      00014B 12r00r00         [24]  662 	lcall	__gptrget
+      00014E F5*00            [12]  663 	mov	_TIM_INT_cmd_PARM_2,a
+      000150 8F 82            [24]  664 	mov	dpl,r7
+      000152 C0 07            [24]  665 	push	ar7
+      000154 C0 06            [24]  666 	push	ar6
+      000156 C0 05            [24]  667 	push	ar5
+      000158 C0 04            [24]  668 	push	ar4
+      00015A 12r02r3B         [24]  669 	lcall	_TIM_INT_cmd
+      00015D D0 04            [24]  670 	pop	ar4
+      00015F D0 05            [24]  671 	pop	ar5
+      000161 D0 06            [24]  672 	pop	ar6
+      000163 D0 07            [24]  673 	pop	ar7
+                                    674 ;	../src/tim.c:92: TIM_INT_setPriority(tim, tc->interruptPriority);
+      000165 74 02            [12]  675 	mov	a,#0x02
+      000167 2C               [12]  676 	add	a,r4
+      000168 FC               [12]  677 	mov	r4,a
+      000169 E4               [12]  678 	clr	a
+      00016A 3D               [12]  679 	addc	a,r5
+      00016B FD               [12]  680 	mov	r5,a
+      00016C 8C 82            [24]  681 	mov	dpl,r4
+      00016E 8D 83            [24]  682 	mov	dph,r5
+      000170 8E F0            [24]  683 	mov	b,r6
+      000172 12r00r00         [24]  684 	lcall	__gptrget
+      000175 F5*00            [12]  685 	mov	_TIM_INT_setPriority_PARM_2,a
+      000177 8F 82            [24]  686 	mov	dpl,r7
+                                    687 ;	../src/tim.c:93: }
+      000179 02r02r55         [24]  688 	ljmp	_TIM_INT_setPriority
+                                    689 ;------------------------------------------------------------
+                                    690 ;Allocation info for local variables in function 'TIM_getValue'
+                                    691 ;------------------------------------------------------------
+                                    692 ;tim                       Allocated to registers r7 
+                                    693 ;------------------------------------------------------------
+                                    694 ;	../src/tim.c:106: uint16_t TIM_getValue(PERIPH_TIM tim)
+                                    695 ;	-----------------------------------------
+                                    696 ;	 function TIM_getValue
+                                    697 ;	-----------------------------------------
+      00017C                        698 _TIM_getValue:
+      00017C AF 82            [24]  699 	mov	r7,dpl
+                                    700 ;	../src/tim.c:108: switch (tim)
+      00017E BF 00 02         [24]  701 	cjne	r7,#0x00,00115$
+      000181 80 05            [24]  702 	sjmp	00101$
+      000183                        703 00115$:
+                                    704 ;	../src/tim.c:110: case PERIPH_TIM_0: return ((TH0 << 0x08) | TL0);
+      000183 BF 01 28         [24]  705 	cjne	r7,#0x01,00103$
+      000186 80 13            [24]  706 	sjmp	00102$
+      000188                        707 00101$:
+      000188 AF 8C            [24]  708 	mov	r7,_TH0
+      00018A 7E 00            [12]  709 	mov	r6,#0x00
+      00018C AC 8A            [24]  710 	mov	r4,_TL0
+      00018E 7D 00            [12]  711 	mov	r5,#0x00
+      000190 EC               [12]  712 	mov	a,r4
+      000191 42 06            [12]  713 	orl	ar6,a
+      000193 ED               [12]  714 	mov	a,r5
+      000194 42 07            [12]  715 	orl	ar7,a
+      000196 8E 82            [24]  716 	mov	dpl,r6
+      000198 8F 83            [24]  717 	mov	dph,r7
+                                    718 ;	../src/tim.c:111: case PERIPH_TIM_1: return ((TH1 << 0x08) | TL1);
+      00019A 22               [24]  719 	ret
+      00019B                        720 00102$:
+      00019B AF 8D            [24]  721 	mov	r7,_TH1
+      00019D 7E 00            [12]  722 	mov	r6,#0x00
+      00019F AC 8B            [24]  723 	mov	r4,_TL1
+      0001A1 7D 00            [12]  724 	mov	r5,#0x00
+      0001A3 EC               [12]  725 	mov	a,r4
+      0001A4 42 06            [12]  726 	orl	ar6,a
+      0001A6 ED               [12]  727 	mov	a,r5
+      0001A7 42 07            [12]  728 	orl	ar7,a
+      0001A9 8E 82            [24]  729 	mov	dpl,r6
+      0001AB 8F 83            [24]  730 	mov	dph,r7
+                                    731 ;	../src/tim.c:112: default: return 0x0000;
+      0001AD 22               [24]  732 	ret
+      0001AE                        733 00103$:
+      0001AE 90 00 00         [24]  734 	mov	dptr,#0x0000
+                                    735 ;	../src/tim.c:113: }
+                                    736 ;	../src/tim.c:114: }
+      0001B1 22               [24]  737 	ret
+                                    738 ;------------------------------------------------------------
+                                    739 ;Allocation info for local variables in function 'TIM_isOverflow'
+                                    740 ;------------------------------------------------------------
+                                    741 ;tim                       Allocated to registers r7 
+                                    742 ;------------------------------------------------------------
+                                    743 ;	../src/tim.c:127: bool TIM_isOverflow(PERIPH_TIM tim)
+                                    744 ;	-----------------------------------------
+                                    745 ;	 function TIM_isOverflow
+                                    746 ;	-----------------------------------------
+      0001B2                        747 _TIM_isOverflow:
+      0001B2 AF 82            [24]  748 	mov	r7,dpl
+                                    749 ;	../src/tim.c:129: switch (tim)
+      0001B4 BF 00 02         [24]  750 	cjne	r7,#0x00,00115$
+      0001B7 80 05            [24]  751 	sjmp	00101$
+      0001B9                        752 00115$:
+                                    753 ;	../src/tim.c:131: case PERIPH_TIM_0: return (bool)TF0;
+      0001B9 BF 01 10         [24]  754 	cjne	r7,#0x01,00103$
+      0001BC 80 07            [24]  755 	sjmp	00102$
+      0001BE                        756 00101$:
+      0001BE A2 8D            [12]  757 	mov	c,_TF0
+      0001C0 E4               [12]  758 	clr	a
+      0001C1 33               [12]  759 	rlc	a
+      0001C2 F5 82            [12]  760 	mov	dpl,a
+                                    761 ;	../src/tim.c:132: case PERIPH_TIM_1: return (bool)TF1;
+      0001C4 22               [24]  762 	ret
+      0001C5                        763 00102$:
+      0001C5 A2 8F            [12]  764 	mov	c,_TF1
+      0001C7 E4               [12]  765 	clr	a
+      0001C8 33               [12]  766 	rlc	a
+      0001C9 F5 82            [12]  767 	mov	dpl,a
+                                    768 ;	../src/tim.c:133: default: return false;
+      0001CB 22               [24]  769 	ret
+      0001CC                        770 00103$:
+      0001CC 75 82 00         [24]  771 	mov	dpl,#0x00
+                                    772 ;	../src/tim.c:134: }
+                                    773 ;	../src/tim.c:135: }
+      0001CF 22               [24]  774 	ret
+                                    775 ;------------------------------------------------------------
+                                    776 ;Allocation info for local variables in function 'TIM_setFunction'
+                                    777 ;------------------------------------------------------------
+                                    778 ;f                         Allocated with name '_TIM_setFunction_PARM_2'
+                                    779 ;tim                       Allocated to registers r7 
+                                    780 ;------------------------------------------------------------
+                                    781 ;	../src/tim.c:148: void TIM_setFunction(PERIPH_TIM tim, TIM_function f)
+                                    782 ;	-----------------------------------------
+                                    783 ;	 function TIM_setFunction
+                                    784 ;	-----------------------------------------
+      0001D0                        785 _TIM_setFunction:
+      0001D0 AF 82            [24]  786 	mov	r7,dpl
+                                    787 ;	../src/tim.c:150: switch (tim)
+      0001D2 BF 00 02         [24]  788 	cjne	r7,#0x00,00115$
+      0001D5 80 05            [24]  789 	sjmp	00101$
+      0001D7                        790 00115$:
+                                    791 ;	../src/tim.c:152: case PERIPH_TIM_0: CONFB(TMOD, BIT_NUM_T0_CT, f); break;
+      0001D7 BF 01 20         [24]  792 	cjne	r7,#0x01,00105$
+      0001DA 80 0F            [24]  793 	sjmp	00102$
+      0001DC                        794 00101$:
+      0001DC 74 FB            [12]  795 	mov	a,#0xfb
+      0001DE 55 89            [12]  796 	anl	a,_TMOD
+      0001E0 FF               [12]  797 	mov	r7,a
+      0001E1 E5*00            [12]  798 	mov	a,_TIM_setFunction_PARM_2
+      0001E3 25 E0            [12]  799 	add	a,acc
+      0001E5 25 E0            [12]  800 	add	a,acc
+      0001E7 4F               [12]  801 	orl	a,r7
+      0001E8 F5 89            [12]  802 	mov	_TMOD,a
+                                    803 ;	../src/tim.c:153: case PERIPH_TIM_1: CONFB(TMOD, BIT_NUM_T1_CT, f); break;
+      0001EA 22               [24]  804 	ret
+      0001EB                        805 00102$:
+      0001EB 74 BF            [12]  806 	mov	a,#0xbf
+      0001ED 55 89            [12]  807 	anl	a,_TMOD
+      0001EF FF               [12]  808 	mov	r7,a
+      0001F0 E5*00            [12]  809 	mov	a,_TIM_setFunction_PARM_2
+      0001F2 03               [12]  810 	rr	a
+      0001F3 03               [12]  811 	rr	a
+      0001F4 54 C0            [12]  812 	anl	a,#0xc0
+      0001F6 FE               [12]  813 	mov	r6,a
+      0001F7 4F               [12]  814 	orl	a,r7
+      0001F8 F5 89            [12]  815 	mov	_TMOD,a
+                                    816 ;	../src/tim.c:155: }
+      0001FA                        817 00105$:
+                                    818 ;	../src/tim.c:156: }
+      0001FA 22               [24]  819 	ret
+                                    820 ;------------------------------------------------------------
+                                    821 ;Allocation info for local variables in function 'TIM_setMode'
+                                    822 ;------------------------------------------------------------
+                                    823 ;mode                      Allocated with name '_TIM_setMode_PARM_2'
+                                    824 ;tim                       Allocated to registers r7 
+                                    825 ;------------------------------------------------------------
+                                    826 ;	../src/tim.c:169: void TIM_setMode(PERIPH_TIM tim, TIM_mode mode)
+                                    827 ;	-----------------------------------------
+                                    828 ;	 function TIM_setMode
+                                    829 ;	-----------------------------------------
+      0001FB                        830 _TIM_setMode:
+      0001FB AF 82            [24]  831 	mov	r7,dpl
+                                    832 ;	../src/tim.c:171: switch (tim)
+      0001FD BF 00 02         [24]  833 	cjne	r7,#0x00,00115$
+      000200 80 05            [24]  834 	sjmp	00101$
+      000202                        835 00115$:
+                                    836 ;	../src/tim.c:173: case PERIPH_TIM_0: TMOD = (TMOD & 0xFC) | mode; break;
+      000202 BF 01 1B         [24]  837 	cjne	r7,#0x01,00105$
+      000205 80 0B            [24]  838 	sjmp	00102$
+      000207                        839 00101$:
+      000207 E5 89            [12]  840 	mov	a,_TMOD
+      000209 54 FC            [12]  841 	anl	a,#0xfc
+      00020B FF               [12]  842 	mov	r7,a
+      00020C E5*00            [12]  843 	mov	a,_TIM_setMode_PARM_2
+      00020E 4F               [12]  844 	orl	a,r7
+      00020F F5 89            [12]  845 	mov	_TMOD,a
+                                    846 ;	../src/tim.c:174: case PERIPH_TIM_1: TMOD = (TMOD & 0xCF) | (mode << 0x4); break;
+      000211 22               [24]  847 	ret
+      000212                        848 00102$:
+      000212 E5 89            [12]  849 	mov	a,_TMOD
+      000214 54 CF            [12]  850 	anl	a,#0xcf
+      000216 FF               [12]  851 	mov	r7,a
+      000217 E5*00            [12]  852 	mov	a,_TIM_setMode_PARM_2
+      000219 C4               [12]  853 	swap	a
+      00021A 54 F0            [12]  854 	anl	a,#0xf0
+      00021C FE               [12]  855 	mov	r6,a
+      00021D 4F               [12]  856 	orl	a,r7
+      00021E F5 89            [12]  857 	mov	_TMOD,a
+                                    858 ;	../src/tim.c:176: }
+      000220                        859 00105$:
+                                    860 ;	../src/tim.c:177: }
+      000220 22               [24]  861 	ret
+                                    862 ;------------------------------------------------------------
+                                    863 ;Allocation info for local variables in function 'TIM_setValue'
+                                    864 ;------------------------------------------------------------
+                                    865 ;val                       Allocated with name '_TIM_setValue_PARM_2'
+                                    866 ;tim                       Allocated to registers r7 
+                                    867 ;------------------------------------------------------------
+                                    868 ;	../src/tim.c:190: void TIM_setValue(PERIPH_TIM tim, uint16_t val)
+                                    869 ;	-----------------------------------------
+                                    870 ;	 function TIM_setValue
+                                    871 ;	-----------------------------------------
+      000221                        872 _TIM_setValue:
+      000221 AF 82            [24]  873 	mov	r7,dpl
+                                    874 ;	../src/tim.c:192: switch (tim)
+      000223 BF 00 02         [24]  875 	cjne	r7,#0x00,00115$
+      000226 80 05            [24]  876 	sjmp	00101$
+      000228                        877 00115$:
+                                    878 ;	../src/tim.c:194: case PERIPH_TIM_0:
+      000228 BF 01 0F         [24]  879 	cjne	r7,#0x01,00105$
+      00022B 80 07            [24]  880 	sjmp	00102$
+      00022D                        881 00101$:
+                                    882 ;	../src/tim.c:196: TH0 = (uint8_t)((val >> 0x8) & 0x00FF);
+      00022D 85*01 8C         [24]  883 	mov	_TH0,(_TIM_setValue_PARM_2 + 1)
+                                    884 ;	../src/tim.c:197: TL0 = (uint8_t)(val & 0x00FF);
+      000230 85*00 8A         [24]  885 	mov	_TL0,_TIM_setValue_PARM_2
+                                    886 ;	../src/tim.c:198: } break;
+                                    887 ;	../src/tim.c:199: case PERIPH_TIM_1:
+      000233 22               [24]  888 	ret
+      000234                        889 00102$:
+                                    890 ;	../src/tim.c:201: TH1 = (uint8_t)((val >> 0x8) & 0x00FF);
+      000234 85*01 8D         [24]  891 	mov	_TH1,(_TIM_setValue_PARM_2 + 1)
+                                    892 ;	../src/tim.c:202: TL1 = (uint8_t)(val & 0x00FF);
+      000237 85*00 8B         [24]  893 	mov	_TL1,_TIM_setValue_PARM_2
+                                    894 ;	../src/tim.c:205: }
+      00023A                        895 00105$:
+                                    896 ;	../src/tim.c:206: }
+      00023A 22               [24]  897 	ret
+                                    898 ;------------------------------------------------------------
+                                    899 ;Allocation info for local variables in function 'TIM_INT_cmd'
+                                    900 ;------------------------------------------------------------
+                                    901 ;a                         Allocated with name '_TIM_INT_cmd_PARM_2'
+                                    902 ;tim                       Allocated to registers r7 
+                                    903 ;------------------------------------------------------------
+                                    904 ;	../src/tim.c:219: void TIM_INT_cmd(PERIPH_TIM tim, Action a)
+                                    905 ;	-----------------------------------------
+                                    906 ;	 function TIM_INT_cmd
+                                    907 ;	-----------------------------------------
+      00023B                        908 _TIM_INT_cmd:
+      00023B AF 82            [24]  909 	mov	r7,dpl
+                                    910 ;	../src/tim.c:221: switch (tim)
+      00023D BF 00 02         [24]  911 	cjne	r7,#0x00,00115$
+      000240 80 05            [24]  912 	sjmp	00101$
+      000242                        913 00115$:
+                                    914 ;	../src/tim.c:223: case PERIPH_TIM_0: ET0 = a; break;
+      000242 BF 01 0F         [24]  915 	cjne	r7,#0x01,00105$
+      000245 80 07            [24]  916 	sjmp	00102$
+      000247                        917 00101$:
+                                    918 ;	assignBit
+      000247 E5*00            [12]  919 	mov	a,_TIM_INT_cmd_PARM_2
+      000249 24 FF            [12]  920 	add	a,#0xff
+      00024B 92 A9            [24]  921 	mov	_ET0,c
+                                    922 ;	../src/tim.c:224: case PERIPH_TIM_1: ET1 = a; break;
+      00024D 22               [24]  923 	ret
+      00024E                        924 00102$:
+                                    925 ;	assignBit
+      00024E E5*00            [12]  926 	mov	a,_TIM_INT_cmd_PARM_2
+      000250 24 FF            [12]  927 	add	a,#0xff
+      000252 92 AB            [24]  928 	mov	_ET1,c
+                                    929 ;	../src/tim.c:226: }
+      000254                        930 00105$:
+                                    931 ;	../src/tim.c:227: }
+      000254 22               [24]  932 	ret
+                                    933 ;------------------------------------------------------------
+                                    934 ;Allocation info for local variables in function 'TIM_INT_setPriority'
+                                    935 ;------------------------------------------------------------
+                                    936 ;p                         Allocated with name '_TIM_INT_setPriority_PARM_2'
+                                    937 ;tim                       Allocated to registers r7 
+                                    938 ;------------------------------------------------------------
+                                    939 ;	../src/tim.c:240: void TIM_INT_setPriority(PERIPH_TIM tim, UTIL_interruptPriority p)
+                                    940 ;	-----------------------------------------
+                                    941 ;	 function TIM_INT_setPriority
+                                    942 ;	-----------------------------------------
+      000255                        943 _TIM_INT_setPriority:
+      000255 AF 82            [24]  944 	mov	r7,dpl
+                                    945 ;	../src/tim.c:242: switch (tim)
+      000257 BF 00 02         [24]  946 	cjne	r7,#0x00,00115$
+      00025A 80 05            [24]  947 	sjmp	00101$
+      00025C                        948 00115$:
+                                    949 ;	../src/tim.c:244: case PERIPH_TIM_0:
+      00025C BF 01 50         [24]  950 	cjne	r7,#0x01,00105$
+      00025F 80 28            [24]  951 	sjmp	00102$
+      000261                        952 00101$:
+                                    953 ;	../src/tim.c:246: PT0 = TESTB(p, 0);
+      000261 E5*00            [12]  954 	mov	a,_TIM_INT_setPriority_PARM_2
+      000263 54 01            [12]  955 	anl	a,#0x01
+      000265 B4 01 00         [24]  956 	cjne	a,#0x01,00117$
+      000268                        957 00117$:
+      000268 B3               [12]  958 	cpl	c
+      000269 E4               [12]  959 	clr	a
+      00026A 33               [12]  960 	rlc	a
+      00026B 24 FF            [12]  961 	add	a,#0xff
+      00026D 92 B9            [24]  962 	mov	_PT0,c
+                                    963 ;	../src/tim.c:247: CONFB(IPH, BIT_NUM_PT0H, TESTB(p, 1));
+      00026F 74 FD            [12]  964 	mov	a,#0xfd
+      000271 55 B7            [12]  965 	anl	a,_IPH
+      000273 FF               [12]  966 	mov	r7,a
+      000274 E5*00            [12]  967 	mov	a,_TIM_INT_setPriority_PARM_2
+      000276 03               [12]  968 	rr	a
+      000277 54 01            [12]  969 	anl	a,#0x01
+      000279 B4 01 00         [24]  970 	cjne	a,#0x01,00119$
+      00027C                        971 00119$:
+      00027C E4               [12]  972 	clr	a
+      00027D 33               [12]  973 	rlc	a
+      00027E B4 01 00         [24]  974 	cjne	a,#0x01,00120$
+      000281                        975 00120$:
+      000281 E4               [12]  976 	clr	a
+      000282 33               [12]  977 	rlc	a
+      000283 25 E0            [12]  978 	add	a,acc
+      000285 4F               [12]  979 	orl	a,r7
+      000286 F5 B7            [12]  980 	mov	_IPH,a
+                                    981 ;	../src/tim.c:248: } break;
+                                    982 ;	../src/tim.c:249: case PERIPH_TIM_1:
+      000288 22               [24]  983 	ret
+      000289                        984 00102$:
+                                    985 ;	../src/tim.c:251: PT1 = TESTB(p, 0);
+      000289 E5*00            [12]  986 	mov	a,_TIM_INT_setPriority_PARM_2
+      00028B 54 01            [12]  987 	anl	a,#0x01
+      00028D B4 01 00         [24]  988 	cjne	a,#0x01,00121$
+      000290                        989 00121$:
+      000290 B3               [12]  990 	cpl	c
+      000291 E4               [12]  991 	clr	a
+      000292 33               [12]  992 	rlc	a
+      000293 24 FF            [12]  993 	add	a,#0xff
+      000295 92 BB            [24]  994 	mov	_PT1,c
+                                    995 ;	../src/tim.c:252: CONFB(IPH, BIT_NUM_PT1H, TESTB(p, 1));
+      000297 74 F7            [12]  996 	mov	a,#0xf7
+      000299 55 B7            [12]  997 	anl	a,_IPH
+      00029B FF               [12]  998 	mov	r7,a
+      00029C E5*00            [12]  999 	mov	a,_TIM_INT_setPriority_PARM_2
+      00029E 03               [12] 1000 	rr	a
+      00029F 54 01            [12] 1001 	anl	a,#0x01
+      0002A1 B4 01 00         [24] 1002 	cjne	a,#0x01,00123$
+      0002A4                       1003 00123$:
+      0002A4 B3               [12] 1004 	cpl	c
+      0002A5 E4               [12] 1005 	clr	a
+      0002A6 33               [12] 1006 	rlc	a
+      0002A7 C4               [12] 1007 	swap	a
+      0002A8 03               [12] 1008 	rr	a
+      0002A9 54 F8            [12] 1009 	anl	a,#0xf8
+      0002AB FE               [12] 1010 	mov	r6,a
+      0002AC 4F               [12] 1011 	orl	a,r7
+      0002AD F5 B7            [12] 1012 	mov	_IPH,a
+                                   1013 ;	../src/tim.c:255: }
+      0002AF                       1014 00105$:
+                                   1015 ;	../src/tim.c:256: }
+      0002AF 22               [24] 1016 	ret
+                                   1017 	.area CSEG    (CODE)
+                                   1018 	.area CONST   (CODE)
+                                   1019 	.area XINIT   (CODE)
+                                   1020 	.area CABS    (ABS,CODE)
