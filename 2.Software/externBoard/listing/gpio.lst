@@ -1,0 +1,38 @@
+C51 COMPILER V9.01   GPIO                                                                  04/02/2023 17:20:06 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE GPIO
+OBJECT MODULE PLACED IN .\output\gpio.obj
+COMPILER INVOKED BY: E:\Keil_v4\C51\BIN\C51.EXE Mid_Driver\src\gpio.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc)
+                    - DEBUG OBJECTEXTEND PRINT(.\listing\gpio.lst) OBJECT(.\output\gpio.obj)
+
+line level    source
+
+   1          /*****************************************************************************/
+   2          /** 
+   3           * \file        gpio.c
+   4           * \author      Jiabin Hsu  | zsiothsu(at)zhishan-iot.tk
+   5           * \author      Weilun Fong | wlf@zhishan-iot.tk
+   6           * \brief       operations for GPIO module
+   7           * \note        
+   8           * \version     v1.3
+   9           * \ingroup     GPIO
+  10          ******************************************************************************/
+  11          
+  12          #include "gpio.h"
+  13          
+  14          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

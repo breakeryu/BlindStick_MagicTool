@@ -1,0 +1,70 @@
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=72
+creating hex file from ".\output\externBoard"...
+".\output\externBoard" - 0 Error(s), 0 Warning(s).
+Driver version   : V1.18
+Firmware version : V3.2
+Driver version   : V1.18
+Firmware version : V3.2
+Build target 'Target 1'
+compiling gpio.c...
+compiling main.c...
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(19): warning C318: can't open file 'stdbool.h'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(20): warning C318: can't open file 'stdint.h'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(17): warning C318: can't open file 'iso646.h'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(63): error C129: missing ';' before 'byte'
+Target not created
+Build target 'Target 1'
+compiling main.c...
+.\MID_DRIVER\INC\STDINT.H(8): warning C245: unknown #pragma, line ignored
+.\MID_DRIVER\INC\STDINT.H(11): warning C318: can't open file 'vcruntime.h'
+.\MID_DRIVER\INC\STDINT.H(13): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(17): warning C318: can't open file 'iso646.h'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(63): error C129: missing ';' before 'byte'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\CONF.H(22): warning C320: no specified clock frequency, HML will fill it with 11.0592MHz
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\CONF.H(34): warning C320: no specified MCU prescaler, HML will fill it with 12(12T mode)
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\CONF.H(42): warning C320: no specified MCU model, HML will fill it with STC89C52RC
+Target not created
+Build target 'Target 1'
+compiling main.c...
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(17): warning C318: can't open file 'iso646.h'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\BIT.H(28): warning C322: unknown identifier
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(61): error C129: missing ';' before 'byte'
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\CONF.H(22): warning C320: no specified clock frequency, HML will fill it with 11.0592MHz
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\CONF.H(34): warning C320: no specified MCU prescaler, HML will fill it with 12(12T mode)
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\CONF.H(42): warning C320: no specified MCU model, HML will fill it with STC89C52RC
+Target not created
+Build target 'Target 1'
+compiling main.c...
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(61): error C129: missing ';' before 'byte'
+Target not created
+Build target 'Target 1'
+compiling main.c...
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(61): error C129: missing ';' before 'unsigned'
+Target not created
+Build target 'Target 1'
+compiling main.c...
+\USERS\项目\BLINDSTICK_MAGICTOOL\2.SOFTWARE\EXTERNBOARD\MID_DRIVER\INC\TYPES.H(61): error C129: missing ';' before 'unsigned'
+Target not created
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=72
+creating hex file from ".\output\externBoard"...
+".\output\externBoard" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=72
+creating hex file from ".\output\externBoard"...
+".\output\externBoard" - 0 Error(s), 0 Warning(s).
