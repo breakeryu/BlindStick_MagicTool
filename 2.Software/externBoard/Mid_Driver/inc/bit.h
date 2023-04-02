@@ -20,8 +20,21 @@
  *****************************************************************************/
 
 
-#define _complement complement
 
+#define and &&
+#define and_eq &=
+#define bitand &
+#define bitor |
+#define complement ~
+#define not !
+#define not_eq !=
+#define or ||
+#define or_eq |=
+#define xor ^
+#define xor_eq ^=
+
+
+#define _complement complement
 
 /**
  * \brief constants define

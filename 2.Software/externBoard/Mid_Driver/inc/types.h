@@ -19,6 +19,10 @@
 
 #include "bit.h"
 
+#define UINT8_MAX              (255)
+#define UINT16_MAX             (65535)
+#define UINT32_MAX             (4294967295UL)
+
 /**
  *             [ HML BASE DATA TYPE SHEET ]
  * ========================================================
@@ -52,14 +56,23 @@
 /*****************************************************************************
  *                                macro                                      *
  *****************************************************************************/
-#define BYTE_MAX   8
-#define WORD_MAX   16
+#define BYTE_MAX   UINT8_MAX
+#define WORD_MAX   UINT16_MAX
 
 /*****************************************************************************
  *                             type define                                   *
  *****************************************************************************/
-typedef  unsigned char uint8_t;
-typedef  unsigned short int uint16_t;
+
+/* Signed.  */
+typedef signed char             int8_t;
+typedef short int               int16_t;
+typedef long int                int32_t;
+
+/* Unsigned.  */
+typedef unsigned char           uint8_t;
+typedef unsigned short int      uint16_t;
+typedef unsigned long int       uint32_t;
+
 typedef uint8_t    byte;
 typedef uint16_t   word;
 

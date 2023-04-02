@@ -57,10 +57,62 @@ typedef enum
  */
 typedef enum
 {
-    PERIPH_GPIO_PIN_MODE_GENERAL    = 0x00,
-    PERIPH_GPIO_PIN_MODE_PUSH_PULL  = 0x01,
-    PERIPH_GPIO_PIN_MODE_HIGH_Z     = 0x02,
-    PERIPH_GPIO_PIN_MODE_OPEN_DRAIN = 0x03
+    PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT     = 0x00,
+    PERIPH_GPIO_PIN_MODE_PUSH_PULL_OUTPUT   = 0x01,
+    PERIPH_GPIO_PIN_MODE_HIGH_Z_INPUT       = 0x02,
+    PERIPH_GPIO_PIN_MODE_OPEN_DRAIN_OUTPUT  = 0x03
 } PERIPH_GPIO_PIN_MODE;
+
+
+/**
+ * \brief config pinMode
+ */
+
+void GPIO_configMode(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, PERIPH_GPIO_PIN_MODE mode);
+
+
+/**
+ * \brief config HighCurrent
+ */
+
+void GPIO_configHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f);
+void GPIO_setGeneralCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+void GPIO_setHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+
+
+/**
+ * \brief config HighSpeed
+ */
+
+void GPIO_configHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f);
+void GPIO_setGeneralSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+void GPIO_setHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+
+/**
+ * \brief config PullUP
+ */
+
+void GPIO_configPullUP(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f);
+void GPIO_resetPullUp(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+void GPIO_setPullUp(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+
+
+/**
+ * \brief GPIO write
+ */
+
+void GPIO_configBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f);
+void GPIO_resetBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+void GPIO_setBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+void GPIO_toggleBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+
+/**
+ * \brief GPIO read
+ */
+
+FunctionalState GPIO_getBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin);
+byte GPIO_getPortValue(PERIPH_GPIO gpio);
+
+
 
 #endif
