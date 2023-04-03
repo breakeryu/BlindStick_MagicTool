@@ -2,8 +2,8 @@
 #include "hml.h"
 
 
-PERIPH_GPIO_PIN  LED0 =   PERIPH_GPIO_5;			 //LED0 pin
-PERIPH_GPIO_PIN  LED1 =   PERIPH_GPIO_6;			 //LED1 pin
+uint8_t  LED0 =   PERIPH_GPIO_PIN_5;			 //LED0 pin
+uint8_t  LED1 =   PERIPH_GPIO_PIN_6;			 //LED1 pin
 
 void delayms(unsigned int m)
 {
