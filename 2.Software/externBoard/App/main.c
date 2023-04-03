@@ -2,8 +2,8 @@
 #include "hml.h"
 
 
-sbit  LED0=P4^5;			 //定义LED0指示灯
-sbit  LED1=P4^6;			 //定义LED1指示灯
+PERIPH_GPIO_PIN  LED0 =   PERIPH_GPIO_5;			 //LED0 pin
+PERIPH_GPIO_PIN  LED1 =   PERIPH_GPIO_6;			 //LED1 pin
 
 void delayms(unsigned int m)
 {
@@ -17,17 +17,20 @@ void delayms(unsigned int m)
 void main(void)
 {
 
-    //配置io 为准双向
-  P4M0=0X00;
-  P4M1=0X00;
+  //config pin mode
+  GPIO_configMode(PERIPH_GPIO_4, LED0, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
+  GPIO_configMode(PERIPH_GPIO_4, LED1, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
   while(1)
   {
-	LED0=0;
-	LED1=0;
-	delayms(100);
-	LED0=1;
-	LED1=1;
-	delayms(100);
+    
+    GPIO_resetBitValue(PERIPH_GPIO_4,LED0);
+    GPIO_resetBitValue(PERIPH_GPIO_4,LED1);
+    delayms(100);
+
+    GPIO_setBitValue(PERIPH_GPIO_4,LED0);
+    GPIO_setBitValue(PERIPH_GPIO_4,LED1);
+    delayms(100);
+
   }
 
 }

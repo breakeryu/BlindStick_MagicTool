@@ -114,7 +114,7 @@ void GPIO_configMode(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, PERIPH_GPIO_PIN_MODE
             switch (mode)
             {
                 case PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT:
-                    CLR_BIT_MASK(P4M0, pin); CLR_BIT_MASK(P4M1, pin);
+                    CLR_BIT_MASK(P4M1, pin); CLR_BIT_MASK(P4M0, pin); 
                     break;
                 case PERIPH_GPIO_PIN_MODE_PUSH_PULL_OUTPUT:
                     SET_BIT_MASK(P4M0, pin); CLR_BIT_MASK(P4M1, pin);
@@ -368,11 +368,11 @@ void GPIO_configPullUP(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
 {
     if (f == RESET)
     {
-        GPIO_resetPinPullUp(gpio, pin);
+        GPIO_resetPullUp(gpio, pin);
     }
     else
     {
-        GPIO_setPinPullUp(gpio, pin);
+        GPIO_setPullUp(gpio, pin);
     }
 }
 

@@ -3,3 +3,4 @@
 ".\output\main.obj" 
 TO ".\output\externBoard" 
 PRINT(".\listing\externBoard.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 
