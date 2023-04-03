@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   MAIN                                                                  04/03/2023 07:57:17 PAGE 1   
+C51 COMPILER V9.01   MAIN                                                                  04/03/2023 18:09:45 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
@@ -12,8 +12,8 @@ line level    source
    2          #include "hml.h"
    3          
    4          
-   5          PERIPH_GPIO_PIN  LED0 =   PERIPH_GPIO_5;                         //LED0 pin
-   6          PERIPH_GPIO_PIN  LED1 =   PERIPH_GPIO_6;                         //LED1 pin
+   5          uint8_t  LED0 =   PERIPH_GPIO_PIN_5;                     //LED0 pin
+   6          uint8_t  LED1 =   PERIPH_GPIO_PIN_6;                     //LED1 pin
    7          
    8          void delayms(unsigned int m)
    9          {

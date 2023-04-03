@@ -4,122 +4,13 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 E:\Users\ÏîÄ¿\BlindStick_MagicTool\2.Software\externBoard\externBoard.uvproj
-Project File Date:  04/02/2023
+Project File Date:  04/03/2023
 
 <h2>Output:</h2>
 Build target 'Target 1'
 compiling gpio.c...
-MID_DRIVER\SRC\GPIO.C(371): warning C206: 'GPIO_resetPinPullUp': missing function-prototype
-MID_DRIVER\SRC\GPIO.C(371): error C267: 'GPIO_resetPinPullUp': requires ANSI-style prototype
-compiling main.c...
-Target not created
-Build target 'Target 1'
-compiling gpio.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGMODE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGHIGHCURRENT?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGHIGHSPEED?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGPULLUP?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_TOGGLEBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_GETBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_GETPORTVALUE?GPIO
-Program Size: data=17.0 xdata=0 code=1431
-creating hex file from ".\output\externBoard"...
-".\output\externBoard" - 0 Error(s), 8 Warning(s).
-Build target 'Target 1'
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGMODE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGHIGHCURRENT?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGHIGHSPEED?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGPULLUP?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_TOGGLEBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_GETBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_GETPORTVALUE?GPIO
-Program Size: data=17.0 xdata=0 code=1431
-creating hex file from ".\output\externBoard"...
-".\output\externBoard" - 0 Error(s), 8 Warning(s).
-Build target 'Target 1'
-assembling STARTUP.A51...
-compiling gpio.c...
 compiling main.c...
 linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGMODE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGHIGHCURRENT?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGHIGHSPEED?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGPULLUP?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_CONFIGBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_TOGGLEBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_GETBITVALUE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_GPIO_GETPORTVALUE?GPIO
-Program Size: data=17.0 xdata=0 code=1431
-creating hex file from ".\output\externBoard"...
-".\output\externBoard" - 0 Error(s), 8 Warning(s).
-Build target 'Target 1'
-linking...
-Program Size: data=17.0 xdata=0 code=1431
+Program Size: data=19.0 xdata=0 code=1627
 creating hex file from ".\output\externBoard"...
 ".\output\externBoard" - 0 Error(s), 0 Warning(s).
-Build target 'Target 1'
-compiling main.c...
-linking...
-Program Size: data=19.0 xdata=0 code=1603
-creating hex file from ".\output\externBoard"...
-".\output\externBoard" - 0 Error(s), 0 Warning(s).
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Build target 'Target 1'
-compiling main.c...
-linking...
-Program Size: data=19.0 xdata=0 code=1603
-creating hex file from ".\output\externBoard"...
-".\output\externBoard" - 0 Error(s), 0 Warning(s).
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Driver version   : V1.18
-Firmware version : V3.2
-Build target 'Target 1'
-compiling gpio.c...
-linking...
-Program Size: data=19.0 xdata=0 code=1603
-creating hex file from ".\output\externBoard"...
-".\output\externBoard" - 0 Error(s), 0 Warning(s).
-Driver version   : V1.18
-Firmware version : V3.2
