@@ -98,4 +98,11 @@ typedef enum
     SET   = !RESET
 } FunctionalState;
 
+/**
+ * xdata sfr address switch
+*/
+#define SFRX_ON()             (P_SW2 |= 0x80)
+#define SFRX_OFF()            (P_SW2 &= ~0x80)
+
+
 #endif
