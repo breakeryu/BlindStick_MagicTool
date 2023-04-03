@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   MAIN                                                                  04/03/2023 18:09:45 PAGE 1   
+C51 COMPILER V9.01   MAIN                                                                  04/03/2023 20:29:05 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
@@ -30,28 +30,40 @@ line level    source
   20   1        //config pin mode
   21   1        GPIO_configMode(PERIPH_GPIO_4, LED0, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
   22   1        GPIO_configMode(PERIPH_GPIO_4, LED1, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
-  23   1        while(1)
-  24   1        {
-  25   2          
-  26   2          GPIO_resetBitValue(PERIPH_GPIO_4,LED0);
-  27   2          GPIO_resetBitValue(PERIPH_GPIO_4,LED1);
-  28   2          delayms(100);
-  29   2      
-  30   2          GPIO_setBitValue(PERIPH_GPIO_4,LED0);
-  31   2          GPIO_setBitValue(PERIPH_GPIO_4,LED1);
-  32   2          delayms(100);
-  33   2      
-  34   2        }
-  35   1      
-  36   1      }
+  23   1      
+  24   1        GPIO_configHighCurrent(PERIPH_GPIO_4,LED0,SET);
+  25   1        GPIO_configHighSpeed(PERIPH_GPIO_4,LED0,SET);
+  26   1        GPIO_configPullUP(PERIPH_GPIO_4,LED0,SET);
+  27   1      
+  28   1      
+  29   1        GPIO_configHighCurrent(PERIPH_GPIO_4,LED1,SET);
+  30   1        GPIO_configHighSpeed(PERIPH_GPIO_4,LED1,SET);
+  31   1        GPIO_configPullUP(PERIPH_GPIO_4,LED1,SET);
+  32   1      
+  33   1        while(1)
+  34   1        {
+  35   2          
+  36   2          GPIO_resetBitValue(PERIPH_GPIO_4,LED0);
+  37   2          GPIO_resetBitValue(PERIPH_GPIO_4,LED1);
+  38   2          delayms(100);
+  39   2      
+  40   2          GPIO_setBitValue(PERIPH_GPIO_4,LED0);
+  41   2          GPIO_setBitValue(PERIPH_GPIO_4,LED1);
+  42   2          delayms(100);
+  43   2      
+  44   2        }
+  45   1      
+  46   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     94    ----
+   CODE SIZE        =    148    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      2    ----
+C51 COMPILER V9.01   MAIN                                                                  04/03/2023 20:29:05 PAGE 2   
+
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

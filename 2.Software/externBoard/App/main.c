@@ -20,6 +20,16 @@ void main(void)
   //config pin mode
   GPIO_configMode(PERIPH_GPIO_4, LED0, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
   GPIO_configMode(PERIPH_GPIO_4, LED1, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
+
+  GPIO_configHighCurrent(PERIPH_GPIO_4,LED0,SET);
+  GPIO_configHighSpeed(PERIPH_GPIO_4,LED0,SET);
+  GPIO_configPullUP(PERIPH_GPIO_4,LED0,SET);
+
+
+  GPIO_configHighCurrent(PERIPH_GPIO_4,LED1,SET);
+  GPIO_configHighSpeed(PERIPH_GPIO_4,LED1,SET);
+  GPIO_configPullUP(PERIPH_GPIO_4,LED1,SET);
+
   while(1)
   {
     
