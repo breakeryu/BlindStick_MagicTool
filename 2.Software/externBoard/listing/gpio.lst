@@ -1,10 +1,10 @@
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 1   
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE GPIO
 OBJECT MODULE PLACED IN .\output\gpio.obj
-COMPILER INVOKED BY: E:\Keil_v4\C51\BIN\C51.EXE Mid_Driver\src\gpio.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc)
-                    - DEBUG OBJECTEXTEND PRINT(.\listing\gpio.lst) OBJECT(.\output\gpio.obj)
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE Mid_Driver\src\gpio.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc) DE
+                    -BUG OBJECTEXTEND PRINT(.\listing\gpio.lst) OBJECT(.\output\gpio.obj)
 
 line level    source
 
@@ -16,7 +16,7 @@ line level    source
    6           * \author      Xiaoyu Ren
    7           * \brief       operations for GPIO module
    8           * \note        
-   9           * \version     v1.3
+   9           * \version     v0.1
   10           * \ingroup     GPIO
   11          ******************************************************************************/
   12          
@@ -62,7 +62,7 @@ line level    source
   52   3                      default:
   53   3                          break;
   54   3                  }
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 2   
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 2   
 
   55   2                  break;
   56   2              case PERIPH_GPIO_1: 
@@ -126,7 +126,7 @@ line level    source
  114   2                  switch (mode)
  115   2                  {
  116   3                      case PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT:
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 3   
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 3   
 
  117   3                          CLR_BIT_MASK(P4M1, pin); CLR_BIT_MASK(P4M0, pin); 
  118   3                          break;
@@ -190,7 +190,7 @@ line level    source
  176   3                          case PERIPH_GPIO_PIN_MODE_PUSH_PULL_OUTPUT:
  177   3                              SET_BIT_MASK(P7M0, pin); CLR_BIT_MASK(P7M1, pin);
  178   3                              break;
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 4   
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 4   
 
  179   3                          case PERIPH_GPIO_PIN_MODE_HIGH_Z_INPUT:
  180   3                              CLR_BIT_MASK(P7M0, pin); SET_BIT_MASK(P7M1, pin);
@@ -220,432 +220,426 @@ line level    source
  204          ******************************************************************************/
  205          void GPIO_configHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
  206          {
- 207   1          SFRX_ON();
- 208   1          if (f == RESET)
- 209   1          {
- 210   2              GPIO_setGeneralCurrent(gpio, pin);
- 211   2          }
- 212   1          else
- 213   1          {
- 214   2              GPIO_setHighCurrent(gpio, pin);
- 215   2          }
- 216   1          SFRX_OFF();
- 217   1      }
- 218          
- 219          
- 220          /*****************************************************************************/
- 221          /** 
- 222           * \author      Xiaoyu Ren
- 223           * \date        
- 224           * \brief       set target GPIO Pin General Current
- 225           * \param[in]   gpio: target GPIO port
- 226           * \param[in]   pin : target GPIO pin
- 227           * \return      none
- 228           * \ingroup     GPIO
- 229           * \remarks     
- 230          ******************************************************************************/
- 231          void GPIO_setGeneralCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 232          {
- 233   1          switch (gpio)
- 234   1          {
- 235   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0DR, pin); break;
- 236   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1DR, pin); break;
- 237   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2DR, pin); break;
- 238   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3DR, pin); break;
- 239   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4DR, pin); break;
- 240   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5DR, pin); break;
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 5   
+ 207   1          if (f == RESET)
+ 208   1          {
+ 209   2              GPIO_setGeneralCurrent(gpio, pin);
+ 210   2          }
+ 211   1          else
+ 212   1          {
+ 213   2              GPIO_setHighCurrent(gpio, pin);
+ 214   2          }
+ 215   1      }
+ 216          
+ 217          
+ 218          /*****************************************************************************/
+ 219          /** 
+ 220           * \author      Xiaoyu Ren
+ 221           * \date        
+ 222           * \brief       set target GPIO Pin General Current
+ 223           * \param[in]   gpio: target GPIO port
+ 224           * \param[in]   pin : target GPIO pin
+ 225           * \return      none
+ 226           * \ingroup     GPIO
+ 227           * \remarks     
+ 228          ******************************************************************************/
+ 229          void GPIO_setGeneralCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 230          {
+ 231   1          switch (gpio)
+ 232   1          {
+ 233   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0DR, pin); break;
+ 234   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1DR, pin); break;
+ 235   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2DR, pin); break;
+ 236   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3DR, pin); break;
+ 237   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4DR, pin); break;
+ 238   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5DR, pin); break;
+ 239   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6DR, pin); break;
+ 240   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7DR, pin); break;
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 5   
 
- 241   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6DR, pin); break;
- 242   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7DR, pin); break;
- 243   2              default: break;
- 244   2          }
- 245   1      }
- 246          
- 247          /*****************************************************************************/
- 248          /** 
- 249           * \author      Xiaoyu Ren
- 250           * \date        
- 251           * \brief       set target GPIO Pin High Current
- 252           * \param[in]   gpio: target GPIO port
- 253           * \param[in]   pin : target GPIO pin
- 254           * \return      none
- 255           * \ingroup     GPIO
- 256           * \remarks     
- 257          ******************************************************************************/
- 258          void GPIO_setHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 259          {
- 260   1          switch (gpio)
- 261   1          {
- 262   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0DR, pin); break;
- 263   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1DR, pin); break;
- 264   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2DR, pin); break;
- 265   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3DR, pin); break;
- 266   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4DR, pin); break;
- 267   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5DR, pin); break;
- 268   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6DR, pin); break;
- 269   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7DR, pin); break;
- 270   2              default: break;
- 271   2          }
- 272   1      }
+ 241   2              default: break;
+ 242   2          }
+ 243   1      }
+ 244          
+ 245          /*****************************************************************************/
+ 246          /** 
+ 247           * \author      Xiaoyu Ren
+ 248           * \date        
+ 249           * \brief       set target GPIO Pin High Current
+ 250           * \param[in]   gpio: target GPIO port
+ 251           * \param[in]   pin : target GPIO pin
+ 252           * \return      none
+ 253           * \ingroup     GPIO
+ 254           * \remarks     
+ 255          ******************************************************************************/
+ 256          void GPIO_setHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 257          {
+ 258   1          switch (gpio)
+ 259   1          {
+ 260   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0DR, pin); break;
+ 261   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1DR, pin); break;
+ 262   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2DR, pin); break;
+ 263   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3DR, pin); break;
+ 264   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4DR, pin); break;
+ 265   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5DR, pin); break;
+ 266   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6DR, pin); break;
+ 267   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7DR, pin); break;
+ 268   2              default: break;
+ 269   2          }
+ 270   1      }
+ 271          
+ 272          
  273          
- 274          
- 275          
- 276          /*****************************************************************************/
- 277          /** 
- 278           * \author      Xiaoyu Ren
- 279           * \date        
- 280           * \brief       configure state of target GPIO High Speed as SET or RESET
- 281           * \param[in]   gpio: target GPIO port
- 282           * \param[in]   pin : target GPIO pin
- 283           * \param[in]   f   : expected state
- 284           * \return      none
- 285           * \ingroup     GPIO
- 286           * \remarks     
- 287          ******************************************************************************/
- 288          void GPIO_configHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
- 289          {
- 290   1          SFRX_ON();
- 291   1          if (f == RESET)
- 292   1          {
- 293   2              GPIO_setGeneralSpeed(gpio, pin);
- 294   2          }
- 295   1          else
- 296   1          {
- 297   2              GPIO_setHighSpeed(gpio, pin);
- 298   2          }
- 299   1          SFRX_OFF();
- 300   1      }
- 301          
- 302          
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 6   
+ 274          /*****************************************************************************/
+ 275          /** 
+ 276           * \author      Xiaoyu Ren
+ 277           * \date        
+ 278           * \brief       configure state of target GPIO High Speed as SET or RESET
+ 279           * \param[in]   gpio: target GPIO port
+ 280           * \param[in]   pin : target GPIO pin
+ 281           * \param[in]   f   : expected state
+ 282           * \return      none
+ 283           * \ingroup     GPIO
+ 284           * \remarks     
+ 285          ******************************************************************************/
+ 286          void GPIO_configHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
+ 287          {
+ 288   1          if (f == RESET)
+ 289   1          {
+ 290   2              GPIO_setGeneralSpeed(gpio, pin);
+ 291   2          }
+ 292   1          else
+ 293   1          {
+ 294   2              GPIO_setHighSpeed(gpio, pin);
+ 295   2          }
+ 296   1      }
+ 297          
+ 298          
+ 299          /*****************************************************************************/
+ 300          /** 
+ 301           * \author      Xiaoyu Ren
+ 302           * \date        
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 6   
 
- 303          /*****************************************************************************/
- 304          /** 
- 305           * \author      Xiaoyu Ren
- 306           * \date        
- 307           * \brief       set target GPIO Pin General Speed
- 308           * \param[in]   gpio: target GPIO port
- 309           * \param[in]   pin : target GPIO pin
- 310           * \return      none
- 311           * \ingroup     GPIO
- 312           * \remarks     
- 313          ******************************************************************************/
- 314          void GPIO_setGeneralSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 315          {
- 316   1          switch (gpio)
- 317   1          {
- 318   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0SR, pin); break;
- 319   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1SR, pin); break;
- 320   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2SR, pin); break;
- 321   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3SR, pin); break;
- 322   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4SR, pin); break;
- 323   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5SR, pin); break;
- 324   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6SR, pin); break;
- 325   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7SR, pin); break;
- 326   2              default: break;
- 327   2          }
- 328   1      }
- 329          
- 330          /*****************************************************************************/
- 331          /** 
- 332           * \author      Xiaoyu Ren
- 333           * \date        
- 334           * \brief       set target GPIO Pin High Speed
- 335           * \param[in]   gpio: target GPIO port
- 336           * \param[in]   pin : target GPIO pin
- 337           * \return      none
- 338           * \ingroup     GPIO
- 339           * \remarks     
- 340          ******************************************************************************/
- 341          void GPIO_setHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 342          {
- 343   1          switch (gpio)
- 344   1          {
- 345   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0SR, pin); break;
- 346   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1SR, pin); break;
- 347   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2SR, pin); break;
- 348   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3SR, pin); break;
- 349   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4SR, pin); break;
- 350   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5SR, pin); break;
- 351   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6SR, pin); break;
- 352   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7SR, pin); break;
- 353   2              default: break;
- 354   2          }
- 355   1      }
- 356          
- 357          
- 358          
- 359          /*****************************************************************************/
- 360          /** 
- 361           * \author      Xiaoyu Ren
- 362           * \date        
- 363           * \brief       configure state of target GPIO Pull Up as SET or RESET
- 364           * \param[in]   gpio: target GPIO port
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 7   
+ 303           * \brief       set target GPIO Pin General Speed
+ 304           * \param[in]   gpio: target GPIO port
+ 305           * \param[in]   pin : target GPIO pin
+ 306           * \return      none
+ 307           * \ingroup     GPIO
+ 308           * \remarks     
+ 309          ******************************************************************************/
+ 310          void GPIO_setGeneralSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 311          {
+ 312   1          switch (gpio)
+ 313   1          {
+ 314   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0SR, pin); break;
+ 315   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1SR, pin); break;
+ 316   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2SR, pin); break;
+ 317   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3SR, pin); break;
+ 318   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4SR, pin); break;
+ 319   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5SR, pin); break;
+ 320   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6SR, pin); break;
+ 321   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7SR, pin); break;
+ 322   2              default: break;
+ 323   2          }
+ 324   1      }
+ 325          
+ 326          /*****************************************************************************/
+ 327          /** 
+ 328           * \author      Xiaoyu Ren
+ 329           * \date        
+ 330           * \brief       set target GPIO Pin High Speed
+ 331           * \param[in]   gpio: target GPIO port
+ 332           * \param[in]   pin : target GPIO pin
+ 333           * \return      none
+ 334           * \ingroup     GPIO
+ 335           * \remarks     
+ 336          ******************************************************************************/
+ 337          void GPIO_setHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 338          {
+ 339   1          switch (gpio)
+ 340   1          {
+ 341   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0SR, pin); break;
+ 342   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1SR, pin); break;
+ 343   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2SR, pin); break;
+ 344   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3SR, pin); break;
+ 345   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4SR, pin); break;
+ 346   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5SR, pin); break;
+ 347   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6SR, pin); break;
+ 348   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7SR, pin); break;
+ 349   2              default: break;
+ 350   2          }
+ 351   1      }
+ 352          
+ 353          
+ 354          
+ 355          /*****************************************************************************/
+ 356          /** 
+ 357           * \author      Xiaoyu Ren
+ 358           * \date        
+ 359           * \brief       configure state of target GPIO Pull Up as SET or RESET
+ 360           * \param[in]   gpio: target GPIO port
+ 361           * \param[in]   pin : target GPIO pin
+ 362           * \param[in]   f   : expected state
+ 363           * \return      none
+ 364           * \ingroup     GPIO
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 7   
 
- 365           * \param[in]   pin : target GPIO pin
- 366           * \param[in]   f   : expected state
- 367           * \return      none
- 368           * \ingroup     GPIO
- 369           * \remarks     
- 370          ******************************************************************************/
- 371          void GPIO_configPullUP(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
- 372          {
- 373   1          SFRX_ON();
- 374   1          if (f == RESET)
- 375   1          {
- 376   2              GPIO_resetPullUp(gpio, pin);
- 377   2          }
- 378   1          else
- 379   1          {
- 380   2              GPIO_setPullUp(gpio, pin);
- 381   2          }
- 382   1          SFRX_OFF();
- 383   1      }
- 384          
- 385          
- 386          
- 387          /*****************************************************************************/
- 388          /** 
- 389           * \author      Xiaoyu Ren
- 390           * \date        
- 391           * \brief       reset target GPIO Pin Pull Up 
- 392           * \param[in]   gpio: target GPIO port
- 393           * \param[in]   pin : target GPIO pin
- 394           * \return      none
- 395           * \ingroup     GPIO
- 396           * \remarks     
- 397          ******************************************************************************/
- 398          void GPIO_resetPullUp(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 399          {
- 400   1          switch (gpio)
- 401   1          {
- 402   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0PU, pin); break;
- 403   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1PU, pin); break;
- 404   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2PU, pin); break;
- 405   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3PU, pin); break;
- 406   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4PU, pin); break;
- 407   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5PU, pin); break;
- 408   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6PU, pin); break;
- 409   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7PU, pin); break;
- 410   2              default: break;
- 411   2          }
- 412   1      }
- 413          
- 414          /*****************************************************************************/
- 415          /** 
- 416           * \author      Xiaoyu Ren
- 417           * \date        
- 418           * \brief       set target GPIO Pin Pull Up 
- 419           * \param[in]   gpio: target GPIO port
- 420           * \param[in]   pin : target GPIO pin
- 421           * \return      none
- 422           * \ingroup     GPIO
- 423           * \remarks     
- 424          ******************************************************************************/
- 425          void GPIO_setPullUp(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 426          {
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 8   
+ 365           * \remarks     
+ 366          ******************************************************************************/
+ 367          void GPIO_configPullUP(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
+ 368          {
+ 369   1          if (f == RESET)
+ 370   1          {
+ 371   2              GPIO_resetPullUp(gpio, pin);
+ 372   2          }
+ 373   1          else
+ 374   1          {
+ 375   2              GPIO_setPullUp(gpio, pin);
+ 376   2          }
+ 377   1      }
+ 378          
+ 379          
+ 380          
+ 381          /*****************************************************************************/
+ 382          /** 
+ 383           * \author      Xiaoyu Ren
+ 384           * \date        
+ 385           * \brief       reset target GPIO Pin Pull Up 
+ 386           * \param[in]   gpio: target GPIO port
+ 387           * \param[in]   pin : target GPIO pin
+ 388           * \return      none
+ 389           * \ingroup     GPIO
+ 390           * \remarks     
+ 391          ******************************************************************************/
+ 392          void GPIO_resetPullUp(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 393          {
+ 394   1          switch (gpio)
+ 395   1          {
+ 396   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0PU, pin); break;
+ 397   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1PU, pin); break;
+ 398   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2PU, pin); break;
+ 399   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3PU, pin); break;
+ 400   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4PU, pin); break;
+ 401   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5PU, pin); break;
+ 402   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6PU, pin); break;
+ 403   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7PU, pin); break;
+ 404   2              default: break;
+ 405   2          }
+ 406   1      }
+ 407          
+ 408          /*****************************************************************************/
+ 409          /** 
+ 410           * \author      Xiaoyu Ren
+ 411           * \date        
+ 412           * \brief       set target GPIO Pin Pull Up 
+ 413           * \param[in]   gpio: target GPIO port
+ 414           * \param[in]   pin : target GPIO pin
+ 415           * \return      none
+ 416           * \ingroup     GPIO
+ 417           * \remarks     
+ 418          ******************************************************************************/
+ 419          void GPIO_setPullUp(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 420          {
+ 421   1          switch (gpio)
+ 422   1          {
+ 423   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0PU, pin); break;
+ 424   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1PU, pin); break;
+ 425   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2PU, pin); break;
+ 426   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3PU, pin); break;
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 8   
 
- 427   1          switch (gpio)
- 428   1          {
- 429   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0PU, pin); break;
- 430   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1PU, pin); break;
- 431   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2PU, pin); break;
- 432   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3PU, pin); break;
- 433   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4PU, pin); break;
- 434   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5PU, pin); break;
- 435   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6PU, pin); break;
- 436   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7PU, pin); break;
- 437   2              default: break;
- 438   2          }
- 439   1      }
- 440          
- 441          
- 442          
- 443          /*****************************************************************************/
- 444          /** 
- 445           * \author      Weilun Fong
- 446           * \author      Xiaoyu Ren
- 447           * \date        2023/04/02
- 448           * \brief       configure state of target GPIO bit as SET or RESET
- 449           * \param[in]   gpio: target GPIO port
- 450           * \param[in]   pin : target GPIO pin
- 451           * \param[in]   f   : expected state
- 452           * \return      none
- 453           * \ingroup     GPIO
- 454           * \remarks     
- 455          ******************************************************************************/
- 456          void GPIO_configBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
- 457          {
- 458   1          if (f == RESET)
- 459   1          {
- 460   2              GPIO_resetBitValue(gpio, pin);
- 461   2          }
- 462   1          else
- 463   1          {
- 464   2              GPIO_setBitValue(gpio, pin);
- 465   2          }
- 466   1      }
- 467          
- 468          /*****************************************************************************/
- 469          /** 
- 470           * \author      Weilun Fong
- 471           * \author      Xiaoyu Ren
- 472           * \date        2023/04/02
- 473           * \brief       reset target GPIO pin
- 474           * \param[in]   gpio: target GPIO port
- 475           * \param[in]   pin : target GPIO pin
- 476           * \return      none
- 477           * \ingroup     GPIO
- 478           * \remarks     
- 479          ******************************************************************************/
- 480          void GPIO_resetBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 481          {
- 482   1          switch (gpio)
- 483   1          {
- 484   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0, pin); break;
- 485   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1, pin); break;
- 486   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2, pin); break;
- 487   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3, pin); break;
- 488   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4, pin); break;
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 9   
+ 427   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4PU, pin); break;
+ 428   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5PU, pin); break;
+ 429   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6PU, pin); break;
+ 430   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7PU, pin); break;
+ 431   2              default: break;
+ 432   2          }
+ 433   1      }
+ 434          
+ 435          
+ 436          
+ 437          /*****************************************************************************/
+ 438          /** 
+ 439           * \author      Weilun Fong
+ 440           * \author      Xiaoyu Ren
+ 441           * \date        2023/04/02
+ 442           * \brief       configure state of target GPIO bit as SET or RESET
+ 443           * \param[in]   gpio: target GPIO port
+ 444           * \param[in]   pin : target GPIO pin
+ 445           * \param[in]   f   : expected state
+ 446           * \return      none
+ 447           * \ingroup     GPIO
+ 448           * \remarks     
+ 449          ******************************************************************************/
+ 450          void GPIO_configBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
+ 451          {
+ 452   1          if (f == RESET)
+ 453   1          {
+ 454   2              GPIO_resetBitValue(gpio, pin);
+ 455   2          }
+ 456   1          else
+ 457   1          {
+ 458   2              GPIO_setBitValue(gpio, pin);
+ 459   2          }
+ 460   1      }
+ 461          
+ 462          /*****************************************************************************/
+ 463          /** 
+ 464           * \author      Weilun Fong
+ 465           * \author      Xiaoyu Ren
+ 466           * \date        2023/04/02
+ 467           * \brief       reset target GPIO pin
+ 468           * \param[in]   gpio: target GPIO port
+ 469           * \param[in]   pin : target GPIO pin
+ 470           * \return      none
+ 471           * \ingroup     GPIO
+ 472           * \remarks     
+ 473          ******************************************************************************/
+ 474          void GPIO_resetBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 475          {
+ 476   1          switch (gpio)
+ 477   1          {
+ 478   2              case PERIPH_GPIO_0: CLR_BIT_MASK(P0, pin); break;
+ 479   2              case PERIPH_GPIO_1: CLR_BIT_MASK(P1, pin); break;
+ 480   2              case PERIPH_GPIO_2: CLR_BIT_MASK(P2, pin); break;
+ 481   2              case PERIPH_GPIO_3: CLR_BIT_MASK(P3, pin); break;
+ 482   2              case PERIPH_GPIO_4: CLR_BIT_MASK(P4, pin); break;
+ 483   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5, pin); break;
+ 484   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6, pin); break;
+ 485   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7, pin); break;
+ 486   2              default: break;
+ 487   2          }
+ 488   1      }
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 9   
 
- 489   2              case PERIPH_GPIO_5: CLR_BIT_MASK(P5, pin); break;
- 490   2              case PERIPH_GPIO_6: CLR_BIT_MASK(P6, pin); break;
- 491   2              case PERIPH_GPIO_7: CLR_BIT_MASK(P7, pin); break;
- 492   2              default: break;
- 493   2          }
- 494   1      }
- 495          
- 496          /*****************************************************************************/
- 497          /** 
- 498           * \author      Weilun Fong
- 499           * \author      Xiaoyu Ren
- 500           * \date        2023/04/02
- 501           * \brief       set target GPIO pin
- 502           * \param[in]   gpio: target GPIO port
- 503           * \param[in]   pin : target GPIO pin
- 504           * \return      none
- 505           * \ingroup     GPIO
- 506           * \remarks     
- 507          ******************************************************************************/
- 508          void GPIO_setBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 509          {
- 510   1          switch (gpio)
- 511   1          {
- 512   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0, pin); break;
- 513   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1, pin); break;
- 514   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2, pin); break;
- 515   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3, pin); break;
- 516   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4, pin); break;
- 517   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5, pin); break;
- 518   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6, pin); break;
- 519   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7, pin); break;
- 520   2              default: break;
- 521   2          }
- 522   1      }
- 523          
- 524          
- 525          /*****************************************************************************/
- 526          /** 
- 527           * \author      Weilun Fong
- 528           * \author      Xiaoyu Ren
- 529           * \date        2023/04/02
- 530           * \brief       toggle state of target GPIO pin
- 531           * \param[in]   gpio: target GPIO port
- 532           * \param[in]   pin : target GPIO pin
- 533           * \return      none
- 534           * \ingroup     GPIO
- 535           * \remarks     
- 536          ******************************************************************************/
- 537          void GPIO_toggleBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 538          {
- 539   1          switch (gpio)
- 540   1          {
- 541   2              case PERIPH_GPIO_0: NOT_BIT_MASK(P0, pin); break;
- 542   2              case PERIPH_GPIO_1: NOT_BIT_MASK(P1, pin); break;
- 543   2              case PERIPH_GPIO_2: NOT_BIT_MASK(P2, pin); break;
- 544   2              case PERIPH_GPIO_3: NOT_BIT_MASK(P3, pin); break;
- 545   2              case PERIPH_GPIO_4: NOT_BIT_MASK(P4, pin); break;
- 546   2              case PERIPH_GPIO_5: NOT_BIT_MASK(P5, pin); break;
- 547   2              case PERIPH_GPIO_6: NOT_BIT_MASK(P6, pin); break;
- 548   2              case PERIPH_GPIO_7: NOT_BIT_MASK(P7, pin); break;       
- 549   2              default: break;
- 550   2          }
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 10  
+ 489          
+ 490          /*****************************************************************************/
+ 491          /** 
+ 492           * \author      Weilun Fong
+ 493           * \author      Xiaoyu Ren
+ 494           * \date        2023/04/02
+ 495           * \brief       set target GPIO pin
+ 496           * \param[in]   gpio: target GPIO port
+ 497           * \param[in]   pin : target GPIO pin
+ 498           * \return      none
+ 499           * \ingroup     GPIO
+ 500           * \remarks     
+ 501          ******************************************************************************/
+ 502          void GPIO_setBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 503          {
+ 504   1          switch (gpio)
+ 505   1          {
+ 506   2              case PERIPH_GPIO_0: SET_BIT_MASK(P0, pin); break;
+ 507   2              case PERIPH_GPIO_1: SET_BIT_MASK(P1, pin); break;
+ 508   2              case PERIPH_GPIO_2: SET_BIT_MASK(P2, pin); break;
+ 509   2              case PERIPH_GPIO_3: SET_BIT_MASK(P3, pin); break;
+ 510   2              case PERIPH_GPIO_4: SET_BIT_MASK(P4, pin); break;
+ 511   2              case PERIPH_GPIO_5: SET_BIT_MASK(P5, pin); break;
+ 512   2              case PERIPH_GPIO_6: SET_BIT_MASK(P6, pin); break;
+ 513   2              case PERIPH_GPIO_7: SET_BIT_MASK(P7, pin); break;
+ 514   2              default: break;
+ 515   2          }
+ 516   1      }
+ 517          
+ 518          
+ 519          /*****************************************************************************/
+ 520          /** 
+ 521           * \author      Weilun Fong
+ 522           * \author      Xiaoyu Ren
+ 523           * \date        2023/04/02
+ 524           * \brief       toggle state of target GPIO pin
+ 525           * \param[in]   gpio: target GPIO port
+ 526           * \param[in]   pin : target GPIO pin
+ 527           * \return      none
+ 528           * \ingroup     GPIO
+ 529           * \remarks     
+ 530          ******************************************************************************/
+ 531          void GPIO_toggleBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 532          {
+ 533   1          switch (gpio)
+ 534   1          {
+ 535   2              case PERIPH_GPIO_0: NOT_BIT_MASK(P0, pin); break;
+ 536   2              case PERIPH_GPIO_1: NOT_BIT_MASK(P1, pin); break;
+ 537   2              case PERIPH_GPIO_2: NOT_BIT_MASK(P2, pin); break;
+ 538   2              case PERIPH_GPIO_3: NOT_BIT_MASK(P3, pin); break;
+ 539   2              case PERIPH_GPIO_4: NOT_BIT_MASK(P4, pin); break;
+ 540   2              case PERIPH_GPIO_5: NOT_BIT_MASK(P5, pin); break;
+ 541   2              case PERIPH_GPIO_6: NOT_BIT_MASK(P6, pin); break;
+ 542   2              case PERIPH_GPIO_7: NOT_BIT_MASK(P7, pin); break;       
+ 543   2              default: break;
+ 544   2          }
+ 545   1      }
+ 546          
+ 547          
+ 548          /*****************************************************************************/
+ 549          /** 
+ 550           * \author      Weilun Fong
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 10  
 
- 551   1      }
- 552          
- 553          
- 554          /*****************************************************************************/
- 555          /** 
- 556           * \author      Weilun Fong
- 557           * \author      Xiaoyu Ren
- 558           * \date        2023/04/02
- 559           * \brief       get state of target GPIO pin
- 560           * \param[in]   gpio: target GPIO port
- 561           * \param[in]   pin : target GPIO pin
- 562           * \return      SET or RESET
- 563           * \ingroup     GPIO
- 564           * \remarks     
- 565          ******************************************************************************/
- 566          FunctionalState GPIO_getBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
- 567          {
- 568   1          switch (gpio)
- 569   1          {
- 570   2              case PERIPH_GPIO_0: return GET_BIT(P0, pin);
- 571   2              case PERIPH_GPIO_1: return GET_BIT(P1, pin);
- 572   2              case PERIPH_GPIO_2: return GET_BIT(P2, pin);
- 573   2              case PERIPH_GPIO_3: return GET_BIT(P3, pin);
- 574   2              case PERIPH_GPIO_4: return GET_BIT(P4, pin);
- 575   2              case PERIPH_GPIO_5: return GET_BIT(P5, pin);
- 576   2              case PERIPH_GPIO_6: return GET_BIT(P6, pin);
- 577   2              case PERIPH_GPIO_7: return GET_BIT(P7, pin);
- 578   2              default: return RESET;
- 579   2          }
- 580   1      }
- 581          
- 582          /*****************************************************************************/
- 583          /** 
- 584           * \author      Weilun Fong
- 585           * \author      Xiaoyu Ren
- 586           * \date        2023/04/02
- 587           * \brief       get value of target GPIO port
- 588           * \param[in]   gpio: target GPIO port
- 589           * \return      current value of target GPIO port
- 590           * \ingroup     GPIO
- 591           * \remarks     
- 592          ******************************************************************************/
- 593          byte GPIO_getPortValue(PERIPH_GPIO gpio)
- 594          {
- 595   1          switch (gpio)
- 596   1          {
- 597   2              case PERIPH_GPIO_0: return P0;
- 598   2              case PERIPH_GPIO_1: return P1;
- 599   2              case PERIPH_GPIO_2: return P2;
- 600   2              case PERIPH_GPIO_3: return P3;
- 601   2              case PERIPH_GPIO_4: return P4;
- 602   2              case PERIPH_GPIO_5: return P5;
- 603   2              case PERIPH_GPIO_6: return P6;
- 604   2              case PERIPH_GPIO_7: return P7;
- 605   2              default: return 0x00;
- 606   2          }
- 607   1      }
- 608          
- 609          
- 610          #endif
- 611          
- 612          
-C51 COMPILER V9.01   GPIO                                                                  04/03/2023 18:09:44 PAGE 11  
-
+ 551           * \author      Xiaoyu Ren
+ 552           * \date        2023/04/02
+ 553           * \brief       get state of target GPIO pin
+ 554           * \param[in]   gpio: target GPIO port
+ 555           * \param[in]   pin : target GPIO pin
+ 556           * \return      SET or RESET
+ 557           * \ingroup     GPIO
+ 558           * \remarks     
+ 559          ******************************************************************************/
+ 560          FunctionalState GPIO_getBitValue(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
+ 561          {
+ 562   1          switch (gpio)
+ 563   1          {
+ 564   2              case PERIPH_GPIO_0: return GET_BIT(P0, pin);
+ 565   2              case PERIPH_GPIO_1: return GET_BIT(P1, pin);
+ 566   2              case PERIPH_GPIO_2: return GET_BIT(P2, pin);
+ 567   2              case PERIPH_GPIO_3: return GET_BIT(P3, pin);
+ 568   2              case PERIPH_GPIO_4: return GET_BIT(P4, pin);
+ 569   2              case PERIPH_GPIO_5: return GET_BIT(P5, pin);
+ 570   2              case PERIPH_GPIO_6: return GET_BIT(P6, pin);
+ 571   2              case PERIPH_GPIO_7: return GET_BIT(P7, pin);
+ 572   2              default: return RESET;
+ 573   2          }
+ 574   1      }
+ 575          
+ 576          /*****************************************************************************/
+ 577          /** 
+ 578           * \author      Weilun Fong
+ 579           * \author      Xiaoyu Ren
+ 580           * \date        2023/04/02
+ 581           * \brief       get value of target GPIO port
+ 582           * \param[in]   gpio: target GPIO port
+ 583           * \return      current value of target GPIO port
+ 584           * \ingroup     GPIO
+ 585           * \remarks     
+ 586          ******************************************************************************/
+ 587          byte GPIO_getPortValue(PERIPH_GPIO gpio)
+ 588          {
+ 589   1          switch (gpio)
+ 590   1          {
+ 591   2              case PERIPH_GPIO_0: return P0;
+ 592   2              case PERIPH_GPIO_1: return P1;
+ 593   2              case PERIPH_GPIO_2: return P2;
+ 594   2              case PERIPH_GPIO_3: return P3;
+ 595   2              case PERIPH_GPIO_4: return P4;
+ 596   2              case PERIPH_GPIO_5: return P5;
+ 597   2              case PERIPH_GPIO_6: return P6;
+ 598   2              case PERIPH_GPIO_7: return P7;
+ 599   2              default: return 0x00;
+ 600   2          }
+ 601   1      }
+ 602          
+ 603          
+ 604          #endif
+ 605          
+ 606          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1383    ----
+   CODE SIZE        =   1359    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   GPIO                                                                  04/04/2023 22:32:57 PAGE 11  
+
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----       8
    IDATA SIZE       =   ----    ----

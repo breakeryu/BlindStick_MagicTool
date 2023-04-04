@@ -1,0 +1,57 @@
+C51 COMPILER V9.01   RCC                                                                   04/04/2023 22:36:22 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE RCC
+OBJECT MODULE PLACED IN .\output\rcc.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE Mid_Driver\src\rcc.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc) DEB
+                    -UG OBJECTEXTEND PRINT(.\listing\rcc.lst) OBJECT(.\output\rcc.obj)
+
+line level    source
+
+   1          /*****************************************************************************/
+   2          /** 
+   3           * \file        rcc.c
+   4           * \author      Xiaoyu Ren
+   5           * \brief       operations for RCC module
+   6           * \note        just use internal IRC , plesese use isp download tool
+   7           * \version     v0.1
+   8           * \ingroup     RCC
+   9          ******************************************************************************/
+  10          
+  11          #include "rcc.h"
+  12          
+  13          #ifdef COMPILE_RCC
+  14          
+  15          
+  16          /*****************************************************************************/
+  17          /** 
+  18           * \author      Xiaoyu Ren
+  19           * \date        
+  20           * \brief       configure system clock 
+  21           * \param[in]   void
+  22           * \return      none
+  23           * \ingroup     RCC
+  24           * \remarks     
+  25          ******************************************************************************/
+  26          void RCC_configSysClock(void)
+  27          {
+  28   1          CLKDIV = __CONF_CLKDIV;
+  29   1      }
+  30          
+  31          
+  32          #endif
+  33          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      6    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

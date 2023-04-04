@@ -1,1 +1,0 @@
-"Mid_Driver\src\gpio.c" BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc) DEBUG OBJECTEXTEND PRINT(.\listing\gpio.lst) OBJECT(.\output\gpio.obj)

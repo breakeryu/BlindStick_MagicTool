@@ -1,5 +1,7 @@
 ".\output\STARTUP.obj",
 ".\output\gpio.obj",
+".\output\rcc.obj",
+".\output\util.obj",
 ".\output\main.obj" 
 TO ".\output\externBoard" 
 PRINT(".\listing\externBoard.m51") RAMSIZE(256) 

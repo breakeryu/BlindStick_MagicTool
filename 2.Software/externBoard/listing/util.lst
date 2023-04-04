@@ -1,0 +1,89 @@
+C51 COMPILER V9.01   UTIL                                                                  04/04/2023 22:36:22 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE UTIL
+OBJECT MODULE PLACED IN .\output\util.obj
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE Mid_Driver\src\util.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc) DE
+                    -BUG OBJECTEXTEND PRINT(.\listing\util.lst) OBJECT(.\output\util.obj)
+
+line level    source
+
+   1          /*****************************************************************************/
+   2          /** 
+   3           * \file        util.c
+   4           * \author      Xiaoyu Ren
+   5           * \brief       public operations
+   6           * \note        
+   7           * \version     v0.1
+   8           * \ingroup     util
+   9          ******************************************************************************/
+  10          
+  11          #include "util.h"
+  12          
+  13          #ifdef COMPILE_UTIL
+  14          
+  15          uint16_t ticks_ms    = (__CONF_FOSC / ((__CONF_CLKDIV == 0)? 1 : __CONF_CLKDIV) / __CLK_REF);
+  16          uint8_t  ticks_us    = (__CONF_FOSC / ((__CONF_CLKDIV == 0)? 1 : __CONF_CLKDIV) / __CLK_REF / 1000);
+  17          
+  18          
+  19          /*****************************************************************************/
+  20          /**
+  21           * \author      IOsetting
+  22           * \author      Xiaoyu Ren
+  23           * \date        2023/04/04
+  24           * \brief       software delay according to MCU clock frequency
+  25           * \param[in]   t: how many one ms you want to delay
+  26           * \return      none
+  27           * \ingroup     UTIL
+  28           * \remarks
+  29          ******************************************************************************/
+  30          void Delay(uint16_t t)
+  31          {
+  32   1          uint16_t i;
+  33   1          do
+  34   1          {
+  35   2              i = ticks_ms;
+  36   2              while (--i);
+  37   2          } while (--t);
+  38   1      }
+  39          
+  40          
+  41          /*****************************************************************************/
+  42          /**
+  43           * \author      IOsetting
+  44           * \author      Xiaoyu Ren
+  45           * \date        2023/04/04
+  46           * \brief       software delay according to MCU clock frequency
+  47           * \param[in]   t: how many one us you want to delay
+  48           * \return      none
+  49           * \ingroup     UTIL
+  50           * \remarks
+  51          ******************************************************************************/
+  52          void Delay_us(uint16_t t)
+  53          {
+  54   1          uint8_t i;
+C51 COMPILER V9.01   UTIL                                                                  04/04/2023 22:36:22 PAGE 2   
+
+  55   1          do
+  56   1          {
+  57   2              i = ticks_us;
+  58   2              while (--i);
+  59   2          } while (--t);
+  60   1      }
+  61          
+  62          
+  63          #endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     37    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -6,7 +6,7 @@
  * \author      Xiaoyu Ren
  * \brief       operations for GPIO module
  * \note        
- * \version     v1.3
+ * \version     v0.1
  * \ingroup     GPIO
 ******************************************************************************/
 
@@ -204,7 +204,6 @@ void GPIO_configMode(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, PERIPH_GPIO_PIN_MODE
 ******************************************************************************/
 void GPIO_configHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
 {
-    SFRX_ON();
     if (f == RESET)
     {
         GPIO_setGeneralCurrent(gpio, pin);
@@ -213,7 +212,6 @@ void GPIO_configHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalSta
     {
         GPIO_setHighCurrent(gpio, pin);
     }
-    SFRX_OFF();
 }
 
 
@@ -287,7 +285,6 @@ void GPIO_setHighCurrent(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
 ******************************************************************************/
 void GPIO_configHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
 {
-    SFRX_ON();
     if (f == RESET)
     {
         GPIO_setGeneralSpeed(gpio, pin);
@@ -296,7 +293,6 @@ void GPIO_configHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState
     {
         GPIO_setHighSpeed(gpio, pin);
     }
-    SFRX_OFF();
 }
 
 
@@ -370,7 +366,6 @@ void GPIO_setHighSpeed(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin)
 ******************************************************************************/
 void GPIO_configPullUP(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
 {
-    SFRX_ON();
     if (f == RESET)
     {
         GPIO_resetPullUp(gpio, pin);
@@ -379,7 +374,6 @@ void GPIO_configPullUP(PERIPH_GPIO gpio, PERIPH_GPIO_PIN pin, FunctionalState f)
     {
         GPIO_setPullUp(gpio, pin);
     }
-    SFRX_OFF();
 }
 
 
