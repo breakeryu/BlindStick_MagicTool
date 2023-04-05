@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        04/04/2023  22:39:19  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/05/2023  18:38:05  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\output\externBoard (?C_STARTUP)
 
 
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 2
 
 
 OVERLAY MAP OF MODULE:   .\output\externBoard (?C_STARTUP)
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   N:0000H         SYMBOL        PPAGE
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 3
 
 
   D:0081H         SYMBOL        SP
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:064BH         PUBLIC        _GPIO_configPullUP
   C:0364H         PUBLIC        _GPIO_setHighSpeed
   C:04F9H         PUBLIC        _GPIO_resetBitValue
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 4
 
 
   C:0216H         PUBLIC        _GPIO_getBitValue
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:0096H         LINE#         78
   C:0096H         LINE#         79
   C:009CH         LINE#         80
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 5
 
 
   C:009DH         LINE#         81
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:011AH         LINE#         135
   C:011AH         LINE#         136
   C:0120H         LINE#         137
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 6
 
 
   C:0121H         LINE#         138
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   -------         ENDPROC       _GPIO_CONFIGMODE
   -------         PROC          _GPIO_CONFIGHIGHCURRENT
   D:000FH         SYMBOL        gpio
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 7
 
 
   D:0010H         SYMBOL        pin
@@ -419,7 +419,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   D:0003H         SYMBOL        f
   C:0639H         LINE#         286
   C:063DH         LINE#         287
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 8
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 8
 
 
   C:063DH         LINE#         288
@@ -479,7 +479,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:0652H         LINE#         370
   C:0652H         LINE#         371
   C:0655H         LINE#         372
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 9
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 9
 
 
   C:0655H         LINE#         374
@@ -539,7 +539,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:0667H         LINE#         458
   C:066EH         LINE#         459
   C:066EH         LINE#         460
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 10
 
 
   -------         ENDPROC       _GPIO_CONFIGBITVALUE
@@ -599,7 +599,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:05CFH         LINE#         543
   C:05CFH         LINE#         544
   C:05CFH         LINE#         545
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 11
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 11
 
 
   -------         ENDPROC       _GPIO_TOGGLEBITVALUE
@@ -659,7 +659,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   C:068BH         PUBLIC        RCC_configSysClock
   D:00D0H         PUBLIC        PSW
   -------         PROC          RCC_CONFIGSYSCLOCK
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 12
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 12
 
 
   C:068BH         LINE#         26
@@ -719,7 +719,7 @@ SYMBOL TABLE OF MODULE:  .\output\externBoard (?C_STARTUP)
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
   C:0296H         PUBLIC        main
-BL51 BANKED LINKER/LOCATER V6.22                                                      04/04/2023  22:39:19  PAGE 13
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/05/2023  18:38:05  PAGE 13
 
 
   D:0098H         PUBLIC        SCON
