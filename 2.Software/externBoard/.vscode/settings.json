@@ -1,6 +1,8 @@
 {
     "files.associations": {
+        "*.m": "matlab",
         "gpio.h": "c",
-        "hml.h": "c"
+        "hml.h": "c",
+        "tim.h": "c"
     }
 }

@@ -20,7 +20,6 @@
 #define COMPILE_MEM   1
 #define COMPILE_RST   1
 #define COMPILE_TIM   1
-#define COMPILE_TIM2  1
 #define COMPILE_UART  1
 #define COMPILE_UTIL  1
 #define COMPILE_WDT   1
