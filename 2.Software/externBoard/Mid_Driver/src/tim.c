@@ -80,7 +80,35 @@ void TIM_setMode(PERIPH_TIM tim, TIM_mode mode)
     }
 }
 
-
+/*****************************************************************************/
+/** 
+ * \author      Weilun Fong
+ * \author      Xiaoyu Ren
+ * \date        
+ * \brief       set value of THx/TLx register
+ * \param[in]   tim: target timer module
+ * \param[in]   val: expected value(range: 0x0000~0xFFFF)
+ * \return      none
+ * \ingroup     TIM
+ * \remarks     not for timer2
+******************************************************************************/
+void TIM_setValue(PERIPH_TIM tim, uint16_t val)
+{
+    switch (tim)
+    {
+        case PERIPH_TIM_0:
+        {
+            TH0 = (uint8_t)((val >> 0x8) & 0x00FF);
+            TL0 = (uint8_t)(val & 0x00FF);
+        } break;
+        case PERIPH_TIM_1:
+        {
+            TH1 = (uint8_t)((val >> 0x8) & 0x00FF);
+            TL1 = (uint8_t)(val & 0x00FF);
+        } break;
+        default:break;
+    }
+}
 
 
 
