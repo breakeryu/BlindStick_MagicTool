@@ -24,10 +24,10 @@
  */
 typedef enum
 {
-    UTIL_interruptPriority_0 = 0x00,
-    UTIL_interruptPriority_1 = 0x01,
-    UTIL_interruptPriority_2 = 0x02,
-    UTIL_interruptPriority_3 = 0x03,
+    UTIL_interruptPriority_0 = 0x00,    /*Priority Lowest*/
+    UTIL_interruptPriority_1 = 0x01,    /*Priority Lower*/
+    UTIL_interruptPriority_2 = 0x02,    /*Priority Higher*/
+    UTIL_interruptPriority_3 = 0x03,    /*Priority Highest*/
 } UTIL_interruptPriority;
 
 
