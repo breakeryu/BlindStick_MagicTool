@@ -16,6 +16,37 @@ uint16_t ticks_ms    = (__CONF_FOSC / ((__CONF_CLKDIV == 0)? 1 : __CONF_CLKDIV) 
 uint8_t  ticks_us    = (__CONF_FOSC / ((__CONF_CLKDIV == 0)? 1 : __CONF_CLKDIV) / __CLK_REF / 1000);
 
 
+
+/*****************************************************************************/
+/**
+ * \author      Weilun Fong
+ * \date        
+ * \brief       disable master switch of MCU interrupt
+ * \param[in]   
+ * \return      none
+ * \ingroup     UTIL
+ * \remarks     
+******************************************************************************/
+void disableAllInterrupts(void)
+{
+    EA = DISABLE;
+}
+
+/*****************************************************************************/
+/**
+ * \author      Weilun Fong
+ * \date        
+ * \brief       enable master switch of MCU interrupt
+ * \param[in]   
+ * \return      none
+ * \ingroup     UTIL
+ * \remarks     
+******************************************************************************/
+void enableAllInterrupts(void)
+{
+    EA = ENABLE;
+}
+
 /*****************************************************************************/
 /**
  * \author      IOsetting

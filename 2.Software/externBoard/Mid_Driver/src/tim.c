@@ -42,10 +42,11 @@ uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode)
         default: break;
     }
 
-    if(!tc->Dividerfunction)
+    if(tc->Dividerfunction)
     {
         value = value / 12;
     }
+
     value = time*(value/1000000);
     //这里使用timer2里面的计算方式来做定时计算中间的过程
     if ( value >= maxTick)
@@ -253,6 +254,51 @@ void TIM_INT_setPriority(PERIPH_TIM tim, UTIL_interruptPriority p)
             CONFB(IPH, BIT_NUM_PT1H, TESTB(p, 1));
         } break;
         default: break;
+    }
+}
+
+/*****************************************************************************/
+/** 
+ * \author      Weilun Fong
+ * \author      Xiaoyu Ren
+ * \date        
+ * \brief       get value from THx/TLx register
+ * \param[in]   tim: target timer module
+ * \return      value stored in THx/TLx register. This function will return 0x0000
+ *              when it gets a invalid parameter
+ * \ingroup     TIM
+ * \remarks     not for timer2
+******************************************************************************/
+uint16_t TIM_getValue(PERIPH_TIM tim)
+{
+    switch (tim)
+    {
+        case PERIPH_TIM_0: return ((TH0 << 0x08) | TL0);
+        case PERIPH_TIM_1: return ((TH1 << 0x08) | TL1);
+        default: return 0x0000;
+    }
+}
+
+
+/*****************************************************************************/
+/** 
+ * \author      Weilun Fong
+ * \author      Xiaoyu Ren
+ * \date        
+ * \brief       check whether counter of target timer is overflow or not
+ * \param[in]   tim: target timer module
+ * \return      true(overflow) or false. This function will return false when 
+ *              it gets a invalid parameter
+ * \ingroup     TIM
+ * \remarks     not for timer2
+******************************************************************************/
+bool TIM_isOverflow(PERIPH_TIM tim)
+{
+    switch (tim)
+    {
+        case PERIPH_TIM_0: return (bool)TF0;
+        case PERIPH_TIM_1: return (bool)TF1;
+        default: return false;
     }
 }
 

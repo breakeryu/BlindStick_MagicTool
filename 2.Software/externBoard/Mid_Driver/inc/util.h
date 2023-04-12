@@ -12,7 +12,7 @@
 
 #include "conf.h"
 #include "types.h"
-
+#include "stc8h.h"
 
 #define __CLK_REF 10000
 
@@ -30,7 +30,8 @@ typedef enum
     UTIL_interruptPriority_3 = 0x03,    /*Priority Highest*/
 } UTIL_interruptPriority;
 
-
+void disableAllInterrupts(void);
+void enableAllInterrupts(void);
 void Delay(uint16_t t);
 void Delay_us(uint16_t t);
 

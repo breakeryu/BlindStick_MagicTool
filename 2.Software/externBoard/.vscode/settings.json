@@ -3,6 +3,7 @@
         "*.m": "matlab",
         "gpio.h": "c",
         "hml.h": "c",
-        "tim.h": "c"
+        "tim.h": "c",
+        "util.h": "c"
     }
 }

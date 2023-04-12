@@ -60,7 +60,7 @@ typedef enum
  */
 typedef struct
 {
-    TIM_function            Dividerfunction;
+    Action                  Dividerfunction;// Enable clk = clk / 12; Disable clk = clk
     TIM_function            function;
     Action                  interruptState;
     UTIL_interruptPriority  interruptPriority;
@@ -72,12 +72,17 @@ typedef struct
  *                          function declare                                 *
  *****************************************************************************/
 
+uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode);
+void TIM_config(PERIPH_TIM tim, TIM_configTypeDef *tc);
 void TIM_cmd(PERIPH_TIM tim, Action a);
 void TIM_setFrequencyDivider(PERIPH_TIM tim, Action f);
 void TIM_setFunction(PERIPH_TIM tim, TIM_function f);
 void TIM_setMode(PERIPH_TIM tim, TIM_mode mode);
 void TIM_setValue(PERIPH_TIM tim, uint16_t val);
-
+void TIM_INT_cmd(PERIPH_TIM tim, Action a);
+void TIM_INT_setPriority(PERIPH_TIM tim, UTIL_interruptPriority p);
+uint16_t TIM_getValue(PERIPH_TIM tim);
+bool TIM_isOverflow(PERIPH_TIM tim);
 
 #endif
 
