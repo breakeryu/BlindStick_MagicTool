@@ -23,12 +23,12 @@ void sys_init(void)
     
     TIM_configTypeDef tc;
 
-    tc.Dividerfunction = DISABLE;
+    tc.Frequency_1T_State = DISABLE;
     tc.function = TIM_function_tim;
     tc.interruptState = ENABLE;
     tc.interruptPriority = UTIL_interruptPriority_0;
     tc.mode = TIM_mode_1;
-    tc.value = TIM_calculateValue(&tc,50000,TIM_mode_1);
+    tc.value = TIM_calculateValue(&tc,5000); //5ms的定时周期
 
     TIM_config(PERIPH_TIM_0,&tc);
     TIM_cmd(PERIPH_TIM_0,ENABLE);

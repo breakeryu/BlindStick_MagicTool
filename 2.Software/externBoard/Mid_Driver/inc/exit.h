@@ -14,7 +14,9 @@
 #include "stc8h.h"
 #include "types.h"
 
-
+/**
+ * \brief define interrupt list number
+ */
 #define EXTI_VectInt0           0
 #define EXTI_VectTimer0         1
 #define EXTI_VectInt1           2

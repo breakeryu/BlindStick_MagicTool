@@ -2,7 +2,7 @@
 /** 
  * \file        tim.h
  * \author      Xiaoyu Ren
- * \brief       operations for TIM module
+ * \brief       operations for TIM 0 and TIM 1 module
  * \note        
  * \version     v0.1
  * \ingroup     TIM
@@ -28,7 +28,9 @@ typedef enum
 {
     PERIPH_TIM_0 = 0x0,
     PERIPH_TIM_1 = 0x1,
-    PERIPH_TIM_2 = 0x2
+    PERIPH_TIM_2 = 0x2,
+    PERIPH_TIM_3 = 0x3,
+    PERIPH_TIM_4 = 0x4
 } PERIPH_TIM;
 
 /**
@@ -57,10 +59,12 @@ typedef enum
 
 /**
  * \brief struct for timer configuration
+ * \if Frequency_1T_State = ENABLE  , Min time Period = 1/__SYSCLOCK s, Max time Period = 65535/__SYSCLOCK s
+ * \if Frequency_1T_State = DISABLE , Min time Period = 1*12/__SYSCLOCK s, Max time Period = 65535*12/__SYSCLOCK s
  */
 typedef struct
 {
-    Action                  Dividerfunction;// Enable clk = clk / 12; Disable clk = clk
+    Action                  Frequency_1T_State;// Enable clk = clk / 12; Disable clk = clk
     TIM_function            function;
     Action                  interruptState;
     UTIL_interruptPriority  interruptPriority;
@@ -72,10 +76,10 @@ typedef struct
  *                          function declare                                 *
  *****************************************************************************/
 
-uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode);
+uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time);
 void TIM_config(PERIPH_TIM tim, TIM_configTypeDef *tc);
 void TIM_cmd(PERIPH_TIM tim, Action a);
-void TIM_setFrequencyDivider(PERIPH_TIM tim, Action f);
+void TIM_set_1T_Frequency(PERIPH_TIM tim, Action f);
 void TIM_setFunction(PERIPH_TIM tim, TIM_function f);
 void TIM_setMode(PERIPH_TIM tim, TIM_mode mode);
 void TIM_setValue(PERIPH_TIM tim, uint16_t val);

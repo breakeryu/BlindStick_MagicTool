@@ -2,7 +2,7 @@
 /** 
  * \file        tim.c
  * \author      Xiaoyu Ren
- * \brief       operations for TIM module
+ * \brief       operations for TIM 0 and TIM 1 module
  * \note        
  * \version     v0.1
  * \ingroup     TIM
@@ -12,7 +12,7 @@
 
 #include "tim.h"
 
-
+//Todo 编写一个计算定时器最小和最大时间的一个工具。
 
 /*****************************************************************************/
 /** 
@@ -20,6 +20,7 @@
  * \author      Xiaoyu Ren
  * \date        
  * \brief       calculate initial value for THx/TLx register
+ * \param[in]   tc: configuration struct includes all parameters
  * \param[in]   time: expected timing cycle(unit: us)
  * \param[in]   mode: work mode of timer
  * \return      initial value of timer counter register(if return 0x0000, it 
@@ -27,13 +28,13 @@
  * \ingroup     TIM
  * \remarks     
 ******************************************************************************/
-uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode)
+uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time)
 {
     /* machine cycle: MCU_FRE_CLK / MCU_PRESCALER */
     uint32_t value = __SYSCLOCK;
     uint32_t maxTick = 0x0000;
     
-    switch (mode)
+    switch (tc->mode)
     {
         case TIM_mode_0: maxTick = 0xFFFF; break;
         case TIM_mode_1: maxTick = 0xFFFF; break;
@@ -42,7 +43,7 @@ uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode)
         default: break;
     }
 
-    if(tc->Dividerfunction)
+    if(!tc->Frequency_1T_State)
     {
         value = value / 12;
     }
@@ -74,7 +75,7 @@ uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode)
 ******************************************************************************/
 void TIM_config(PERIPH_TIM tim, TIM_configTypeDef *tc)
 {
-    TIM_setFrequencyDivider(tim, tc->Dividerfunction);
+    TIM_set_1T_Frequency(tim, tc->Frequency_1T_State);
     TIM_setFunction(tim, tc->function);
     TIM_setMode(tim, tc->mode);
     TIM_setValue(tim, tc->value);
@@ -114,18 +115,19 @@ void TIM_cmd(PERIPH_TIM tim, Action a)
  * \brief       configure function(timer or counter) of target timer
  * \param[in]   tim: target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
  * \param[in]   f: expected function (the value must be DISABLE or ENABLE)
- *                  f = DISABLE, timerSpeed =  FOSC
- *                  f = ENABLE , timerSpeed =  FOSC/12
+ *                   f = DISABLE, timerSpeed =  FOSC/12
+ *                   f = ENABLE , timerSpeed =  FOSC
+ *                   Default is Disable.
  * \return      none
  * \ingroup     TIM
  * \remarks     just for timer0 and timer1
 ******************************************************************************/
-void TIM_setFrequencyDivider(PERIPH_TIM tim, Action f)
+void TIM_set_1T_Frequency(PERIPH_TIM tim, Action f)
 {
     switch (tim)
     {
-        case PERIPH_TIM_0: CONFB(AUXR, BIT_NUM_T0X12, !f); break;
-        case PERIPH_TIM_1: CONFB(AUXR, BIT_NUM_T1X12, !f); break;
+        case PERIPH_TIM_0: CONFB(AUXR, BIT_NUM_T0X12, f); break;
+        case PERIPH_TIM_1: CONFB(AUXR, BIT_NUM_T1X12, f); break;
         default: break;
     }
 }

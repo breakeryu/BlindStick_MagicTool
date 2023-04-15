@@ -74,8 +74,25 @@
 #define BIT_NUM_T1_CT     6
 #define BIT_NUM_T1_GATE   7
 
+/* T4T3M bits */
+#define BIT_NUM_T4T3M_T3CLKO    0
+#define BIT_NUM_T4T3M_T3X12     1
+#define BIT_NUM_T4T3M_T3CT      2
+#define BIT_NUM_T4T3M_T3R       3
+#define BIT_NUM_T4T3M_T4CLKO    4
+#define BIT_NUM_T4T3M_T4X12     5
+#define BIT_NUM_T4T3M_T4CT      6
+#define BIT_NUM_T4T3M_T4R       7
 
-
+/* IE2 bits */
+#define BIT_NUM_IE2_ES2    0
+#define BIT_NUM_IE2_ESPI   1
+#define BIT_NUM_IE2_ET2    2
+#define BIT_NUM_IE2_ES3    3
+#define BIT_NUM_IE2_ES4    4
+#define BIT_NUM_IE2_ET3    5
+#define BIT_NUM_IE2_ET4    6
+#define BIT_NUM_IE2_EUSB   7
 
 #endif
 
