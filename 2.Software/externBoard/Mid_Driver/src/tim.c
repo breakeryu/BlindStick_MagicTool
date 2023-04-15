@@ -48,7 +48,7 @@ uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time, TIM_mode mode)
     }
 
     value = time*(value/1000000);
-    //这里使用timer2里面的计算方式来做定时计算中间的过程
+    
     if ( value >= maxTick)
     {
         return 0;

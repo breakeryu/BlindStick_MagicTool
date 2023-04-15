@@ -12,6 +12,7 @@
 #define ___MSTC8H_H___
 
 
+#define INTERRUPT(name, vector) void name (void) interrupt vector
 
 /* BIT number for bits that are not directly accessible */
 /* AUXR bits */

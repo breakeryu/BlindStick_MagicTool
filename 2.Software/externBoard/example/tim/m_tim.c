@@ -11,9 +11,18 @@
 #include "hml.h"
 
 
+
 void sys_init(void)
 {
+    //enable XFR register
+    SFRX_ON();
+    
+    RCC_configSysClock(); //IRC value = 30MHz
+
+    GPIO_configMode(PERIPH_GPIO_1, PERIPH_GPIO_PIN_2, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
+    
     TIM_configTypeDef tc;
+
     tc.Dividerfunction = DISABLE;
     tc.function = TIM_function_tim;
     tc.interruptState = ENABLE;
@@ -25,13 +34,17 @@ void sys_init(void)
     TIM_cmd(PERIPH_TIM_0,ENABLE);
 
     enableAllInterrupts();
+
     
+    //disable XFR register
+    SFRX_OFF();
 }
 
 
 void main(void)
 {
 
+    sys_init();
 
     while (1)
     {
@@ -40,3 +53,28 @@ void main(void)
     
 
 }
+
+/*****************************************************************************/
+/** 
+ * \author      Jiabin Hsu
+ * \author      Xiaoyu Ren
+ * \date        
+ * \brief       interrupt service function for TIM0
+ * \param[in]   
+ * \return      none
+ * \ingroup     example
+ * \remarks     
+******************************************************************************/
+INTERRUPT(Timer0_Routine,EXTI_VectTimer0)
+{
+    static uint8_t i = 0;
+
+    /* per 500ms */
+    i++;
+    if (i == 10)
+    {
+        GPIO_toggleBitValue(PERIPH_GPIO_1, PERIPH_GPIO_PIN_2);
+        i = 0;
+    }
+}
+
