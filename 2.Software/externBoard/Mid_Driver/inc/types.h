@@ -62,7 +62,13 @@
 /*****************************************************************************
  *                             type define                                   *
  *****************************************************************************/
+#define _Bool bit
+#define BOOL bit
+#define bool _Bool
+#define __bool_true_false_are_defined 1
 
+#define true    (bool)1
+#define false   (bool)0
 /* Signed.  */
 typedef signed char             int8_t;
 typedef short int               int16_t;
@@ -75,7 +81,6 @@ typedef unsigned long int       uint32_t;
 
 typedef uint8_t    byte;
 typedef uint16_t   word;
-
 /*****************************************************************************
  *                           enumeration type                                *
  *****************************************************************************/

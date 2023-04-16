@@ -371,6 +371,21 @@
               <FileType>1</FileType>
               <FilePath>.\Mid_Driver\src\util.c</FilePath>
             </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Mid_Driver\src\tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Mid_Driver\src\tim2.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Mid_Driver\src\uart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

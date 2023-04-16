@@ -1,0 +1,44 @@
+C51 COMPILER V9.01   UART                                                                  04/16/2023 08:35:08 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE UART
+OBJECT MODULE PLACED IN .\output\uart.obj
+COMPILER INVOKED BY: E:\Keil_v4\C51\BIN\C51.EXE Mid_Driver\src\uart.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc)
+                    - DEBUG OBJECTEXTEND PRINT(.\listing\uart.lst) OBJECT(.\output\uart.obj)
+
+line level    source
+
+   1          /*****************************************************************************/
+   2          /** 
+   3           * \file        uart.c
+   4           * \author      Xiaoyu Ren
+   5           * \brief       operations for UART module
+   6           * \note        
+   7           * \version     v0.1
+   8           * \ingroup     UART
+   9          ******************************************************************************/
+  10          
+  11          #if COMPILE_UART
+*** WARNING C322 IN LINE 11 OF Mid_Driver\src\uart.c: unknown identifier
+              
+              #include "uart.h"
+              
+              
+              
+              
+              #endif
+  19          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

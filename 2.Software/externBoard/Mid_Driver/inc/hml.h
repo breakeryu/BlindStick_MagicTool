@@ -26,7 +26,6 @@
 #include "util.h"
 #include "tim.h"
 #include "exit.h"
-
-
+#include "tim2.h"
 
 #endif

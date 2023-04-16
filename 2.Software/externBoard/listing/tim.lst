@@ -1,0 +1,342 @@
+C51 COMPILER V9.01   TIM                                                                   04/16/2023 08:44:27 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TIM
+OBJECT MODULE PLACED IN .\output\tim.obj
+COMPILER INVOKED BY: E:\Keil_v4\C51\BIN\C51.EXE Mid_Driver\src\tim.c BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc) 
+                    -DEBUG OBJECTEXTEND PRINT(.\listing\tim.lst) OBJECT(.\output\tim.obj)
+
+line level    source
+
+   1          /*****************************************************************************/
+   2          /** 
+   3           * \file        tim.c
+   4           * \author      Xiaoyu Ren
+   5           * \brief       operations for TIM 0 and TIM 1 module
+   6           * \note        
+   7           * \version     v0.1
+   8           * \ingroup     TIM
+   9          ******************************************************************************/
+  10          
+  11          //#if COMPILE_TIM
+  12          
+  13          #include "tim.h"
+  14          
+  15          //Todo 编写一个计算定时器最小和最大时间的一个工具。
+  16          
+  17          /*****************************************************************************/
+  18          /** 
+  19           * \author      Jiabin Hsu
+  20           * \author      Xiaoyu Ren
+  21           * \date        
+  22           * \brief       calculate initial value for THx/TLx register
+  23           * \param[in]   tc: configuration struct includes all parameters
+  24           * \param[in]   time: expected timing cycle(unit: us)
+  25           * \param[in]   mode: work mode of timer
+  26           * \return      initial value of timer counter register(if return 0x0000, it 
+  27           *              means that the time has over the limit)
+  28           * \ingroup     TIM
+  29           * \remarks     
+  30          ******************************************************************************/
+  31          uint16_t TIM_calculateValue(TIM_configTypeDef *tc, uint16_t time)
+  32          {
+  33   1          /* machine cycle: MCU_FRE_CLK / MCU_PRESCALER */
+  34   1          uint32_t value = __SYSCLOCK;
+  35   1          uint32_t maxTick = 0x0000;
+  36   1          
+  37   1          switch (tc->mode)
+  38   1          {
+  39   2              case TIM_mode_0: maxTick = 0xFFFF; break;
+  40   2              case TIM_mode_1: maxTick = 0xFFFF; break;
+  41   2              case TIM_mode_2: maxTick = 0x00FF; break;
+  42   2              case TIM_mode_3: maxTick = 0xFFFF; break;
+  43   2              default: break;
+  44   2          }
+  45   1      
+  46   1          if(!tc->Frequency_1T_State)
+  47   1          {
+  48   2              value = value / 12;
+  49   2          }
+  50   1      
+  51   1          value = time*(value/1000000);
+  52   1          
+  53   1          if ( value >= maxTick)
+  54   1          {
+C51 COMPILER V9.01   TIM                                                                   04/16/2023 08:44:27 PAGE 2   
+
+  55   2              return 0;
+  56   2          }
+  57   1          else
+  58   1          {
+  59   2              return (maxTick + 1 - value);
+  60   2          }
+  61   1          
+  62   1      }
+  63          
+  64          /*****************************************************************************/
+  65          /** 
+  66           * \author      Weilun Fong
+  67           * \author      Xiaoyu Ren
+  68           * \date        
+  69           * \brief       configure target timer
+  70           * \param[in]   tim: target timer(the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+  71           * \param[in]   tc : configuration struct includes all parameters
+  72           * \return      none
+  73           * \ingroup     TIM
+  74           * \remarks     not for timer2
+  75          ******************************************************************************/
+  76          void TIM_config(PERIPH_TIM tim, TIM_configTypeDef *tc)
+  77          {
+  78   1          TIM_set_1T_Frequency(tim, tc->Frequency_1T_State);
+  79   1          TIM_setFunction(tim, tc->function);
+  80   1          TIM_setMode(tim, tc->mode);
+  81   1          TIM_setValue(tim, tc->value);
+  82   1          TIM_INT_cmd(tim, tc->interruptState);
+  83   1          TIM_INT_setPriority(tim, tc->interruptPriority);
+  84   1      }
+  85          
+  86          
+  87          
+  88          /*****************************************************************************/
+  89          /** 
+  90           * \author      Weilun Fong
+  91           * \author      Xiaoyu Ren
+  92           * \date        
+  93           * \brief       enable or disable target timer
+  94           * \param[in]   tim: target timer(the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+  95           * \param[in]   a  : expected state
+  96           * \return      none
+  97           * \ingroup     TIM
+  98           * \remarks     not for timer2
+  99          ******************************************************************************/
+ 100          void TIM_cmd(PERIPH_TIM tim, Action a)
+ 101          {
+ 102   1          switch (tim)
+ 103   1          {
+ 104   2              case PERIPH_TIM_0: TR0 = a; break;
+ 105   2              case PERIPH_TIM_1: TR1 = a; break;
+ 106   2              default: break;
+ 107   2          }
+ 108   1      }
+ 109          
+ 110          
+ 111          /*****************************************************************************/
+ 112          /** 
+ 113           * \author      Xiaoyu Ren
+ 114           * \date        
+ 115           * \brief       configure function(timer or counter) of target timer
+ 116           * \param[in]   tim: target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+C51 COMPILER V9.01   TIM                                                                   04/16/2023 08:44:27 PAGE 3   
+
+ 117           * \param[in]   f: expected function (the value must be DISABLE or ENABLE)
+ 118           *                   f = DISABLE, timerSpeed =  FOSC/12
+ 119           *                   f = ENABLE , timerSpeed =  FOSC
+ 120           *                   Default is Disable.
+ 121           * \return      none
+ 122           * \ingroup     TIM
+ 123           * \remarks     just for timer0 and timer1
+ 124          ******************************************************************************/
+ 125          void TIM_set_1T_Frequency(PERIPH_TIM tim, Action f)
+ 126          {
+ 127   1          switch (tim)
+ 128   1          {
+ 129   2              case PERIPH_TIM_0: CONFB(AUXR, BIT_NUM_T0X12, f); break;
+ 130   2              case PERIPH_TIM_1: CONFB(AUXR, BIT_NUM_T1X12, f); break;
+ 131   2              default: break;
+ 132   2          }
+ 133   1      }
+ 134          
+ 135          
+ 136          /*****************************************************************************/
+ 137          /** 
+ 138           * \author      Weilun Fong
+ 139           * \author      Xiaoyu Ren
+ 140           * \date        
+ 141           * \brief       configure function(timer or counter) of target timer
+ 142           * \param[in]   tim: target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+ 143           * \param[in]   f: expected function (the value must be TIM_function_cnt or TIM_function_tim)
+ 144           * \return      none
+ 145           * \ingroup     TIM
+ 146           * \remarks     just for timer0 and timer1
+ 147          ******************************************************************************/
+ 148          void TIM_setFunction(PERIPH_TIM tim, TIM_function f)
+ 149          {
+ 150   1          switch (tim)
+ 151   1          {
+ 152   2              case PERIPH_TIM_0: CONFB(TMOD, BIT_NUM_T0_CT, f); break;
+ 153   2              case PERIPH_TIM_1: CONFB(TMOD, BIT_NUM_T1_CT, f); break;
+ 154   2              default: break;
+ 155   2          }
+ 156   1      }
+ 157          
+ 158          /*****************************************************************************/
+ 159          /** 
+ 160           * \author      Weilun Fong
+ 161           * \author      Xiaoyu Ren
+ 162           * \date        
+ 163           * \brief       configure work mode of target timer
+ 164           * \param[in]   tim : target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+ 165           * \param[in]   mode: expected work mode
+ 166           * \return      none
+ 167           * \ingroup     TIM
+ 168           * \remarks     just for timer0 and timer1
+ 169          ******************************************************************************/
+ 170          void TIM_setMode(PERIPH_TIM tim, TIM_mode mode)
+ 171          {
+ 172   1          switch (tim)
+ 173   1          {
+ 174   2              case PERIPH_TIM_0: TMOD = (TMOD & 0xFC) | mode; break;
+ 175   2              case PERIPH_TIM_1: TMOD = (TMOD & 0xCF) | (mode << 0x4); break;
+ 176   2              default: break;
+ 177   2          }
+ 178   1      }
+C51 COMPILER V9.01   TIM                                                                   04/16/2023 08:44:27 PAGE 4   
+
+ 179          
+ 180          /*****************************************************************************/
+ 181          /** 
+ 182           * \author      Weilun Fong
+ 183           * \author      Xiaoyu Ren
+ 184           * \date        
+ 185           * \brief       set value of THx/TLx register
+ 186           * \param[in]   tim: target timer module
+ 187           * \param[in]   val: expected value(range: 0x0000~0xFFFF)
+ 188           * \return      none
+ 189           * \ingroup     TIM
+ 190           * \remarks     not for timer2
+ 191          ******************************************************************************/
+ 192          void TIM_setValue(PERIPH_TIM tim, uint16_t val)
+ 193          {
+ 194   1          switch (tim)
+ 195   1          {
+ 196   2              case PERIPH_TIM_0:
+ 197   2              {
+ 198   3                  TH0 = (uint8_t)((val >> 0x8) & 0x00FF);
+ 199   3                  TL0 = (uint8_t)(val & 0x00FF);
+ 200   3              } break;
+ 201   2              case PERIPH_TIM_1:
+ 202   2              {
+ 203   3                  TH1 = (uint8_t)((val >> 0x8) & 0x00FF);
+ 204   3                  TL1 = (uint8_t)(val & 0x00FF);
+ 205   3              } break;
+ 206   2              default:break;
+ 207   2          }
+ 208   1      }
+ 209          
+ 210          /*****************************************************************************/
+ 211          /** 
+ 212           * \author      Weilun Fong
+ 213           * \author      Xiaoyu Ren
+ 214           * \date        
+ 215           * \brief       enable or disable interrupt function of target timer
+ 216           * \param[in]   tim: target timer module
+ 217           * \param[in]   a  : expected state
+ 218           * \return      none
+ 219           * \ingroup     TIM
+ 220           * \remarks     not for timer2
+ 221          ******************************************************************************/
+ 222          void TIM_INT_cmd(PERIPH_TIM tim, Action a)
+ 223          {
+ 224   1          switch (tim)
+ 225   1          {
+ 226   2              case PERIPH_TIM_0: ET0 = a; break;
+ 227   2              case PERIPH_TIM_1: ET1 = a; break;
+ 228   2              default: break;
+ 229   2          }
+ 230   1      }
+ 231          
+ 232          /*****************************************************************************/
+ 233          /** 
+ 234           * \author      Weilun Fong
+ 235           * \author      Xiaoyu Ren
+ 236           * \date        
+ 237           * \brief       configure interrupt priority class of target timer
+ 238           * \param[in]   tim: target timer module
+ 239           * \param[in]   p  : interrupt priority class
+ 240           * \return      none
+C51 COMPILER V9.01   TIM                                                                   04/16/2023 08:44:27 PAGE 5   
+
+ 241           * \ingroup     TIM
+ 242           * \remarks     not for timer2
+ 243          ******************************************************************************/
+ 244          void TIM_INT_setPriority(PERIPH_TIM tim, UTIL_interruptPriority p)
+ 245          {
+ 246   1          switch (tim)
+ 247   1          {
+ 248   2              case PERIPH_TIM_0:
+ 249   2              {
+ 250   3                  PT0 = TESTB(p, 0);
+ 251   3                  CONFB(IPH, BIT_NUM_PT0H, TESTB(p, 1));
+ 252   3              } break;
+ 253   2              case PERIPH_TIM_1:
+ 254   2              {
+ 255   3                  PT1 = TESTB(p, 0);
+ 256   3                  CONFB(IPH, BIT_NUM_PT1H, TESTB(p, 1));
+ 257   3              } break;
+ 258   2              default: break;
+ 259   2          }
+ 260   1      }
+ 261          
+ 262          /*****************************************************************************/
+ 263          /** 
+ 264           * \author      Weilun Fong
+ 265           * \author      Xiaoyu Ren
+ 266           * \date        
+ 267           * \brief       get value from THx/TLx register
+ 268           * \param[in]   tim: target timer module
+ 269           * \return      value stored in THx/TLx register. This function will return 0x0000
+ 270           *              when it gets a invalid parameter
+ 271           * \ingroup     TIM
+ 272           * \remarks     not for timer2
+ 273          ******************************************************************************/
+ 274          uint16_t TIM_getValue(PERIPH_TIM tim)
+ 275          {
+ 276   1          switch (tim)
+ 277   1          {
+ 278   2              case PERIPH_TIM_0: return ((TH0 << 0x08) | TL0);
+ 279   2              case PERIPH_TIM_1: return ((TH1 << 0x08) | TL1);
+ 280   2              default: return 0x0000;
+ 281   2          }
+ 282   1      }
+ 283          
+ 284          
+ 285          /*****************************************************************************/
+ 286          /** 
+ 287           * \author      Weilun Fong
+ 288           * \author      Xiaoyu Ren
+ 289           * \date        
+ 290           * \brief       check whether counter of target timer is overflow or not
+ 291           * \param[in]   tim: target timer module
+ 292           * \return      true(overflow) or false. This function will return false when 
+ 293           *              it gets a invalid parameter
+ 294           * \ingroup     TIM
+ 295           * \remarks     not for timer2
+ 296          ******************************************************************************/
+ 297          bool TIM_isOverflow(PERIPH_TIM tim)
+ 298          {
+ 299   1          switch (tim)
+ 300   1          {
+ 301   2              case PERIPH_TIM_0: return (bool)TF0;
+ 302   2              case PERIPH_TIM_1: return (bool)TF1;
+C51 COMPILER V9.01   TIM                                                                   04/16/2023 08:44:27 PAGE 6   
+
+ 303   2              default: return false;
+ 304   2          }
+ 305   1      }
+ 306          
+ 307          
+ 308          //#endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    582    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      14
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

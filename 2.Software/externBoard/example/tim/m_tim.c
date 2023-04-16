@@ -19,7 +19,7 @@ void sys_init(void)
     
     RCC_configSysClock(); //IRC value = 30MHz
 
-    GPIO_configMode(PERIPH_GPIO_1, PERIPH_GPIO_PIN_2, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
+    GPIO_configMode(PERIPH_GPIO_4, PERIPH_GPIO_PIN_5, PERIPH_GPIO_PIN_MODE_GENERAL_IN_OUT);
     
     TIM_configTypeDef tc;
 
@@ -73,7 +73,7 @@ INTERRUPT(Timer0_Routine,EXTI_VectTimer0)
     i++;
     if (i == 10)
     {
-        GPIO_toggleBitValue(PERIPH_GPIO_1, PERIPH_GPIO_PIN_2);
+        GPIO_toggleBitValue(PERIPH_GPIO_4, PERIPH_GPIO_PIN_5);
         i = 0;
     }
 }

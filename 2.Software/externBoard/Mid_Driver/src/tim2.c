@@ -87,9 +87,9 @@ void TIM2_setFunction(PERIPH_TIM tim, TIM_function mode)
 {
     switch (tim)
     {
-        case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2CT, f); break;
-        case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3CT, f); break;
-        case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4CT, f); break;
+        case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2CT, mode); break;
+        case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3CT, mode); break;
+        case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4CT, mode); break;
         default: break;
     }
 }

@@ -1,0 +1,1 @@
+"Mid_Driver\src\tim.c" BROWSE INCDIR(.\App;.\Mid_Driver;.\Mid_Driver\inc) DEBUG OBJECTEXTEND PRINT(.\listing\tim.lst) OBJECT(.\output\tim.obj)
