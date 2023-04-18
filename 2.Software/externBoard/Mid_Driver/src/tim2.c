@@ -15,17 +15,15 @@
 
 /*****************************************************************************/
 /** 
- * \author      Jiabin Hsu
  * \author      Xiaoyu Ren
  * \date        
- * \brief       calculate initial value for THx/TLx register
+ * \brief       calculate initial value for TxH/TxL register, x = 2, 3, 4
  * \param[in]   tc: configuration struct includes all parameters
  * \param[in]   time: expected timing cycle(unit: us)
- * \param[in]   mode: work mode of timer
  * \return      initial value of timer counter register(if return 0x0000, it 
  *              means that the time has over the limit)
- * \ingroup     TIM
- * \remarks     
+ * \ingroup     TIM2
+ * \remarks     just for timer2, timer3 and timer4
 ******************************************************************************/
 uint16_t TIM2_calculateValue(TIM2_configTypeDef *tc, uint16_t time)
 {
@@ -38,9 +36,9 @@ uint16_t TIM2_calculateValue(TIM2_configTypeDef *tc, uint16_t time)
         value = value / 12;
     }
 
-    value = time*(value/1000000)/(tc->PS_value+1);
+    value = time*(value/1000000)/(tc->PS_value + 1);
     
-    if ( value >= maxTick)
+    if ( value >= maxTick || value <= 0)
     {
         return 0;
     }
@@ -77,7 +75,7 @@ void TIM2_config(PERIPH_TIM tim, TIM2_configTypeDef *tc)
  * \author      Xiaoyu Ren
  * \date        
  * \brief       configure work mode of target timer
- * \param[in]   tim : target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+ * \param[in]   tim : target timer module (the value must be PERIPH_TIM_2, PERIPH_TIM_3 or PERIPH_TIM_4)
  * \param[in]   mode: expected work mode
  * \return      none
  * \ingroup     TIM2
