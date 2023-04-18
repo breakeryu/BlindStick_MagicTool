@@ -38,6 +38,36 @@
 #define BIT_NUM_PX2H      6
 #define BIT_NUM_PX3H      7
 
+/* IP2 bits */
+#define BIT_NUM_PS2             0
+#define BIT_NUM_PSPI            1
+#define BIT_NUM_PPWMA           2
+#define BIT_NUM_PPWMB           3
+#define BIT_NUM_PX4             4
+#define BIT_NUM_PCMP            5
+#define BIT_NUM_PI2C            6
+#define BIT_NUM_PUSB_PTKSU      7
+
+/* IP2H bits */
+#define BIT_NUM_PS2H            0
+#define BIT_NUM_PSPIH           1
+#define BIT_NUM_PPWMAH          2
+#define BIT_NUM_PPWMBH          3
+#define BIT_NUM_PX4H            4
+#define BIT_NUM_PCMPH           5
+#define BIT_NUM_PI2CH           6
+#define BIT_NUM_PUSBH_PTKSUH    7
+
+/* IP3 bits */
+#define BIT_NUM_PS3             0
+#define BIT_NUM_PS4             1
+#define BIT_NUM_PRTC            2
+
+/* IP3H bits */
+#define BIT_NUM_PS3H             0
+#define BIT_NUM_PS4H             1
+#define BIT_NUM_PRTCH            2
+
 /* ISP_CMD bits */
 #define BIT_NUM_MS0       0
 #define BIT_NUM_MS1       1
@@ -93,6 +123,36 @@
 #define BIT_NUM_IE2_ET3    5
 #define BIT_NUM_IE2_ET4    6
 #define BIT_NUM_IE2_EUSB   7
+
+/* S2CON bits */
+#define BIT_NUM_S2CON_S2RI      0
+#define BIT_NUM_S2CON_S2TI      1
+#define BIT_NUM_S2CON_S2RB8     2
+#define BIT_NUM_S2CON_S2TB8     3
+#define BIT_NUM_S2CON_S2REN     4
+#define BIT_NUM_S2CON_S2SM2     5
+#define BIT_NUM_S2CON_S2SM0     7
+
+/* S3CON bits */
+#define BIT_NUM_S3CON_S3RI      0
+#define BIT_NUM_S3CON_S3TI      1
+#define BIT_NUM_S3CON_S3RB8     2
+#define BIT_NUM_S3CON_S3TB8     3
+#define BIT_NUM_S3CON_S3REN     4
+#define BIT_NUM_S3CON_S3SM2     5
+#define BIT_NUM_S3CON_S3ST3     6
+#define BIT_NUM_S3CON_S3SM0     7
+
+/* S4CON bits */
+#define BIT_NUM_S4CON_S4RI      0
+#define BIT_NUM_S4CON_S4TI      1
+#define BIT_NUM_S4CON_S4RB8     2
+#define BIT_NUM_S4CON_S4TB8     3
+#define BIT_NUM_S4CON_S4REN     4
+#define BIT_NUM_S4CON_S4SM2     5
+#define BIT_NUM_S4CON_S4ST4     6
+#define BIT_NUM_S4CON_S4SM0     7
+
 
 #endif
 
