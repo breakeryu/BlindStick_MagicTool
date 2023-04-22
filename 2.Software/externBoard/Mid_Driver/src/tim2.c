@@ -205,3 +205,29 @@ void TIM2_INT_cmd(PERIPH_TIM tim, Action a)
     }
 }
 
+
+/*****************************************************************************/
+/** 
+ * \author      Jiabin Hsu
+ * \author      Xiaoyu Ren
+ * \date        
+ * \brief       enable or disable timer-2
+ * \param[in]   tim: target timer module
+ * \param[in]   a: expected state
+ * \return      none
+ * \ingroup     TIM2
+ * \remarks     
+******************************************************************************/
+void TIM2_cmd(PERIPH_TIM tim, Action a)
+{
+    switch (tim)
+    {
+        case PERIPH_TIM_2: T2R = a; break;
+        case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3R, a); break;
+        case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4R, a); break;
+        default: break;
+    }
+    
+}
+
+

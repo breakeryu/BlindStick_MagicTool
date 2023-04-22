@@ -57,7 +57,7 @@ void TIM2_set_1T_Frequency(PERIPH_TIM tim, Action f);
 void TIM2_set_PS_Value(PERIPH_TIM tim, uint8_t val);
 void TIM2_setValue(PERIPH_TIM tim, uint16_t val);
 void TIM2_INT_cmd(PERIPH_TIM tim, Action a);
-
+void TIM2_cmd(PERIPH_TIM tim, Action a);
 
 #endif
 

@@ -27,5 +27,8 @@
 #include "tim.h"
 #include "exit.h"
 #include "tim2.h"
+#include "uart.h"
+
+
 
 #endif

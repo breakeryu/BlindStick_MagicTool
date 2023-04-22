@@ -78,12 +78,13 @@ typedef enum
  */
 typedef struct
 {
-    UART_Port_t            uart;
+    UART_Port_t            uart;                //串口号
+    uint8_t                portPin;             //引脚号
     uint32_t               baudrate;            //波特率
     PERIPH_TIM             baudGenerator;       //波特率产生源
     Action                 interruptState;      //中断使能
     UTIL_interruptPriority interruptPriority;   //中断优先级
-    UART_mode              mode;                //串口模式
+    uint8_t                mode;                //串口模式
     Action                 multiBaudrate;       //波特率加倍
     Action                 receiveState;        //接收状态
 } UART_configTypeDef;
@@ -98,8 +99,17 @@ void UART_switchPort(UART_Port_t uart, uint8_t UART_PortPin);
 void UART_INT_cmd(UART_Port_t uart, Action a);
 void UART_INT_setPriority(UART_Port_t uart, UTIL_interruptPriority p);
 void UART_switchTim(UART_Port_t uart, PERIPH_TIM tim);
-
-
+void UART_setMode(UART_Port_t uart, uint8_t mode);
+void UART_cmd_receive(UART_Port_t uart, Action a);
+void UART_cmd_multiBaudrate(UART_Port_t uart, Action a);
+void UART_config(UART_configTypeDef *uc);
+uint16_t UART_getBaudGeneratorInitValue(uint32_t baud, PERIPH_TIM tim);
+byte UART_getByte(UART_Port_t uart);
+FunctionalState UART_isReceived(UART_Port_t uart);
+FunctionalState UART_isTransmitted(UART_Port_t uart);
+void UART_sendByte(UART_Port_t uart, byte dat);
+void UART_sendHex(UART_Port_t uart, uint8_t hex);
+void UART_sendString(UART_Port_t uart, char *str);
 
 #endif
 
