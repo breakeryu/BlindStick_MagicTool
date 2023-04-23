@@ -67,13 +67,13 @@ void UART_INT_cmd(UART_Port_t uart, Action a)
             ES = a;
             break;
         case PERIPH_UART2:
-            CONFB(IE_2, BIT_NUM_IE2_ES2, a);
+            CONFB(IE2, BIT_NUM_IE2_ES2, a);
             break;
         case PERIPH_UART3:
-            CONFB(IE_2, BIT_NUM_IE2_ES3, a);
+            CONFB(IE2, BIT_NUM_IE2_ES3, a);
             break;
         case PERIPH_UART4:
-            CONFB(IE_2, BIT_NUM_IE2_ES4, a);
+            CONFB(IE2, BIT_NUM_IE2_ES4, a);
             break;
         default:
             break;

@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   UART                                                                  04/16/2023 08:35:08 PAGE 1   
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE UART
@@ -18,27 +18,624 @@ line level    source
    8           * \ingroup     UART
    9          ******************************************************************************/
   10          
-  11          #if COMPILE_UART
-*** WARNING C322 IN LINE 11 OF Mid_Driver\src\uart.c: unknown identifier
-              
-              #include "uart.h"
-              
-              
-              
-              
-              #endif
-  19          
+  11          //#if COMPILE_UART
+  12          
+  13          #include "uart.h"
+  14          
+  15          
+  16          
+  17          /*****************************************************************************/
+  18          /** 
+  19           * \author      Xiaoyu Ren
+  20           * \date        
+  21           * \brief       switch uart port pins
+  22           * \param[in]   uart: expected uart
+  23           * \param[in]   UART_PortPin: expected PortPins
+  24           * \return      none
+  25           * \ingroup     UART
+  26           * \remarks     
+  27          ******************************************************************************/
+  28          void UART_switchPort(UART_Port_t uart, uint8_t UART_PortPin)
+  29          {
+  30   1          switch (uart)
+  31   1          {
+  32   2              case PERIPH_UART1:
+  33   2                  CONFB(P_SW1, 6, TESTB(UART_PortPin, 0));
+  34   2                  CONFB(P_SW1, 7, TESTB(UART_PortPin, 1));
+  35   2                  break;
+  36   2              case PERIPH_UART2:
+  37   2                  CONFB(P_SW2, 0, UART_PortPin);
+  38   2                  break;
+  39   2              case PERIPH_UART3:
+  40   2                  CONFB(P_SW2, 1, UART_PortPin);
+  41   2                  break;
+  42   2              case PERIPH_UART4:
+  43   2                  CONFB(P_SW2, 2, UART_PortPin);
+  44   2                  break;
+  45   2              default:
+  46   2                  break;
+  47   2          }
+  48   1      }
+  49          
+  50          /*****************************************************************************/
+  51          /** 
+  52           * \author      Weilun Fong
+  53           * \author      Xiaoyu Ren
+  54           * \date        
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 2   
+
+  55           * \brief       enable or disable interrupt of UART
+  56           * \param[in]   uart: expected uart
+  57           * \param[in]   a: expected state
+  58           * \return      none
+  59           * \ingroup     UART
+  60           * \remarks     
+  61          ******************************************************************************/
+  62          void UART_INT_cmd(UART_Port_t uart, Action a)
+  63          {
+  64   1          switch (uart)
+  65   1          {
+  66   2              case PERIPH_UART1:
+  67   2                  ES = a;
+  68   2                  break;
+  69   2              case PERIPH_UART2:
+  70   2                  CONFB(IE2, BIT_NUM_IE2_ES2, a);
+  71   2                  break;
+  72   2              case PERIPH_UART3:
+  73   2                  CONFB(IE2, BIT_NUM_IE2_ES3, a);
+  74   2                  break;
+  75   2              case PERIPH_UART4:
+  76   2                  CONFB(IE2, BIT_NUM_IE2_ES4, a);
+  77   2                  break;
+  78   2              default:
+  79   2                  break;
+  80   2          }
+  81   1          
+  82   1      }
+  83          
+  84          /*****************************************************************************/
+  85          /** 
+  86           * \author      Weilun Fong
+  87           * \author      Xiaoyu Ren
+  88           * \date        
+  89           * \brief       configure interrupt priority class of UART
+  90           * \param[in]   uart: expected uart
+  91           * \param[in]   p: expected interrupt priority class
+  92           * \return      none
+  93           * \ingroup     UART
+  94           * \remarks     
+  95          ******************************************************************************/
+  96          void UART_INT_setPriority(UART_Port_t uart, UTIL_interruptPriority p)
+  97          {
+  98   1          switch (uart)
+  99   1          {
+ 100   2              case PERIPH_UART1:
+ 101   2                  PS = TESTB(p, 0);
+ 102   2                  CONFB(IPH, BIT_NUM_PSH, TESTB(p, 1));
+ 103   2                  break;
+ 104   2              case PERIPH_UART2:
+ 105   2                  CONFB(IP2, BIT_NUM_PS2, TESTB(p, 0));
+ 106   2                  CONFB(IP2H, BIT_NUM_PS2H, TESTB(p, 1));
+ 107   2                  break;
+ 108   2              case PERIPH_UART3:
+ 109   2                  CONFB(IP3, BIT_NUM_PS3, TESTB(p, 0));
+ 110   2                  CONFB(IP3H, BIT_NUM_PS3H, TESTB(p, 1));
+ 111   2                  break;
+ 112   2              case PERIPH_UART4:
+ 113   2                  CONFB(IP3, BIT_NUM_PS4, TESTB(p, 0));
+ 114   2                  CONFB(IP3H, BIT_NUM_PS4H, TESTB(p, 1));
+ 115   2                  break;
+ 116   2              default:
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 3   
+
+ 117   2                  break;
+ 118   2          }
+ 119   1          
+ 120   1         
+ 121   1      }
+ 122          
+ 123          
+ 124          /*****************************************************************************/
+ 125          /** 
+ 126           * \author      Jiabin Hsu
+ 127           * \author      Xiaoyu Ren
+ 128           * \date        
+ 129           * \brief       select a timer as baudrate generator
+ 130           * \param[in]   uart: expected uart
+ 131           * \param[in]   tim: target timer
+ 132           * \return      none
+ 133           * \ingroup     UART
+ 134           * \remarks     when parameter uart = PERIPH_UART1, parameter tim must be PERIPH_TIM_1 or PERIPH_TIM_2
+ 135           *              when parameter uart = PERIPH_UART2, parameter tim must be PERIPH_TIM_2
+ 136           *              when parameter uart = PERIPH_UART3, parameter tim must be PERIPH_TIM_2 or PERIPH_TIM_3
+ 137           *              when parameter uart = PERIPH_UART4, parameter tim must be PERIPH_TIM_2 or PERIPH_TIM_4
+ 138          ******************************************************************************/
+ 139          void UART_switchTim(UART_Port_t uart, PERIPH_TIM tim)
+ 140          {
+ 141   1          switch (uart)
+ 142   1          {
+ 143   2              case PERIPH_UART1:
+ 144   2                  if (tim == PERIPH_TIM_1)
+ 145   2                  {
+ 146   3                      CONFB(AUXR, BIT_NUM_S1ST2, 0);
+ 147   3                  }
+ 148   2                  else if (tim == PERIPH_TIM_2)
+ 149   2                  {
+ 150   3                      CONFB(AUXR, BIT_NUM_S1ST2, 1);
+ 151   3                  }
+ 152   2                  break;
+ 153   2              case PERIPH_UART2:
+ 154   2                  break;
+ 155   2              case PERIPH_UART3:
+ 156   2                  if (tim == PERIPH_TIM_2)
+ 157   2                  {
+ 158   3                      CONFB(S3CON, BIT_NUM_S3CON_S3ST3, 0);
+ 159   3                  }
+ 160   2                  else if (tim == PERIPH_TIM_3)
+ 161   2                  {
+ 162   3                      CONFB(S3CON, BIT_NUM_S3CON_S3ST3, 1);
+ 163   3                  }
+ 164   2                  break;
+ 165   2              case PERIPH_UART4:
+ 166   2                  if (tim == PERIPH_TIM_2)
+ 167   2                  {
+ 168   3                      CONFB(S4CON, BIT_NUM_S4CON_S4ST4, 0);
+ 169   3                  }
+ 170   2                  else if (tim == PERIPH_TIM_4)
+ 171   2                  {
+ 172   3                      CONFB(S4CON, BIT_NUM_S4CON_S4ST4, 1);
+ 173   3                  }
+ 174   2                  break;
+ 175   2              default:
+ 176   2                  break;
+ 177   2          }
+ 178   1      
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 4   
+
+ 179   1      }
+ 180          
+ 181          /*****************************************************************************/
+ 182          /** 
+ 183           * \author      Weilun Fong
+ 184           * \author      Xiaoyu Ren
+ 185           * \date        
+ 186           * \brief       set work mode of UART module
+ 187           * \param[in]   uart: expected uart
+ 188           * \param[in]   mode: expected work mode
+ 189           * \return      none
+ 190           * \ingroup     UART
+ 191           * \remarks     
+ 192          ******************************************************************************/
+ 193          void UART_setMode(UART_Port_t uart, uint8_t mode)
+ 194          {
+ 195   1          switch (uart)
+ 196   1          {
+ 197   2              case PERIPH_UART1:
+ 198   2                  SCON = (SCON & 0x3F) | ((uint8_t)mode << 0x6);
+ 199   2                  break;
+ 200   2              case PERIPH_UART2:
+ 201   2                  CONFB(S2CON, BIT_NUM_S2CON_S2SM0, mode);
+ 202   2                  break;
+ 203   2              case PERIPH_UART3:
+ 204   2                  CONFB(S3CON, BIT_NUM_S3CON_S3SM0, mode);
+ 205   2                  break;
+ 206   2              case PERIPH_UART4:
+ 207   2                  CONFB(S4CON, BIT_NUM_S4CON_S4SM0, mode);
+ 208   2                  break;
+ 209   2              default:
+ 210   2                  break;
+ 211   2          }
+ 212   1          
+ 213   1      }
+ 214          
+ 215          /*****************************************************************************/
+ 216          /** 
+ 217           * \author      Weilun Fong
+ 218           * \author      Xiaoyu Ren
+ 219           * \date        
+ 220           * \brief       enable or disable receive function
+ 221           * \param[in]   uart: expected uart
+ 222           * \param[in]   a: expected state
+ 223           * \return      none
+ 224           * \ingroup     UART
+ 225           * \remarks     
+ 226          ******************************************************************************/
+ 227          void UART_cmd_receive(UART_Port_t uart, Action a)
+ 228          {
+ 229   1          switch (uart)
+ 230   1          {
+ 231   2              case PERIPH_UART1:
+ 232   2                  REN = a;
+ 233   2                  break;
+ 234   2              case PERIPH_UART2:
+ 235   2                  CONFB(S2CON, BIT_NUM_S2CON_S2REN, a);
+ 236   2                  break;
+ 237   2              case PERIPH_UART3:
+ 238   2                  CONFB(S3CON, BIT_NUM_S3CON_S3REN, a);
+ 239   2                  break;
+ 240   2              case PERIPH_UART4:
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 5   
+
+ 241   2                  CONFB(S4CON, BIT_NUM_S4CON_S4REN, a);
+ 242   2                  break;
+ 243   2              default:
+ 244   2                  break;
+ 245   2          }
+ 246   1          
+ 247   1      }
+ 248          
+ 249          
+ 250          
+ 251          /*****************************************************************************/
+ 252          /** 
+ 253           * \author      Weilun Fong
+ 254           * \author      Xiaoyu Ren
+ 255           * \date        
+ 256           * \brief       enable or disable multi-baudrate mode
+ 257           * \param[in]   uart: expected uart
+ 258           * \param[in]   a: expected state
+ 259           * \return      none
+ 260           * \ingroup     UART
+ 261           * \remarks     
+ 262          ******************************************************************************/
+ 263          void UART_cmd_multiBaudrate(UART_Port_t uart, Action a)
+ 264          {
+ 265   1          switch (uart)
+ 266   1          {
+ 267   2              case PERIPH_UART1:
+ 268   2                  CONFB(PCON, BIT_NUM_SMOD, a);
+ 269   2                  break;
+ 270   2              default:
+ 271   2                  break;
+ 272   2          }
+ 273   1          
+ 274   1      }
+ 275          
+ 276          
+ 277          
+ 278          /*****************************************************************************/
+ 279          /** 
+ 280           * \author      Jiabin Hsu
+ 281           * \author      Xiaoyu Ren
+ 282           * \date        
+ 283           * \brief       configure UART module
+ 284           * \param[in]   uc: the pointer of configuration struct
+ 285           * \return      none
+ 286           * \ingroup     UART
+ 287           * \remarks     
+ 288          ******************************************************************************/
+ 289          void UART_config(UART_configTypeDef *uc)
+ 290          {
+ 291   1          TIM_configTypeDef  tc;
+ 292   1          TIM2_configTypeDef tc2;
+ 293   1      
+ 294   1          UART_INT_cmd(uc->uart, uc->interruptState);
+ 295   1          UART_INT_setPriority(uc->uart, uc->interruptPriority);
+ 296   1          UART_cmd_multiBaudrate(uc->uart, uc->multiBaudrate);
+ 297   1          UART_setMode(uc->uart, uc->mode);
+ 298   1          UART_cmd_receive(uc->uart, uc->receiveState);
+ 299   1          UART_switchTim(uc->uart, uc->baudGenerator);
+ 300   1          UART_switchPort(uc->uart, uc->portPin);
+ 301   1      
+ 302   1          switch (uc->baudGenerator)
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 6   
+
+ 303   1          {
+ 304   2              case PERIPH_TIM_1:
+ 305   2              {
+ 306   3                  tc.function             = TIM_function_tim;     // timer 
+ 307   3                  tc.interruptState       = DISABLE;                  
+ 308   3                  tc.interruptPriority    = DISABLE;
+ 309   3                  tc.mode                 = TIM_mode_0;           // use mode 0 
+ 310   3                  tc.Frequency_1T_State   = ENABLE;               // 1T
+ 311   3                  tc.value                = UART_getBaudGeneratorInitValue(uc->baudrate, PERIPH_TIM_1);
+ 312   3                  TIM_config(PERIPH_TIM_1, &tc);
+ 313   3                  TIM_cmd(PERIPH_TIM_1, ENABLE); 
+ 314   3              } break; 
+ 315   2              case PERIPH_TIM_2:
+ 316   2              case PERIPH_TIM_3:
+ 317   2              case PERIPH_TIM_4:
+ 318   2              {
+ 319   3                  tc2.function            = TIM_function_tim;
+ 320   3                  tc2.interruptState      = DISABLE;
+ 321   3                  tc2.Frequency_1T_State  = ENABLE;
+ 322   3                  tc2.PS_value = 0x00;
+ 323   3                  tc2.value               = UART_getBaudGeneratorInitValue(uc->baudrate, uc->baudGenerator);
+ 324   3                  TIM2_config(uc->baudGenerator, &tc2);
+ 325   3                  TIM2_cmd(uc->baudGenerator,ENABLE);
+ 326   3              } break;  
+ 327   2              default: break;
+ 328   2          }
+ 329   1      }
+ 330          
+ 331          
+ 332          /*****************************************************************************/
+ 333          /** 
+ 334           * \author      Weilun Fong
+ 335           * \author      Xiaoyu Ren
+ 336           * \date        
+ 337           * \brief       calculate initial value of counter inside timer
+ 338           * \param[in]   baud: expected baud rate
+ 339           * \param[in]   tim : expected baudrate generator
+ 340           * \return      initial value of baudrate generator's counter register(if the 
+ 341           *              function returns 0x0000, it means overflow)
+ 342           * \ingroup     UART
+ 343           * \remarks     
+ 344          ******************************************************************************/
+ 345          uint16_t UART_getBaudGeneratorInitValue(uint32_t baud, PERIPH_TIM tim)
+ 346          {
+ 347   1          
+ 348   1          switch (tim)
+ 349   1          {
+ 350   2              case PERIPH_TIM_1:
+ 351   2              {
+ 352   3      
+ 353   3                  if (baud > __SYSCLOCK/4)
+ 354   3                  {
+ 355   4                      return 0x0000;
+ 356   4                  }
+ 357   3                  else
+ 358   3                  {
+ 359   4                      return (65536 - __SYSCLOCK/4/baud);
+ 360   4                  }
+ 361   3                
+ 362   3              } break;
+ 363   2              case PERIPH_TIM_2:
+ 364   2              case PERIPH_TIM_3:
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 7   
+
+ 365   2              case PERIPH_TIM_4:
+ 366   2              {
+ 367   3                  return ((65536 - (__SYSCLOCK/4/baud)));
+ 368   3              } break;
+ 369   2              default: break;
+ 370   2          }
+ 371   1      
+ 372   1      }
+ 373          
+ 374          
+ 375          
+ 376          /*****************************************************************************/
+ 377          /** 
+ 378           * \author      Weilun Fong
+ 379           * \author      Xiaoyu Ren
+ 380           * \date        2023/04/22
+ 381           * \brief       get result of UART receiver
+ 382           * \param[in]   uart: expected uart
+ 383           * \return      none
+ 384           * \ingroup     UART
+ 385           * \remarks     
+ 386          ******************************************************************************/
+ 387          byte UART_getByte(UART_Port_t uart)
+ 388          {
+ 389   1          switch (uart)
+ 390   1          {
+ 391   2              case PERIPH_UART1:
+ 392   2                  return SBUF;
+ 393   2                  break;
+ 394   2              case PERIPH_UART2:
+ 395   2                  return S2BUF;
+ 396   2                  break;
+ 397   2              case PERIPH_UART3:
+ 398   2                  return S3BUF;
+ 399   2                  break;
+ 400   2              case PERIPH_UART4:
+ 401   2                  return S4BUF;
+ 402   2                  break;
+ 403   2              default:
+ 404   2                  break;
+ 405   2          }
+ 406   1          
+ 407   1      }
+ 408          
+ 409          
+ 410          /*****************************************************************************/
+ 411          /** 
+ 412           * \author      Weilun Fong
+ 413           * \author      Xiaoyu Ren
+ 414           * \date        2023/04/22
+ 415           * \brief       check if UART module has received one byte of data or not
+ 416           * \param[in]   uart: expected uart
+ 417           * \return      value of bit TI
+ 418           * \ingroup     UART
+ 419           * \remarks     
+ 420          ******************************************************************************/
+ 421          FunctionalState UART_isReceived(UART_Port_t uart)
+ 422          {
+ 423   1          switch (uart)
+ 424   1          {
+ 425   2              case PERIPH_UART1:
+ 426   2                  return (FunctionalState)RI;
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 8   
+
+ 427   2                  break;
+ 428   2              case PERIPH_UART2:
+ 429   2                  return (FunctionalState)GET_BIT(S2CON,BIT_NUM_S2CON_S2RI);
+ 430   2                  break;
+ 431   2              case PERIPH_UART3:
+ 432   2                  return (FunctionalState)GET_BIT(S3CON,BIT_NUM_S3CON_S3RI);
+ 433   2                  break;
+ 434   2              case PERIPH_UART4:
+ 435   2                  return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4RI);
+ 436   2                  break;
+ 437   2              default:
+ 438   2                  break;
+ 439   2          }
+ 440   1          
+ 441   1      }
+ 442          
+ 443          /*****************************************************************************/
+ 444          /** 
+ 445           * \author      Weilun Fong
+ 446           * \author      Xiaoyu Ren
+ 447           * \date        2023/04/22
+ 448           * \brief       check if UART module has transmitted one byte of data or not
+ 449           * \param[in]   uart: expected uart
+ 450           * \return      value of bit RI
+ 451           * \ingroup     UART
+ 452           * \remarks     
+ 453          ******************************************************************************/
+ 454          FunctionalState UART_isTransmitted(UART_Port_t uart)
+ 455          {
+ 456   1          switch (uart)
+ 457   1          {
+ 458   2              case PERIPH_UART1:
+ 459   2                  return (FunctionalState)TI;
+ 460   2                  break;
+ 461   2              case PERIPH_UART2:
+ 462   2                  return (FunctionalState)GET_BIT(S2CON,BIT_NUM_S2CON_S2TI);
+ 463   2                  break;
+ 464   2              case PERIPH_UART3:
+ 465   2                  return (FunctionalState)GET_BIT(S3CON,BIT_NUM_S3CON_S3TI);
+ 466   2                  break;
+ 467   2              case PERIPH_UART4:
+ 468   2                  return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4TI);
+ 469   2                  break;
+ 470   2              default:
+ 471   2                  break;
+ 472   2          }
+ 473   1          
+ 474   1      }
+ 475          
+ 476          /*****************************************************************************/
+ 477          /** 
+ 478           * \author      Weilun Fong
+ 479           * \author      Xiaoyu Ren
+ 480           * \date        2023/04/22
+ 481           * \brief       send one byte of data via UART
+ 482           * \param[in]   uart: expected uart
+ 483           * \param[in]   dat: expected byte data
+ 484           * \return      none
+ 485           * \ingroup     UART
+ 486           * \remarks     
+ 487          ******************************************************************************/
+ 488          void UART_sendByte(UART_Port_t uart, byte dat)
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 9   
+
+ 489          {
+ 490   1          switch (uart)
+ 491   1          {
+ 492   2              case PERIPH_UART1:
+ 493   2                  SBUF = dat;
+ 494   2                  while (!TI);
+ 495   2                  TI = RESET;
+ 496   2                  break;
+ 497   2              case PERIPH_UART2:
+ 498   2                  S2BUF = dat;
+ 499   2                  while (!GET_BIT(S2CON,BIT_NUM_S2CON_S2TI));
+ 500   2                  CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2TI);
+ 501   2                  break;
+ 502   2              case PERIPH_UART3:
+ 503   2                  S3BUF = dat;
+ 504   2                  while (!GET_BIT(S3CON,BIT_NUM_S3CON_S3TI));
+ 505   2                  CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3TI);
+ 506   2                  break;
+ 507   2              case PERIPH_UART4:
+ 508   2                  S4BUF = dat;
+ 509   2                  while (!GET_BIT(S4CON,BIT_NUM_S4CON_S4TI));
+ 510   2                  CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4TI);
+ 511   2                  break;
+ 512   2              default:
+ 513   2                  break;
+ 514   2          }
+ 515   1         
+ 516   1      }
+ 517          
+ 518          /*****************************************************************************/
+ 519          /** 
+ 520           * \author      Weilun Fong
+ 521           * \author      Xiaoyu Ren
+ 522           * \date        2023/04/22
+ 523           * \brief       output a hex number with character format via UART
+ 524           * \param[in]   uart: expected uart
+ 525           * \param[in]   hex: expected hex number(range: 0x0 ~ 0xF)
+ 526           * \return      none
+ 527           * \ingroup     UART
+ 528           * \remarks     
+ 529          ******************************************************************************/
+ 530          void UART_sendHex(UART_Port_t uart, uint8_t hex)
+ 531          {
+ 532   1          UART_sendByte(uart, hexTable[hex >> 0x4]);
+ 533   1          UART_sendByte(uart, hexTable[hex & 0xF]);
+ 534   1      }
+ 535          
+ 536          /*****************************************************************************/
+ 537          /** 
+ 538           * \author      Weilun Fong
+ 539           * \author      Xiaoyu Ren
+ 540           * \date        2023/04/22
+ 541           * \brief       send string via UART
+ 542           * \param[in]   uart: expected uart
+ 543           * \param[in]   str: pointer to target string
+ 544           * \return      none
+ 545           * \ingroup     UART
+ 546           * \remarks     the string must be end with '\0'
+ 547          ******************************************************************************/
+ 548          void UART_sendString(UART_Port_t uart, char *str)
+ 549          {
+ 550   1          switch (uart)
+C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 10  
+
+ 551   1          {
+ 552   2              case PERIPH_UART1:
+ 553   2                  while (*str != '\0')
+ 554   2                  {
+ 555   3                      SBUF = *str;
+ 556   3                      while (!TI);
+ 557   3                      TI = RESET;          /* reset flag */
+ 558   3                      str++;
+ 559   3                  }
+ 560   2                  break;
+ 561   2              case PERIPH_UART2:
+ 562   2                  while (*str != '\0')
+ 563   2                  {
+ 564   3                      S2BUF = *str;
+ 565   3                      while (!GET_BIT(S2CON,BIT_NUM_S2CON_S2TI));
+ 566   3                      CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2TI);
+ 567   3                      str++;
+ 568   3                  }
+ 569   2                  break;
+ 570   2              case PERIPH_UART3:
+ 571   2                  while (*str != '\0')
+ 572   2                  {
+ 573   3                      S3BUF = *str;
+ 574   3                      while (!GET_BIT(S3CON,BIT_NUM_S3CON_S3TI));
+ 575   3                      CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3TI);
+ 576   3                      str++;
+ 577   3                  }
+ 578   2                  break;
+ 579   2              case PERIPH_UART4:
+ 580   2                  while (*str != '\0')
+ 581   2                  {
+ 582   3                      S4BUF = *str;
+ 583   3                      while (!GET_BIT(S4CON,BIT_NUM_S4CON_S4TI));
+ 584   3                      CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4TI);
+ 585   3                      str++;
+ 586   3                  }
+ 587   2                  break;
+ 588   2              default:
+ 589   2                  break;
+ 590   2          }
+ 591   1          
+ 592   1      }
+ 593          
+ 594          //#endif
+ 595          
+*** WARNING C291 IN LINE 372 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
+*** WARNING C291 IN LINE 407 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
+*** WARNING C291 IN LINE 441 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
+*** WARNING C291 IN LINE 474 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   ----    ----
+   CODE SIZE        =   1210    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =     16      21
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  4 WARNING(S),  0 ERROR(S)

@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   TIM2                                                                  04/16/2023 08:44:59 PAGE 1   
+C51 COMPILER V9.01   TIM2                                                                  04/22/2023 17:25:24 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE TIM2
@@ -25,211 +25,237 @@ line level    source
   15          
   16          /*****************************************************************************/
   17          /** 
-  18           * \author      Jiabin Hsu
-  19           * \author      Xiaoyu Ren
-  20           * \date        
-  21           * \brief       calculate initial value for THx/TLx register
-  22           * \param[in]   tc: configuration struct includes all parameters
-  23           * \param[in]   time: expected timing cycle(unit: us)
-  24           * \param[in]   mode: work mode of timer
-  25           * \return      initial value of timer counter register(if return 0x0000, it 
-  26           *              means that the time has over the limit)
-  27           * \ingroup     TIM
-  28           * \remarks     
-  29          ******************************************************************************/
-  30          uint16_t TIM2_calculateValue(TIM2_configTypeDef *tc, uint16_t time)
-  31          {
-  32   1          /* machine cycle: MCU_FRE_CLK / MCU_PRESCALER */
-  33   1          uint32_t value = __SYSCLOCK;
-  34   1          uint32_t maxTick = 0xFFFF;
-  35   1      
-  36   1          if(!tc->Frequency_1T_State)
-  37   1          {
-  38   2              value = value / 12;
-  39   2          }
-  40   1      
-  41   1          value = time*(value/1000000)/(tc->PS_value+1);
-  42   1          
-  43   1          if ( value >= maxTick)
-  44   1          {
-  45   2              return 0;
-  46   2          }
-  47   1          else
-  48   1          {
-  49   2              return (maxTick + 1 - value);
-  50   2          }
-  51   1          
-  52   1      }
-  53          
-  54          /*****************************************************************************/
-C51 COMPILER V9.01   TIM2                                                                  04/16/2023 08:44:59 PAGE 2   
+  18           * \author      Xiaoyu Ren
+  19           * \date        
+  20           * \brief       calculate initial value for TxH/TxL register, x = 2, 3, 4
+  21           * \param[in]   tc: configuration struct includes all parameters
+  22           * \param[in]   time: expected timing cycle(unit: us)
+  23           * \return      initial value of timer counter register(if return 0x0000, it 
+  24           *              means that the time has over the limit)
+  25           * \ingroup     TIM2
+  26           * \remarks     just for timer2, timer3 and timer4
+  27          ******************************************************************************/
+  28          uint16_t TIM2_calculateValue(TIM2_configTypeDef *tc, uint16_t time)
+  29          {
+  30   1          /* machine cycle: MCU_FRE_CLK / MCU_PRESCALER */
+  31   1          uint32_t value = __SYSCLOCK;
+  32   1          uint32_t maxTick = 0xFFFF;
+  33   1      
+  34   1          if(!tc->Frequency_1T_State)
+  35   1          {
+  36   2              value = value / 12;
+  37   2          }
+  38   1      
+  39   1          value = time*(value/1000000)/(tc->PS_value + 1);
+  40   1          
+  41   1          if ( value >= maxTick || value <= 0)
+  42   1          {
+  43   2              return 0;
+  44   2          }
+  45   1          else
+  46   1          {
+  47   2              return (maxTick + 1 - value);
+  48   2          }
+  49   1          
+  50   1      }
+  51          
+  52          /*****************************************************************************/
+  53          /** 
+  54           * \author      Xiaoyu Ren
+C51 COMPILER V9.01   TIM2                                                                  04/22/2023 17:25:24 PAGE 2   
 
-  55          /** 
-  56           * \author      Xiaoyu Ren
-  57           * \date        
-  58           * \brief       configure target timer
-  59           * \param[in]   tim: target timer(the value must be PERIPH_TIM_2 , PERIPH_TIM_3 or PERIPH_TIM_4)
-  60           * \param[in]   tc : configuration struct includes all parameters
-  61           * \return      none
-  62           * \ingroup     TIM2
-  63           * \remarks     just for timer2, timer3 and timer4
-  64          ******************************************************************************/
-  65          void TIM2_config(PERIPH_TIM tim, TIM2_configTypeDef *tc)
-  66          {
-  67   1          TIM2_set_1T_Frequency(tim, tc->Frequency_1T_State);
-  68   1          TIM2_setFunction(tim, tc->function);
-  69   1          TIM2_set_PS_Value(tim, tc->PS_value);
-  70   1          TIM2_INT_cmd(tim,tc->interruptState);
-  71   1          TIM2_setValue(tim, tc->value);
-  72   1      }
-  73          
-  74          
-  75          /*****************************************************************************/
-  76          /** 
-  77           * \author      Xiaoyu Ren
-  78           * \date        
-  79           * \brief       configure work mode of target timer
-  80           * \param[in]   tim : target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
-  81           * \param[in]   mode: expected work mode
-  82           * \return      none
-  83           * \ingroup     TIM2
-  84           * \remarks     just for timer2, timer3 and timer4
-  85          ******************************************************************************/
-  86          void TIM2_setFunction(PERIPH_TIM tim, TIM_function mode)
-  87          {
-  88   1          switch (tim)
-  89   1          {
-  90   2              case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2CT, mode); break;
-  91   2              case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3CT, mode); break;
-  92   2              case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4CT, mode); break;
-  93   2              default: break;
-  94   2          }
-  95   1      }
-  96          
-  97          /*****************************************************************************/
-  98          /** 
-  99           * \author      Xiaoyu Ren
- 100           * \date        
- 101           * \brief       configure function(timer or counter) of target timer
- 102           * \param[in]   tim: target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
- 103           * \param[in]   f: expected function (the value must be DISABLE or ENABLE)
- 104           *                   f = DISABLE, timerSpeed =  FOSC/12
- 105           *                   f = ENABLE , timerSpeed =  FOSC
- 106           *                   Default is Disable.
- 107           * \return      none
- 108           * \ingroup     TIM2
- 109           * \remarks     just for timer2, timer3 and timer4
- 110          ******************************************************************************/
- 111          void TIM2_set_1T_Frequency(PERIPH_TIM tim, Action f)
- 112          {
- 113   1          switch (tim)
- 114   1          {
- 115   2              case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2X12, f); break;
- 116   2              case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3X12, f); break;
-C51 COMPILER V9.01   TIM2                                                                  04/16/2023 08:44:59 PAGE 3   
+  55           * \date        
+  56           * \brief       configure target timer
+  57           * \param[in]   tim: target timer(the value must be PERIPH_TIM_2 , PERIPH_TIM_3 or PERIPH_TIM_4)
+  58           * \param[in]   tc : configuration struct includes all parameters
+  59           * \return      none
+  60           * \ingroup     TIM2
+  61           * \remarks     just for timer2, timer3 and timer4
+  62          ******************************************************************************/
+  63          void TIM2_config(PERIPH_TIM tim, TIM2_configTypeDef *tc)
+  64          {
+  65   1          TIM2_set_1T_Frequency(tim, tc->Frequency_1T_State);
+  66   1          TIM2_setFunction(tim, tc->function);
+  67   1          TIM2_set_PS_Value(tim, tc->PS_value);
+  68   1          TIM2_INT_cmd(tim,tc->interruptState);
+  69   1          TIM2_setValue(tim, tc->value);
+  70   1      }
+  71          
+  72          
+  73          /*****************************************************************************/
+  74          /** 
+  75           * \author      Xiaoyu Ren
+  76           * \date        
+  77           * \brief       configure work mode of target timer
+  78           * \param[in]   tim : target timer module (the value must be PERIPH_TIM_2, PERIPH_TIM_3 or PERIPH_TIM_4)
+  79           * \param[in]   mode: expected work mode
+  80           * \return      none
+  81           * \ingroup     TIM2
+  82           * \remarks     just for timer2, timer3 and timer4
+  83          ******************************************************************************/
+  84          void TIM2_setFunction(PERIPH_TIM tim, TIM_function mode)
+  85          {
+  86   1          switch (tim)
+  87   1          {
+  88   2              case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2CT, mode); break;
+  89   2              case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3CT, mode); break;
+  90   2              case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4CT, mode); break;
+  91   2              default: break;
+  92   2          }
+  93   1      }
+  94          
+  95          /*****************************************************************************/
+  96          /** 
+  97           * \author      Xiaoyu Ren
+  98           * \date        
+  99           * \brief       configure function(timer or counter) of target timer
+ 100           * \param[in]   tim: target timer module (the value must be PERIPH_TIM_0 or PERIPH_TIM_1)
+ 101           * \param[in]   f: expected function (the value must be DISABLE or ENABLE)
+ 102           *                   f = DISABLE, timerSpeed =  FOSC/12
+ 103           *                   f = ENABLE , timerSpeed =  FOSC
+ 104           *                   Default is Disable.
+ 105           * \return      none
+ 106           * \ingroup     TIM2
+ 107           * \remarks     just for timer2, timer3 and timer4
+ 108          ******************************************************************************/
+ 109          void TIM2_set_1T_Frequency(PERIPH_TIM tim, Action f)
+ 110          {
+ 111   1          switch (tim)
+ 112   1          {
+ 113   2              case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2X12, f); break;
+ 114   2              case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3X12, f); break;
+ 115   2              case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4X12, f); break;
+ 116   2              default: break;
+C51 COMPILER V9.01   TIM2                                                                  04/22/2023 17:25:24 PAGE 3   
 
- 117   2              case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4X12, f); break;
- 118   2              default: break;
- 119   2          }
- 120   1      }
- 121          
- 122          /*****************************************************************************/
- 123          /** 
- 124           * \author      Xiaoyu Ren
- 125           * \date        
- 126           * \brief       set value of TMXPS register
- 127           * \param[in]   tim: target timer module
- 128           * \param[in]   val: expected value(range: 0x00~0xFF)
- 129           * \return      none
- 130           * \ingroup     TIM2
- 131           * \remarks     just for timer2, timer3 and timer4
- 132          ******************************************************************************/
- 133          void TIM2_set_PS_Value(PERIPH_TIM tim, uint8_t val)
- 134          {
- 135   1          switch (tim)
- 136   1          {
- 137   2              case PERIPH_TIM_2:
- 138   2              {
- 139   3                  TM2PS = val;
- 140   3              } break;
- 141   2              case PERIPH_TIM_3:
- 142   2              {
- 143   3                  TM3PS = val;
- 144   3              } break;
- 145   2              case PERIPH_TIM_4:
- 146   2              {
- 147   3                  TM4PS = val;
- 148   3              } break;
- 149   2              default:break;
- 150   2          }
- 151   1      }
- 152          
- 153          
- 154          /*****************************************************************************/
- 155          /** 
- 156           * \author      Xiaoyu Ren
- 157           * \date        
- 158           * \brief       set value of TxH/TxL register
- 159           * \param[in]   tim: target timer module
- 160           * \param[in]   val: expected value(range: 0x0000~0xFFFF)
- 161           * \return      none
- 162           * \ingroup     TIM2
- 163           * \remarks     just for timer2, timer3 and timer4
- 164          ******************************************************************************/
- 165          void TIM2_setValue(PERIPH_TIM tim, uint16_t val)
- 166          {
- 167   1          switch (tim)
- 168   1          {
- 169   2              case PERIPH_TIM_2:
- 170   2              {
- 171   3                  T2H = (uint8_t)((val >> 0x8) & 0x00FF);
- 172   3                  T2L = (uint8_t)(val & 0x00FF);
- 173   3              } break;
- 174   2              case PERIPH_TIM_3:
- 175   2              {
- 176   3                  T3H = (uint8_t)((val >> 0x8) & 0x00FF);
- 177   3                  T3L = (uint8_t)(val & 0x00FF);
- 178   3              } break;
-C51 COMPILER V9.01   TIM2                                                                  04/16/2023 08:44:59 PAGE 4   
+ 117   2          }
+ 118   1      }
+ 119          
+ 120          /*****************************************************************************/
+ 121          /** 
+ 122           * \author      Xiaoyu Ren
+ 123           * \date        
+ 124           * \brief       set value of TMXPS register
+ 125           * \param[in]   tim: target timer module
+ 126           * \param[in]   val: expected value(range: 0x00~0xFF)
+ 127           * \return      none
+ 128           * \ingroup     TIM2
+ 129           * \remarks     just for timer2, timer3 and timer4
+ 130          ******************************************************************************/
+ 131          void TIM2_set_PS_Value(PERIPH_TIM tim, uint8_t val)
+ 132          {
+ 133   1          switch (tim)
+ 134   1          {
+ 135   2              case PERIPH_TIM_2:
+ 136   2              {
+ 137   3                  TM2PS = val;
+ 138   3              } break;
+ 139   2              case PERIPH_TIM_3:
+ 140   2              {
+ 141   3                  TM3PS = val;
+ 142   3              } break;
+ 143   2              case PERIPH_TIM_4:
+ 144   2              {
+ 145   3                  TM4PS = val;
+ 146   3              } break;
+ 147   2              default:break;
+ 148   2          }
+ 149   1      }
+ 150          
+ 151          
+ 152          /*****************************************************************************/
+ 153          /** 
+ 154           * \author      Xiaoyu Ren
+ 155           * \date        
+ 156           * \brief       set value of TxH/TxL register
+ 157           * \param[in]   tim: target timer module
+ 158           * \param[in]   val: expected value(range: 0x0000~0xFFFF)
+ 159           * \return      none
+ 160           * \ingroup     TIM2
+ 161           * \remarks     just for timer2, timer3 and timer4
+ 162          ******************************************************************************/
+ 163          void TIM2_setValue(PERIPH_TIM tim, uint16_t val)
+ 164          {
+ 165   1          switch (tim)
+ 166   1          {
+ 167   2              case PERIPH_TIM_2:
+ 168   2              {
+ 169   3                  T2H = (uint8_t)((val >> 0x8) & 0x00FF);
+ 170   3                  T2L = (uint8_t)(val & 0x00FF);
+ 171   3              } break;
+ 172   2              case PERIPH_TIM_3:
+ 173   2              {
+ 174   3                  T3H = (uint8_t)((val >> 0x8) & 0x00FF);
+ 175   3                  T3L = (uint8_t)(val & 0x00FF);
+ 176   3              } break;
+ 177   2              case PERIPH_TIM_4:
+ 178   2              {
+C51 COMPILER V9.01   TIM2                                                                  04/22/2023 17:25:24 PAGE 4   
 
- 179   2              case PERIPH_TIM_4:
- 180   2              {
- 181   3                  T4H = (uint8_t)((val >> 0x8) & 0x00FF);
- 182   3                  T4L = (uint8_t)(val & 0x00FF);
- 183   3              } break;
- 184   2              default:break;
- 185   2          }
- 186   1      }
- 187          
- 188          /*****************************************************************************/
- 189          /** 
- 190           * \author      Xiaoyu Ren
- 191           * \date        
- 192           * \brief       enable or disable interrupt function of target timer
- 193           * \param[in]   tim: target timer module
- 194           * \param[in]   a  : expected state
- 195           * \return      none
- 196           * \ingroup     TIM2
- 197           * \remarks     just for timer2, timer3 and timer4
- 198          ******************************************************************************/
- 199          void TIM2_INT_cmd(PERIPH_TIM tim, Action a)
- 200          {
- 201   1          switch (tim)
- 202   1          {
- 203   2              case PERIPH_TIM_2: CONFB(IE2, BIT_NUM_IE2_ET2, a); break;
- 204   2              case PERIPH_TIM_3: CONFB(IE2, BIT_NUM_IE2_ET3, a); break;
- 205   2              case PERIPH_TIM_4: CONFB(IE2, BIT_NUM_IE2_ET4, a); break;
- 206   2              default: break;
- 207   2          }
- 208   1      }
- 209          
+ 179   3                  T4H = (uint8_t)((val >> 0x8) & 0x00FF);
+ 180   3                  T4L = (uint8_t)(val & 0x00FF);
+ 181   3              } break;
+ 182   2              default:break;
+ 183   2          }
+ 184   1      }
+ 185          
+ 186          /*****************************************************************************/
+ 187          /** 
+ 188           * \author      Xiaoyu Ren
+ 189           * \date        
+ 190           * \brief       enable or disable interrupt function of target timer
+ 191           * \param[in]   tim: target timer module
+ 192           * \param[in]   a  : expected state
+ 193           * \return      none
+ 194           * \ingroup     TIM2
+ 195           * \remarks     just for timer2, timer3 and timer4
+ 196          ******************************************************************************/
+ 197          void TIM2_INT_cmd(PERIPH_TIM tim, Action a)
+ 198          {
+ 199   1          switch (tim)
+ 200   1          {
+ 201   2              case PERIPH_TIM_2: CONFB(IE2, BIT_NUM_IE2_ET2, a); break;
+ 202   2              case PERIPH_TIM_3: CONFB(IE2, BIT_NUM_IE2_ET3, a); break;
+ 203   2              case PERIPH_TIM_4: CONFB(IE2, BIT_NUM_IE2_ET4, a); break;
+ 204   2              default: break;
+ 205   2          }
+ 206   1      }
+ 207          
+ 208          
+ 209          /*****************************************************************************/
+ 210          /** 
+ 211           * \author      Jiabin Hsu
+ 212           * \author      Xiaoyu Ren
+ 213           * \date        
+ 214           * \brief       enable or disable timer-2
+ 215           * \param[in]   tim: target timer module
+ 216           * \param[in]   a: expected state
+ 217           * \return      none
+ 218           * \ingroup     TIM2
+ 219           * \remarks     
+ 220          ******************************************************************************/
+ 221          void TIM2_cmd(PERIPH_TIM tim, Action a)
+ 222          {
+ 223   1          switch (tim)
+ 224   1          {
+ 225   2              case PERIPH_TIM_2: CONFB(AUXR, BIT_NUM_T2R, a); break;
+ 226   2              case PERIPH_TIM_3: CONFB(T4T3M, BIT_NUM_T4T3M_T3R, a); break;
+ 227   2              case PERIPH_TIM_4: CONFB(T4T3M, BIT_NUM_T4T3M_T4R, a); break;
+ 228   2              default: break;
+ 229   2          }
+ 230   1          
+ 231   1      }
+ 232          
+ 233          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    493    ----
+   CODE SIZE        =    559    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   TIM2                                                                  04/22/2023 17:25:24 PAGE 5   
+
    DATA SIZE        =   ----      17
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----

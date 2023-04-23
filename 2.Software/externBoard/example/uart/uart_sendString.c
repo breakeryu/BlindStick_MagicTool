@@ -66,7 +66,7 @@ void main(void)
     {
         /* send per 500ms */
         Delay(500);
-        UART_sendString("H\r\n");
+        UART_sendString(PERIPH_UART1,"H\r\n");
     }
 }
 
