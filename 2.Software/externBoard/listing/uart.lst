@@ -1,4 +1,4 @@
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 1   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 1   
 
 
 C51 COMPILER V9.01, COMPILATION OF MODULE UART
@@ -62,7 +62,7 @@ line level    source
   52           * \author      Weilun Fong
   53           * \author      Xiaoyu Ren
   54           * \date        
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 2   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 2   
 
   55           * \brief       enable or disable interrupt of UART
   56           * \param[in]   uart: expected uart
@@ -126,7 +126,7 @@ line level    source
  114   2                  CONFB(IP3H, BIT_NUM_PS4H, TESTB(p, 1));
  115   2                  break;
  116   2              default:
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 3   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 3   
 
  117   2                  break;
  118   2          }
@@ -190,7 +190,7 @@ line level    source
  176   2                  break;
  177   2          }
  178   1      
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 4   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 4   
 
  179   1      }
  180          
@@ -254,7 +254,7 @@ line level    source
  238   2                  CONFB(S3CON, BIT_NUM_S3CON_S3REN, a);
  239   2                  break;
  240   2              case PERIPH_UART4:
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 5   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 5   
 
  241   2                  CONFB(S4CON, BIT_NUM_S4CON_S4REN, a);
  242   2                  break;
@@ -318,7 +318,7 @@ line level    source
  300   1          UART_switchPort(uc->uart, uc->portPin);
  301   1      
  302   1          switch (uc->baudGenerator)
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 6   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 6   
 
  303   1          {
  304   2              case PERIPH_TIM_1:
@@ -382,13 +382,13 @@ line level    source
  362   3              } break;
  363   2              case PERIPH_TIM_2:
  364   2              case PERIPH_TIM_3:
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 7   
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 7   
 
  365   2              case PERIPH_TIM_4:
  366   2              {
  367   3                  return ((65536 - (__SYSCLOCK/4/baud)));
  368   3              } break;
- 369   2              default: break;
+ 369   2              default: return 0; break;
  370   2          }
  371   1      
  372   1      }
@@ -423,78 +423,78 @@ line level    source
  401   2                  return S4BUF;
  402   2                  break;
  403   2              default:
- 404   2                  break;
- 405   2          }
- 406   1          
- 407   1      }
- 408          
+ 404   2                  return 0;
+ 405   2                  break;
+ 406   2          }
+ 407   1          
+ 408   1      }
  409          
- 410          /*****************************************************************************/
- 411          /** 
- 412           * \author      Weilun Fong
- 413           * \author      Xiaoyu Ren
- 414           * \date        2023/04/22
- 415           * \brief       check if UART module has received one byte of data or not
- 416           * \param[in]   uart: expected uart
- 417           * \return      value of bit TI
- 418           * \ingroup     UART
- 419           * \remarks     
- 420          ******************************************************************************/
- 421          FunctionalState UART_isReceived(UART_Port_t uart)
- 422          {
- 423   1          switch (uart)
- 424   1          {
- 425   2              case PERIPH_UART1:
- 426   2                  return (FunctionalState)RI;
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 8   
+ 410          
+ 411          /*****************************************************************************/
+ 412          /** 
+ 413           * \author      Weilun Fong
+ 414           * \author      Xiaoyu Ren
+ 415           * \date        2023/04/22
+ 416           * \brief       check if UART module has received one byte of data or not
+ 417           * \param[in]   uart: expected uart
+ 418           * \return      value of bit TI
+ 419           * \ingroup     UART
+ 420           * \remarks     
+ 421          ******************************************************************************/
+ 422          FunctionalState UART_isReceived(UART_Port_t uart)
+ 423          {
+ 424   1          switch (uart)
+ 425   1          {
+ 426   2              case PERIPH_UART1:
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 8   
 
- 427   2                  break;
- 428   2              case PERIPH_UART2:
- 429   2                  return (FunctionalState)GET_BIT(S2CON,BIT_NUM_S2CON_S2RI);
- 430   2                  break;
- 431   2              case PERIPH_UART3:
- 432   2                  return (FunctionalState)GET_BIT(S3CON,BIT_NUM_S3CON_S3RI);
- 433   2                  break;
- 434   2              case PERIPH_UART4:
- 435   2                  return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4RI);
- 436   2                  break;
- 437   2              default:
- 438   2                  break;
- 439   2          }
- 440   1          
- 441   1      }
- 442          
- 443          /*****************************************************************************/
- 444          /** 
- 445           * \author      Weilun Fong
- 446           * \author      Xiaoyu Ren
- 447           * \date        2023/04/22
- 448           * \brief       check if UART module has transmitted one byte of data or not
- 449           * \param[in]   uart: expected uart
- 450           * \return      value of bit RI
- 451           * \ingroup     UART
- 452           * \remarks     
- 453          ******************************************************************************/
- 454          FunctionalState UART_isTransmitted(UART_Port_t uart)
- 455          {
- 456   1          switch (uart)
- 457   1          {
- 458   2              case PERIPH_UART1:
- 459   2                  return (FunctionalState)TI;
- 460   2                  break;
- 461   2              case PERIPH_UART2:
- 462   2                  return (FunctionalState)GET_BIT(S2CON,BIT_NUM_S2CON_S2TI);
- 463   2                  break;
- 464   2              case PERIPH_UART3:
- 465   2                  return (FunctionalState)GET_BIT(S3CON,BIT_NUM_S3CON_S3TI);
- 466   2                  break;
- 467   2              case PERIPH_UART4:
- 468   2                  return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4TI);
- 469   2                  break;
- 470   2              default:
- 471   2                  break;
- 472   2          }
- 473   1          
+ 427   2                  return (FunctionalState)RI;
+ 428   2                  break;
+ 429   2              case PERIPH_UART2:
+ 430   2                  return (FunctionalState)GET_BIT(S2CON,BIT_NUM_S2CON_S2RI);
+ 431   2                  break;
+ 432   2              case PERIPH_UART3:
+ 433   2                  return (FunctionalState)GET_BIT(S3CON,BIT_NUM_S3CON_S3RI);
+ 434   2                  break;
+ 435   2              case PERIPH_UART4:
+ 436   2                  return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4RI);
+ 437   2                  break;
+ 438   2              default:
+ 439   2                  return 0;
+ 440   2                  break;
+ 441   2          }
+ 442   1          
+ 443   1      }
+ 444          
+ 445          /*****************************************************************************/
+ 446          /** 
+ 447           * \author      Xiaoyu Ren
+ 448           * \date        2023/04/24
+ 449           * \brief       Clear Receive Flag after Interrupt
+ 450           * \param[in]   uart: expected uart
+ 451           * \return      
+ 452           * \ingroup     UART
+ 453           * \remarks     
+ 454          ******************************************************************************/
+ 455          void UART_clearReceiveFlag(UART_Port_t uart)
+ 456          {
+ 457   1          switch (uart)
+ 458   1          {
+ 459   2              case PERIPH_UART1:
+ 460   2                  RI = RESET;
+ 461   2                  break;
+ 462   2              case PERIPH_UART2:
+ 463   2                  CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2RI);
+ 464   2                  break;
+ 465   2              case PERIPH_UART3:
+ 466   2                  CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3RI);
+ 467   2                  break;
+ 468   2              case PERIPH_UART4:
+ 469   2                  CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4RI);
+ 470   2                  break;
+ 471   2              default:
+ 472   2                  break;
+ 473   2          }
  474   1      }
  475          
  476          /*****************************************************************************/
@@ -502,133 +502,165 @@ line level    source
  478           * \author      Weilun Fong
  479           * \author      Xiaoyu Ren
  480           * \date        2023/04/22
- 481           * \brief       send one byte of data via UART
+ 481           * \brief       check if UART module has transmitted one byte of data or not
  482           * \param[in]   uart: expected uart
- 483           * \param[in]   dat: expected byte data
- 484           * \return      none
- 485           * \ingroup     UART
- 486           * \remarks     
- 487          ******************************************************************************/
- 488          void UART_sendByte(UART_Port_t uart, byte dat)
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 9   
+ 483           * \return      value of bit RI
+ 484           * \ingroup     UART
+ 485           * \remarks     
+ 486          ******************************************************************************/
+ 487          FunctionalState UART_isTransmitted(UART_Port_t uart)
+ 488          {
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 9   
 
- 489          {
- 490   1          switch (uart)
- 491   1          {
- 492   2              case PERIPH_UART1:
- 493   2                  SBUF = dat;
- 494   2                  while (!TI);
- 495   2                  TI = RESET;
+ 489   1          switch (uart)
+ 490   1          {
+ 491   2              case PERIPH_UART1:
+ 492   2                  return (FunctionalState)TI;
+ 493   2                  break;
+ 494   2              case PERIPH_UART2:
+ 495   2                  return (FunctionalState)GET_BIT(S2CON,BIT_NUM_S2CON_S2TI);
  496   2                  break;
- 497   2              case PERIPH_UART2:
- 498   2                  S2BUF = dat;
- 499   2                  while (!GET_BIT(S2CON,BIT_NUM_S2CON_S2TI));
- 500   2                  CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2TI);
- 501   2                  break;
- 502   2              case PERIPH_UART3:
- 503   2                  S3BUF = dat;
- 504   2                  while (!GET_BIT(S3CON,BIT_NUM_S3CON_S3TI));
- 505   2                  CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3TI);
- 506   2                  break;
- 507   2              case PERIPH_UART4:
- 508   2                  S4BUF = dat;
- 509   2                  while (!GET_BIT(S4CON,BIT_NUM_S4CON_S4TI));
- 510   2                  CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4TI);
- 511   2                  break;
- 512   2              default:
- 513   2                  break;
- 514   2          }
- 515   1         
- 516   1      }
- 517          
- 518          /*****************************************************************************/
- 519          /** 
- 520           * \author      Weilun Fong
- 521           * \author      Xiaoyu Ren
- 522           * \date        2023/04/22
- 523           * \brief       output a hex number with character format via UART
- 524           * \param[in]   uart: expected uart
- 525           * \param[in]   hex: expected hex number(range: 0x0 ~ 0xF)
- 526           * \return      none
- 527           * \ingroup     UART
- 528           * \remarks     
- 529          ******************************************************************************/
- 530          void UART_sendHex(UART_Port_t uart, uint8_t hex)
- 531          {
- 532   1          UART_sendByte(uart, hexTable[hex >> 0x4]);
- 533   1          UART_sendByte(uart, hexTable[hex & 0xF]);
- 534   1      }
- 535          
- 536          /*****************************************************************************/
- 537          /** 
- 538           * \author      Weilun Fong
- 539           * \author      Xiaoyu Ren
- 540           * \date        2023/04/22
- 541           * \brief       send string via UART
- 542           * \param[in]   uart: expected uart
- 543           * \param[in]   str: pointer to target string
- 544           * \return      none
- 545           * \ingroup     UART
- 546           * \remarks     the string must be end with '\0'
- 547          ******************************************************************************/
- 548          void UART_sendString(UART_Port_t uart, char *str)
- 549          {
- 550   1          switch (uart)
-C51 COMPILER V9.01   UART                                                                  04/22/2023 17:23:14 PAGE 10  
+ 497   2              case PERIPH_UART3:
+ 498   2                  return (FunctionalState)GET_BIT(S3CON,BIT_NUM_S3CON_S3TI);
+ 499   2                  break;
+ 500   2              case PERIPH_UART4:
+ 501   2                  return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4TI);
+ 502   2                  break;
+ 503   2              default:
+ 504   2                  return 0;
+ 505   2                  break;
+ 506   2          }
+ 507   1          
+ 508   1      }
+ 509          
+ 510          /*****************************************************************************/
+ 511          /** 
+ 512           * \author      Weilun Fong
+ 513           * \author      Xiaoyu Ren
+ 514           * \date        2023/04/22
+ 515           * \brief       send one byte of data via UART
+ 516           * \param[in]   uart: expected uart
+ 517           * \param[in]   dat: expected byte data
+ 518           * \return      none
+ 519           * \ingroup     UART
+ 520           * \remarks     
+ 521          ******************************************************************************/
+ 522          void UART_sendByte(UART_Port_t uart, byte dat)
+ 523          {
+ 524   1          switch (uart)
+ 525   1          {
+ 526   2              case PERIPH_UART1:
+ 527   2                  SBUF = dat;
+ 528   2                  while (!TI);
+ 529   2                  TI = RESET;
+ 530   2                  break;
+ 531   2              case PERIPH_UART2:
+ 532   2                  S2BUF = dat;
+ 533   2                  while (!GET_BIT(S2CON,BIT_NUM_S2CON_S2TI));
+ 534   2                  CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2TI);
+ 535   2                  break;
+ 536   2              case PERIPH_UART3:
+ 537   2                  S3BUF = dat;
+ 538   2                  while (!GET_BIT(S3CON,BIT_NUM_S3CON_S3TI));
+ 539   2                  CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3TI);
+ 540   2                  break;
+ 541   2              case PERIPH_UART4:
+ 542   2                  S4BUF = dat;
+ 543   2                  while (!GET_BIT(S4CON,BIT_NUM_S4CON_S4TI));
+ 544   2                  CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4TI);
+ 545   2                  break;
+ 546   2              default:
+ 547   2                  break;
+ 548   2          }
+ 549   1         
+ 550   1      }
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 10  
 
- 551   1          {
- 552   2              case PERIPH_UART1:
- 553   2                  while (*str != '\0')
- 554   2                  {
- 555   3                      SBUF = *str;
- 556   3                      while (!TI);
- 557   3                      TI = RESET;          /* reset flag */
- 558   3                      str++;
- 559   3                  }
- 560   2                  break;
- 561   2              case PERIPH_UART2:
- 562   2                  while (*str != '\0')
- 563   2                  {
- 564   3                      S2BUF = *str;
- 565   3                      while (!GET_BIT(S2CON,BIT_NUM_S2CON_S2TI));
- 566   3                      CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2TI);
- 567   3                      str++;
- 568   3                  }
- 569   2                  break;
- 570   2              case PERIPH_UART3:
- 571   2                  while (*str != '\0')
- 572   2                  {
- 573   3                      S3BUF = *str;
- 574   3                      while (!GET_BIT(S3CON,BIT_NUM_S3CON_S3TI));
- 575   3                      CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3TI);
- 576   3                      str++;
- 577   3                  }
- 578   2                  break;
- 579   2              case PERIPH_UART4:
- 580   2                  while (*str != '\0')
- 581   2                  {
- 582   3                      S4BUF = *str;
- 583   3                      while (!GET_BIT(S4CON,BIT_NUM_S4CON_S4TI));
- 584   3                      CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4TI);
- 585   3                      str++;
- 586   3                  }
- 587   2                  break;
- 588   2              default:
- 589   2                  break;
- 590   2          }
- 591   1          
- 592   1      }
- 593          
- 594          //#endif
- 595          
-*** WARNING C291 IN LINE 372 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
-*** WARNING C291 IN LINE 407 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
-*** WARNING C291 IN LINE 441 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
-*** WARNING C291 IN LINE 474 OF MID_DRIVER\SRC\UART.C: not every exit path returns a value
+ 551          
+ 552          /*****************************************************************************/
+ 553          /** 
+ 554           * \author      Weilun Fong
+ 555           * \author      Xiaoyu Ren
+ 556           * \date        2023/04/22
+ 557           * \brief       output a hex number with character format via UART
+ 558           * \param[in]   uart: expected uart
+ 559           * \param[in]   hex: expected hex number(range: 0x0 ~ 0xF)
+ 560           * \return      none
+ 561           * \ingroup     UART
+ 562           * \remarks     
+ 563          ******************************************************************************/
+ 564          void UART_sendHex(UART_Port_t uart, uint8_t hex)
+ 565          {
+ 566   1          UART_sendByte(uart, hexTable[hex >> 0x4]);
+ 567   1          UART_sendByte(uart, hexTable[hex & 0xF]);
+ 568   1      }
+ 569          
+ 570          /*****************************************************************************/
+ 571          /** 
+ 572           * \author      Weilun Fong
+ 573           * \author      Xiaoyu Ren
+ 574           * \date        2023/04/22
+ 575           * \brief       send string via UART
+ 576           * \param[in]   uart: expected uart
+ 577           * \param[in]   str: pointer to target string
+ 578           * \return      none
+ 579           * \ingroup     UART
+ 580           * \remarks     the string must be end with '\0'
+ 581          ******************************************************************************/
+ 582          void UART_sendString(UART_Port_t uart, char *str)
+ 583          {
+ 584   1          switch (uart)
+ 585   1          {
+ 586   2              case PERIPH_UART1:
+ 587   2                  while (*str != '\0')
+ 588   2                  {
+ 589   3                      SBUF = *str;
+ 590   3                      while (!TI);
+ 591   3                      TI = RESET;          /* reset flag */
+ 592   3                      str++;
+ 593   3                  }
+ 594   2                  break;
+ 595   2              case PERIPH_UART2:
+ 596   2                  while (*str != '\0')
+ 597   2                  {
+ 598   3                      S2BUF = *str;
+ 599   3                      while (!GET_BIT(S2CON,BIT_NUM_S2CON_S2TI));
+ 600   3                      CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2TI);
+ 601   3                      str++;
+ 602   3                  }
+ 603   2                  break;
+ 604   2              case PERIPH_UART3:
+ 605   2                  while (*str != '\0')
+ 606   2                  {
+ 607   3                      S3BUF = *str;
+ 608   3                      while (!GET_BIT(S3CON,BIT_NUM_S3CON_S3TI));
+ 609   3                      CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3TI);
+ 610   3                      str++;
+ 611   3                  }
+ 612   2                  break;
+C51 COMPILER V9.01   UART                                                                  04/24/2023 08:04:38 PAGE 11  
+
+ 613   2              case PERIPH_UART4:
+ 614   2                  while (*str != '\0')
+ 615   2                  {
+ 616   3                      S4BUF = *str;
+ 617   3                      while (!GET_BIT(S4CON,BIT_NUM_S4CON_S4TI));
+ 618   3                      CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4TI);
+ 619   3                      str++;
+ 620   3                  }
+ 621   2                  break;
+ 622   2              default:
+ 623   2                  break;
+ 624   2          }
+ 625   1          
+ 626   1      }
+ 627          
+ 628          //#endif
+ 629          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1210    ----
+   CODE SIZE        =   1238    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -638,4 +670,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  4 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

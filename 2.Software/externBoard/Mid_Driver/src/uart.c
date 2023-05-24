@@ -366,7 +366,7 @@ uint16_t UART_getBaudGeneratorInitValue(uint32_t baud, PERIPH_TIM tim)
         {
             return ((65536 - (__SYSCLOCK/4/baud)));
         } break;
-        default: break;
+        default: return 0; break;
     }
 
 }
@@ -401,6 +401,7 @@ byte UART_getByte(UART_Port_t uart)
             return S4BUF;
             break;
         default:
+            return 0;
             break;
     }
     
@@ -435,9 +436,41 @@ FunctionalState UART_isReceived(UART_Port_t uart)
             return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4RI);
             break;
         default:
+            return 0;
             break;
     }
     
+}
+
+/*****************************************************************************/
+/** 
+ * \author      Xiaoyu Ren
+ * \date        2023/04/24
+ * \brief       Clear Receive Flag after Interrupt
+ * \param[in]   uart: expected uart
+ * \return      
+ * \ingroup     UART
+ * \remarks     
+******************************************************************************/
+void UART_clearReceiveFlag(UART_Port_t uart)
+{
+    switch (uart)
+    {
+        case PERIPH_UART1:
+            RI = RESET;
+            break;
+        case PERIPH_UART2:
+            CLR_BIT_MASK(S2CON,BIT_NUM_S2CON_S2RI);
+            break;
+        case PERIPH_UART3:
+            CLR_BIT_MASK(S3CON,BIT_NUM_S3CON_S3RI);
+            break;
+        case PERIPH_UART4:
+            CLR_BIT_MASK(S4CON,BIT_NUM_S4CON_S4RI);
+            break;
+        default:
+            break;
+    }
 }
 
 /*****************************************************************************/
@@ -468,6 +501,7 @@ FunctionalState UART_isTransmitted(UART_Port_t uart)
             return (FunctionalState)GET_BIT(S4CON,BIT_NUM_S4CON_S4TI);
             break;
         default:
+            return 0;
             break;
     }
     

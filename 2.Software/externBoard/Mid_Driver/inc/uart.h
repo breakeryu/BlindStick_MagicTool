@@ -106,6 +106,7 @@ void UART_config(UART_configTypeDef *uc);
 uint16_t UART_getBaudGeneratorInitValue(uint32_t baud, PERIPH_TIM tim);
 byte UART_getByte(UART_Port_t uart);
 FunctionalState UART_isReceived(UART_Port_t uart);
+void UART_clearReceiveFlag(UART_Port_t uart);
 FunctionalState UART_isTransmitted(UART_Port_t uart);
 void UART_sendByte(UART_Port_t uart, byte dat);
 void UART_sendHex(UART_Port_t uart, uint8_t hex);

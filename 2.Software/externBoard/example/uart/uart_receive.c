@@ -1,14 +1,13 @@
 /*****************************************************************************/
 /** 
- * \file       uart_sendString.c
- * \author     Weilun Fong | wlf@zhishan-iot.tk
+ * \file       uart_receive.c
  * \author     Xiaoyu Ren
  * \date       
- * \brief      a example which shows how to send a string via UART
+ * \brief      a example which shows how to receive a string via UART
  * \note       
- * \version    v1.3
+ * \version    v0.1
  * \ingroup    example
- * \remarks    UART1 use TIM2 as baudrate generator, just send hex
+ * \remarks    UART1 use TIM2 as baudrate generator, Enable Rx interrupt
  *             
 ******************************************************************************/
 
@@ -22,7 +21,6 @@
 
 /*****************************************************************************/
 /** 
- * \author      Weilun Fong
  * \author      Xiaoyu Ren
  * \date        
  * \brief       initial MCU
@@ -39,7 +37,7 @@ void sys_init(void)
     uc.portPin           = UART1_PortPin_P30_P31;
     uc.baudrate          = 9600;
     uc.baudGenerator     = PERIPH_TIM_2;
-    uc.interruptState    = DISABLE;
+    uc.interruptState    = ENABLE;
     uc.interruptPriority = UTIL_interruptPriority_0;
     uc.mode              = UART1_mode_1;
     uc.multiBaudrate     = DISABLE;
@@ -52,8 +50,7 @@ void sys_init(void)
 
 /*****************************************************************************/
 /** 
- * \author      Weilun Fong
- * \author      Xiaoyu Ren
+ * \author     Xiaoyu Ren
  * \date        
  * \brief       main function
  * \param[in]   
@@ -68,7 +65,19 @@ void main(void)
     {
         /* send per 500ms */
         Delay(500);
-        UART_sendString(PERIPH_UART1,"H\r\n");
+        
     }
+}
+
+INTERRUPT(UART1_Routine,EXTI_VectUART1)
+{
+    uint8_t c;
+    if (UART_isReceived(PERIPH_UART1))
+    {
+        UART_clearReceiveFlag(PERIPH_UART1);
+        c = UART_getByte(PERIPH_UART1);
+        UART_sendByte(PERIPH_UART1,c);
+    }
+    
 }
 
